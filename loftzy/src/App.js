@@ -1,25 +1,18 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import Inicio from './views/Inicio'
+import AdminMenu from './views/AdminMenu'
+import AgregarResidente from './views/AgregarResidente'
+import ResidentesAdmin from './views/'
 function App() {
   return (
-    <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Edit <code>src/App.js</code> and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-    </header>
-  </div>
+    <>
+    <Inicio/>
+    <AdminMenu/>
+    <ResidentesAdmin/>
+    <AgregarResidente/>
+    </>
   );
 }
 

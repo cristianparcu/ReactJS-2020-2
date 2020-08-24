@@ -4,10 +4,11 @@ import InputWithLabel from '../componentes/InputWithLabel';
 import ButtonAdmin from '../componentes/ButtonMenu';
 
 
-class inicio extends Component {
+class Inicio extends Component {
 
     render(){
         return(
+            <>
             <div>
                 <InputWithLabel label="nombre"></InputWithLabel>
                 <InputWithLabel label="Contraseña"></InputWithLabel>
@@ -16,11 +17,11 @@ class inicio extends Component {
             <div>
                 <ButtonAdmin label="Acceder" />
             </div>
-         
+         </>
                       
         )
     }
 }
 
 
-export default inicio;
+export default Inicio;
