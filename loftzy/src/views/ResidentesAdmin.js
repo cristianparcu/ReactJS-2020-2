@@ -1,6 +1,6 @@
 import React , {Component}from 'react';
 
-import SearchBar from '../componentes/SearchBar';
+import SearchBar from '../componentes/InputWithLabel';
 
 class ResidentesAdmin extends Component{
 
@@ -15,8 +15,6 @@ class ResidentesAdmin extends Component{
                 </th></tr>
                 <tr><th><button>Actualizar</button></th> <th><button>Eliminar</button></th></tr>
             </table>
-   
-          
             
             </>
         )

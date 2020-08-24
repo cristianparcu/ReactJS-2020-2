@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-class SearchBar extends Component {
+class InputWithLabel extends Component {
     
     
     
@@ -17,4 +17,4 @@ class SearchBar extends Component {
     }
 }
 
-export default SearchBar;
+export default InputWithLabel;
