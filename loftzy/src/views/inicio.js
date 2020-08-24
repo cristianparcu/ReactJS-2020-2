@@ -16,8 +16,7 @@ class inicio extends Component {
             <div>
                 <ButtonAdmin label="Acceder" />
             </div>
-
-                       
+         
                       
         )
     }
