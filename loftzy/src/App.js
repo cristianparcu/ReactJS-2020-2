@@ -4,7 +4,7 @@ import './App.css';
 import Inicio from './views/Inicio'
 import AdminMenu from './views/AdminMenu'
 import AgregarResidente from './views/AgregarResidente'
-import ResidentesAdmin from './views/'
+import ResidentesAdmin from './views/ResidentesAdmin'
 function App() {
   return (
     <>
