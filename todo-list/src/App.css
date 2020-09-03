@@ -40,3 +40,15 @@
   color: red;
   text-align: center;
 }
+.taskBox{
+  width: 100%;
+  text-align: center;
+ 
+}
+.taskDetail{
+  text-decoration: underline;
+}
+.input{
+  width: 100%;
+  text-align: center;
+}
