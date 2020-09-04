@@ -41,14 +41,20 @@
   text-align: center;
 }
 .taskBox{
-  width: 100%;
+  display: block;
   text-align: center;
+  margin: 5%;
  
 }
 .taskDetail{
   text-decoration: underline;
+  display: inline-block;
+  margin: 0% 5%;
+}
+.taskButton{
+  display: inline-block;
 }
 .input{
-  width: 100%;
+  display: block;
   text-align: center;
 }

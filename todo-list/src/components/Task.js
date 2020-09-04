@@ -9,6 +9,7 @@ class Task extends Component{
         return(
             <div className={classes.taskBox}>
                 <p className={classes.taskDetail}>{this.props.task}</p>
+                <button className={classes.taskButton} onClick={this.props.onDelete}>X</button>
             </div>
         )
     }
