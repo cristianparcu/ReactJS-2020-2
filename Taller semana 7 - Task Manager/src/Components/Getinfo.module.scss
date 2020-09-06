@@ -1,0 +1,43 @@
+@import '../variables';
+
+.form {
+    width: 30%;
+    height: 200px;
+    padding: 30px;
+
+
+    input {
+        border: none;
+    }
+
+    :not(:first-child) {
+        margin-top: 2em;
+    }
+
+    .inputTitle, .inputDescr {
+        width: 90%;
+        color: white;
+        background-color: $darkerBlack;
+    }
+
+    .inputTitle {
+        height: 2em;
+    }
+
+    .inputDescr {
+        font-family: 'Open Sans', sans-serif;
+        border: none;
+        height: 5em;
+        resize: none;
+    }
+
+    .inputAdd {
+        height: 40px;
+        width: 40%;
+        background-color: $darkOrange;
+        border-style: none;
+        :hover {
+            cursor: pointer;
+        }
+    }
+}

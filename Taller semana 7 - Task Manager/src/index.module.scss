@@ -1,0 +1,45 @@
+@import 'variables';
+
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: $mintGreen;
+    background: radial-gradient(circle, $mintGreen 70%, $darkerGreen 100%);
+}
+
+.flex {
+    display: flex;
+
+    &_dir_col {
+        flex-direction: column;
+    }
+
+    &_dir_row {
+        flex-direction: row;
+    }
+
+    &_jc_sb {
+        justify-content: space-between;
+    }
+
+    &_jc_c {
+        justify-content: center;
+    }
+
+    &_ai_c {
+        align-items: center;
+    }
+
+    &_jc_e {
+        justify-content: flex-end;
+    }
+
+    &_ai_e {
+        align-items: flex-end;
+    }
+}

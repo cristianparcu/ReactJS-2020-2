@@ -1,0 +1,82 @@
+@import '../variables';
+
+.task {
+    width: 300px;
+    padding: 20px 20px 20px 20px; 
+    margin: 1.5em 0em;
+    word-wrap: break-word;
+    box-shadow: 10px 10px 5px $darkerBlack;
+    border-radius: 5px;
+
+    h3 {
+        margin: 0px 0px 0px 20px;
+        
+    }
+
+    .separator {
+        display: block;
+        height: 1px;
+        border: 0;
+        margin: 1em 0;
+        padding: 0;
+    }
+
+    .checkbox {
+        height: 1.5em;
+        width: 1.5em;
+    }
+
+    .btngroup {
+        width: 100%;
+    }
+
+    .btn {
+        border-style: none;
+        display: block;
+        width: 35px;
+        height: 35px;
+        margin-left: 5px;
+        border-radius: 17.5px;
+
+        :hover {
+           cursor: pointer; 
+        }
+    }
+
+    &_notChecked {
+        background-color: $shdLightBlue;
+
+        h3 {
+            color: $dimmedWhite;
+        }
+        .separator {
+            border-top: 2px solid $dimmedBlack;
+        }
+
+        .btn {
+            background-color: $disGray;
+        }
+    }
+
+    &_checked {
+        background-color: $disGray;
+        color: $dasGray;
+
+        .separator {
+            border-top: 2px solid $dasGray;
+        }
+
+        h3 {
+            text-decoration: line-through;
+        }
+
+        .btn {
+            background-color: $daPink;
+            border: 2px solid $daPink;
+        }
+    }
+}
+
+.removed {
+    display: none;
+}

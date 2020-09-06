@@ -1,0 +1,22 @@
+@import '../variables';
+
+.dashboard {
+    width: 1000px;
+    padding: 10px;
+    padding-left: 0;
+    margin-bottom: 3em;
+    background-color: $dimmedBlack;
+    box-shadow: 10px 10px 5px $darkerGreen;
+    border-radius: 10px;
+}
+
+.tasks {
+    width: 65%;
+    border-left: 1px solid $dimmedWhite;
+    padding-left: 10px;
+    .tasksTitle {
+        margin: 5px 0 0 0;
+        color: $darkOrange;
+        font-size: 2em;
+    }
+}
