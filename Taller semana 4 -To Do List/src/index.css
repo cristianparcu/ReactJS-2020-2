@@ -1,0 +1,66 @@
+:root {
+  --c-white: #ffffff;
+  --c-black: #000000;
+  --c-dark: #222222;
+  --c-semi-black: #1c1e1f;
+  --c-semi-dark: #333333;
+  --c-semi-grey: #555555;
+  --c-grey: #888888;
+  --c-light-grey: #bfbfbf;
+  --c-soft-grey: #eeeeee;
+  --c-primary: #9aaa90;
+  --first-font: "Roboto", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px var(--c-semi-grey);
+  border-radius: 30px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--c-semi-dark);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-grey);
+}
+
+body {
+  background-color: var(--c-semi-dark);
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* 
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+} */
+p {
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+}
+input {
+  padding: 0.4rem 1rem;
+  border-top-left-radius: 0.4rem;
+  border-bottom-left-radius: 0.4rem;
+  border: 0rem;
+  width: 80%;
+}
+button {
+  border-radius: 0.4rem;
+  border: 0;
+  padding: 0.4rem 0.8rem;
+}
+button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}

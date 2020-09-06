@@ -1,0 +1,29 @@
+.card-body {
+  position: relative;
+  top: 0%;
+  left: 10%;
+  width: 80%;
+  background-color: var(--c-white);
+  padding: 1rem 0.5rem;
+  border-radius: 0.4rem;
+  text-align: center;
+}
+.card-footer {
+  position: relative;
+  top: 5%;
+  left: 10%;
+  width: 80%;
+  background-color: var(--c-white);
+  padding: 1rem 0.5rem;
+  border-radius: 0.4rem;
+  text-align: center;
+}
+.task {
+  position: relative;
+  padding: 0.5rem 1rem;
+  background-color: var(--c-semi-black);
+  text-align: center;
+  color: white;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}

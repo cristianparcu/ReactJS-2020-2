@@ -1,0 +1,38 @@
+.card {
+  overflow-y: auto;
+  background-color: var(--c-semi-black);
+  box-shadow: 0 32px 50px 0 rgba(0, 0, 0, 0.5);
+  height: 80vh;
+  width: 50%;
+  left: 25%;
+  top: 10vh;
+  position: relative;
+}
+.card-header {
+  position: sticky;
+  top: 0%;
+  left: 10%;
+  width: 80%;
+  padding-bottom: 1rem;
+  padding-top: 2rem;
+  text-align: center;
+}
+.btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 1rem;
+  height: 100%;
+}
+.btn-success {
+  color: white;
+  background-color: #28a745;
+}
+.btn-primary {
+  color: white;
+  background-color: #17a2b8;
+}
+.btn-danger {
+  color: white;
+  background-color: red;
+}
