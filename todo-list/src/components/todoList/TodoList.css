@@ -1,0 +1,8 @@
+.todoList {
+  text-align: center;
+  list-style-type: none;
+}
+
+.todo {
+  display: inline-block;
+}
