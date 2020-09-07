@@ -1,0 +1,33 @@
+.list{
+    /* position: absolute;
+    margin-top: 7rem; */
+    width: 38rem;
+    height: 50px;
+    
+    border-radius: 10px;
+    background-color:  rgb(238,204,255);
+}
+.p{
+    padding: 2% 20px;
+    font-size: 20px;
+    font-weight: bolder;
+    position: relative;
+}
+.trash{
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+}
+.icono1{
+    font-size: 35px;
+    margin: -4px 2px;
+}
+.edit{
+    position: absolute;
+    right: 4rem;
+    cursor: pointer;
+}
+.icono2{
+    font-size: 35px;
+    margin: -4px 2px;
+}

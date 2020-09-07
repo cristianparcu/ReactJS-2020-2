@@ -1,0 +1,5 @@
+.app {
+    
+    height: 100vh;
+    background-image: radial-gradient(620px at 50%, #FF0000 16%, #0000FF 74%);
+}

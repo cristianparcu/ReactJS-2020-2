@@ -1,0 +1,20 @@
+.heading{
+    background-color: rgba(102, 0, 153,0.7);
+    position: absolute;
+    width: 40%;
+    margin:  10rem 28.5rem;
+    min-height: 25rem;
+    border-radius: 3px;
+    
+}
+.h1{
+    position: absolute;
+}
+.list{
+    
+    position: absolute;
+    width: 40%;
+    margin:  17rem 28.5rem;
+    min-height: 25rem;
+
+}
