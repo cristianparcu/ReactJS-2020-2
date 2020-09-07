@@ -21,8 +21,8 @@ onChange(e){
 
     render(){
         return(
-            <div className={classes.input}>
-                <input  value={this.state.value} onChange={this.onChange} placeholder="ingrese tarea nueva" />
+            <div >
+                <input className={classes.input} value={this.state.value} onChange={this.onChange} placeholder="ingrese tarea nueva" />
                 <button className={classes.button} onClick={(e) => this.props.handleClick(this.state.value)}>Agregar</button>
             </div>
           
