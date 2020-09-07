@@ -1,0 +1,35 @@
+.container{
+    width: 50%;
+    margin: 3% auto;
+    position: relative;
+
+}
+.input{
+    padding: 1%;
+    outline: none;
+    border: transparent;
+    border-radius: 5px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    height: 40px;
+    width: 100%;
+}
+.img{
+    height: 1.6em;
+    width: auto;
+    margin: auto;
+    
+}
+.boton{
+    position: absolute;
+    padding: 0%;
+    float: right;
+    border-radius: 50%;
+    border:transparent;
+    width: 40px;
+    height: 40px;
+    outline: none;
+    background: #b3f57d;
+    cursor: pointer;
+    right: -1%;
+    transform: translateY(10%);
+}
