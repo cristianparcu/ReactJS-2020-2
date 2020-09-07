@@ -1,0 +1,50 @@
+body{
+
+background-color: #C1CAD6;
+
+}
+
+.App{
+background-color: #FFFFFF;
+min-height: 500px;
+width: 400px;
+margin: 40px auto;
+
+}
+
+#todo-form input{
+background-color: #6C6EA0;  
+border: 0;
+width: 200px;
+height: 50px;
+padding: 0 20px;
+margin: 20px;
+font-size:18px;
+border-radius: 10px;
+color: #FFFFFF;
+
+}
+
+#todo-form input::placeholder{
+color: #FFFFFF;
+
+}
+#todo-form input:focus{
+  outline: none;
+}
+#todo-form button:focus{
+  outline: none;
+}
+
+#todo-form button{
+
+height:50px;
+width: 80px;
+border-radius:5px;
+border:0;
+background-color: #FF1053 ;
+font-weight: bolder;
+color: #FFFFFF;
+
+}
+
