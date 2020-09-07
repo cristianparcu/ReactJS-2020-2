@@ -4,3 +4,9 @@
 [submodule "Taller semana 2 - Sliding Puzzle/slidingPuzzle"]
 	path = Taller semana 2 - Sliding Puzzle/slidingPuzzle
 	url = git@github.com:Sockshead/slidingPuzzle.git
+[submodule "todoList-React"]
+	path = todoList-React
+	url = git@github.com:Sockshead/todoList-React.git
+[submodule "Taller Todo-List/todoList-React"]
+	path = Taller Todo-List/todoList-React
+	url = https://github.com/Sockshead/todoList-React.git
