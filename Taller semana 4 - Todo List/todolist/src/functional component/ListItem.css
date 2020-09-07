@@ -1,0 +1,19 @@
+.list{
+    background-color: #B16F7D;
+    color: #7A3D4C;
+    width: 445px;
+    border-radius: 15px;
+    margin: 15px auto;
+}
+.list p{
+    padding: 10px;
+    position: relative;
+}
+.list p span{
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+}
+.faicons:hover{
+    transform: scale(1.2);
+}

@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=BioRhyme:wght@300&display=swap');
+body{
+  background-color: #707788;
+}
+
+.to-do{
+  background-color: #33517D;
+  min-height: 600px;
+  width: 500px;
+  margin: 50px auto;
+  border-radius: 15px;
+}
+.to-do-form{
+  margin: 0;
+  height: 50px;
+}
+
+.to-do-form input{
+  background-color: #A4ABBD;
+  border: 0;
+  border-radius: 15px;
+  width: 300px;
+  height: 35px;
+  margin: 20px;
+  padding: 0 20px;
+  font-size: 15px;
+  color: white;
+}
+
+.to-do-form input:focus, .to-do-form button:focus{
+  outline: none;
+}
+
+.to-do-form button{
+  width: 90px;
+  height: 35px;
+  border-radius: 15px;
+  border: 0;
+  background-color: #7A3D4C;
+  color: #707788;
+  cursor: pointer;
+}
+h1{
+  text-align: center;
+  font-family: 'BioRhyme', serif;
+  margin: 30px 0 0 0 ;
+  padding-top: 25px;
+}
