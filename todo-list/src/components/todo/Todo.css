@@ -1,0 +1,19 @@
+.todos {
+  display: flex;
+  justify-content: center;
+  transform: translateX(-20px);
+}
+
+.checkbox {
+  margin-right: 10px;
+}
+
+.deleteButton {
+  color: white;
+  background-color: #e74c3c;
+  border: none;
+}
+
+.deleteButton:hover {
+  background-color: #c0392b;
+}
