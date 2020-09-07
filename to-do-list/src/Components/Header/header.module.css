@@ -1,0 +1,27 @@
+body{
+  background-color: #D4C1EB;
+}
+.mybuttonform{
+  
+	padding: 10px 45px 10px 45px;
+
+}
+.myh1{
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 40px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-style: italic;
+
+}
+.mydiv{
+  border: 5px outset; 
+  border-color: #8ed5d6;
+  background-color: #B9DAF3;
+  text-align: center;
+  width: 400px;
+  margin: 40px auto;
+  border-radius: 10px;
+
+}

@@ -1,0 +1,39 @@
+.form {
+  padding: 60px;
+  background-color: #BCEFF0;
+  margin: 0 auto;
+  border: 5px outset;
+  width: 400px;
+  margin: 40px auto;
+  border-radius: 10px;
+  border-color: #8ed5d6;
+}
+
+.button {
+  height: 50px;
+  width: 80px;
+  border: 5px;
+  border-radius: 5px;
+  background-color: #ABD9C4;
+  cursor: pointer;
+  font-weight: bolder;
+}
+.input{
+background-color: azure;
+width: 200px;
+height: 50px;
+border:0;
+border-radius: 5px;
+padding: 0 20px;
+margin: 20px;
+}
+.myh2{
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-style: italic;
+  padding: 0 20px;
+
+}
