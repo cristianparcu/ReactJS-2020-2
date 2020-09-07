@@ -1,0 +1,11 @@
+.boton{
+    background-color: white;
+    color:black;
+    margin-left: 3%;
+}
+.borde{
+    border: 4px dotted black;
+}
+.agregar{
+    background-color: chartreuse;
+}
