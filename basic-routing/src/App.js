@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Post from './Components/Post/Post';
+import { BrowserRouter, Route, Link} from 'react-router-dom';
+import Posts from './Components/Posts/Posts';
 import FullPost from './Components/FullPost/FullPost';
 import NewPost from './Components/NewPost/NewPost';
 import './App.css';
@@ -40,7 +41,6 @@ class App extends Component {
         "ratione voluptatem sequi nesciunt."
       }
     ],
-    openPostIndex: -1,
     newPostInfo: {
       title: "",
       author: "",
@@ -50,40 +50,36 @@ class App extends Component {
 
   render () {
     return(
-      <div>
-        <h1 className = "main-header">My posts</h1>
-        {this.state.posts.map((post, postIndex) => this.renderPost(post, postIndex))}
-        {this.renderOpenPost()}
-        <NewPost newPostInfo = {this.state.newPostInfo}
-            updateNewPostData = {this.updateNewPostData}
-            submitNewPost = {this.submitNewPost}
-        />
-      </div>
+      <BrowserRouter>
+          <header>
+            <nav className = "nav-bar">
+              <ul>
+                {/* <li><a href = "/">Home</a></li> */}
+                <li><Link to="/">Home</Link></li>
+                {/* <li><a href = "/new-post">New Post</a></li> */}
+                <li><Link to="/new-post">New Post</Link></li>
+              </ul>
+            </nav>
+          </header>
+          <h1 className = "main-header">My posts</h1>
+
+          <Route path = "/new-post" render = {() => (
+              <NewPost
+                  newPostInfo = {this.state.newPostInfo}
+                  updateNewPostData = {this.updateNewPostData}
+                  submitNewPost = {this.submitNewPost}
+              />
+          )} />
+          <Route path ="/" exact render = {() => <Posts posts = {this.state.posts} />} />
+          <Route path ="/post/:postIndex" exact render = {() => (
+              <FullPost openPost = {(postIndex) => this.openPost(postIndex)} />
+          )} />
+      </BrowserRouter>
     )
   }
 
-  renderPost = (post, postIndex) => {
-    return <Post post = {post} openFullPost = {this.openFullPost.bind(this, postIndex)} />
-  }
-
-  openFullPost = (postIndex) => {
-    this.setState({
-      openPostIndex: postIndex
-    })
-  }
-
-  renderOpenPost = () => {
-    var openPostIndex = this.state.openPostIndex;
-    var openPost;
-    var postToRender = null;
-
-    if (openPostIndex >= 0) {
-      openPost = this.state.posts[openPostIndex];
-
-      postToRender = <FullPost openPost = {openPost}/>
-    }
-
-    return postToRender;
+  openPost = (postIndex) => {
+    return this.state.posts[postIndex];
   }
 
   updateNewPostData = (event, type) => {

@@ -1,14 +1,17 @@
 import React from 'react';
 import './FullPost.css';
+import { withRouter } from 'react-router-dom';
 
 var FullPost = (props) => {
-    return (
+    var openPost = props.openPost(props.match.params.postIndex);
+
+    return openPost ? (
         <div className = "full-post">
-            <h2>{props.openPost.title}</h2>
-            <p>{props.openPost.content}</p>
-            <p className = "author-text">{props.openPost.author}</p>
+            <h2>{openPost.title}</h2>
+            <p>{openPost.content}</p>
+            <p className = "author-text">{openPost.author}</p>
         </div>
-    )
+    ) : null;
 }
 
-export default FullPost;
+export default withRouter(FullPost);

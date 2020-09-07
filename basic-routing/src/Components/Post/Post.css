@@ -10,6 +10,10 @@
     padding-bottom: 15px;
 }
 
+.post h2 {
+    color: black;
+}
+
 .post p {
     color: #ccc;
 }
