@@ -1,0 +1,112 @@
+.App {
+  align-items: center;
+  }
+.nav{
+  background-color: rgba(127, 236, 255, 0.527);
+  text-align:left;
+  font:bolder;
+}
+.numT{
+  background-color: rgba(14, 25, 27, 0.527);
+  border-radius: 12px;
+  padding: 0px 8px;
+  
+}
+
+.body
+{
+  display: inline-block;
+  width: auto;
+  height: auto;
+  align-items: center;
+  padding: 10px;
+}
+
+.grid
+{
+display: grid;
+grid-template-columns: auto auto auto;
+padding : 10px;
+column-gap: 10px;
+row-gap: 10px;
+
+}
+
+.Card
+{
+  background-color: azure;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius:12px;
+  width:30ex;
+}
+
+.ToDoForm
+{
+  background-color: azure;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius:12px;
+  text-align: center;
+  padding: 12px;
+  width: 30ex;
+}
+ .inputs
+ {
+   display: flex;
+   border-radius: 5px;
+   padding :5px;
+   margin:5px;
+ }
+ .priority
+ {
+  border-radius: 12px;
+  padding :2px 2px;
+  margin: 2px 2px;
+  text-align: center;
+  border: 2px solid rgba(183, 0, 255, 0.9);
+ }
+ 
+ .button {
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+
+  background-color: white;
+  color: black;
+  border: 2px solid rgba(127, 236, 255);
+  border-radius: 12px;
+}
+
+.button:hover {
+  background-color: rgba(127, 236, 255);
+  color: white;
+}
+.buttonD
+{
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+
+  background-color: white;
+  color: black;
+  border: 2px solid red;
+  border-radius: 12px;
+}
+
+.buttonD:hover {
+  background-color:red;
+  color: white;
+}
