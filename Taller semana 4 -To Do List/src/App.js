@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Lists from "./Components/Lists/Lists.js"
 import Form from "./Components/Form/Form.js"
-import './App.css';
-import "./extras/fontawesome-free/css/all.min.css";
+import Appcss from './App.css';
 
 class App extends Component {
   state = {
@@ -21,8 +20,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className="card">
-        <div className="card-header">
+      <div className={Appcss.card}>
+        <div className={Appcss["card-header"]}>
           <Form addTask={this.addTask} />
         </div>
         <Lists tasks={this.state.tasks} updateState={this.updateState} />
