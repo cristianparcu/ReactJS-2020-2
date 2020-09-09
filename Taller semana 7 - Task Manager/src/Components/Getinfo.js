@@ -27,7 +27,6 @@ class Getinfo extends React.Component {
     if (this.state.title === '' || this.state.description === '') {
       alert('Debe llenar todos los campos para crear una tarea.')
     } else {
-      console.log(this.state.title + " from child");
       this.props.addTask(this.state.title, this.state.description);
       this.clearInputs();
     }

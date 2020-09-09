@@ -1,10 +1,11 @@
 @import '../variables';
 
 .dashboard {
-    width: 1000px;
+    width: 90%;
     padding: 10px;
     padding-left: 0;
     margin-bottom: 3em;
+     
     background-color: $dimmedBlack;
     box-shadow: 10px 10px 5px $darkerGreen;
     border-radius: 10px;
