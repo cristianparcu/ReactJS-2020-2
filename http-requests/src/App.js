@@ -4,48 +4,33 @@ import Posts from './Components/Posts/Posts';
 import FullPost from './Components/FullPost/FullPost';
 import NewPost from './Components/NewPost/NewPost';
 import classes from './App.css';
+import axios from './instances/axiosInstance';
 
 class App extends Component {
   state = {
-    posts: [
-      {
-        title: "First Title",
-        author: "Cristian",
-        content: "Lorem ipsum dolor sit amet, consectetur "+
-          "adipiscing elit, sed do eiusmod tempor incididunt "+
-          "ut labore et dolore magna aliqua. Ut enim ad minim "+
-          "veniam, quis nostrud exercitation ullamco laboris "+
-          "nisi ut aliquip ex ea commodo consequat."
-      },
-      {
-        title: "Second Title",
-        author: "Mike",
-        content: "Duis aute irure dolor in reprehenderit in "+
-        "voluptate velit esse cillum dolore eu fugiat nulla "+
-        "pariatur. Excepteur sint occaecat cupidatat non proident, "+
-        "sunt in culpa qui officia deserunt mollit anim id est laborum."
-      },
-      {
-        title: "Third Title",
-        author: "Juan",
-        content: "Sed ut perspiciatis unde omnis iste natus error "+
-        "sit voluptatem accusantium doloremque laudantium, totam rem "+
-        "aperiam, eaque ipsa quae ab illo inventore veritatis et quasi "+
-        "architecto beatae vitae dicta sunt explicabo."
-      },
-      {
-        title: "Forth Title",
-        author: "Ana",
-        content: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur "+
-        "aut odit aut fugit, sed quia consequuntur magni dolores eos qui "+
-        "ratione voluptatem sequi nesciunt."
-      }
-    ],
+    posts: [],
     newPostInfo: {
       title: "",
       author: "",
       content: ""
     }
+  }
+
+  componentDidMount () {
+    axios.get('/posts')
+      .then(response => {
+        const posts = response.data.slice(0,4);
+
+        const updatedPosts = posts.map(post => {
+          return {
+            title: post.title.slice(0,10),
+            author: "Cristian",
+            content: post.body
+          }
+        });
+
+        this.setState({posts: updatedPosts})
+      })
   }
 
   componentShouldUpdate(nextProps, nextState) {
@@ -77,7 +62,7 @@ class App extends Component {
           )} />
           <Route path ="/" exact render = {() => <Posts posts = {this.state.posts} />} />
           <Route path ="/post/:postIndex" exact render = {() => (
-              <FullPost openPost = {(postIndex) => this.openPost(postIndex)} />
+              <FullPost openPost = {(postIndex) => this.openPost(postIndex)} removePost = {this.removePost}/>
           )} />
         </div>
       </BrowserRouter>
@@ -100,11 +85,29 @@ class App extends Component {
     });
   }
 
+  removePost = (postIndex) => {
+    axios.delete('/posts/' + postIndex)
+    .then(response => {
+      console.log('response:', response);
+    })
+    .catch(error => {
+      console.log('error:', error);
+    });
+  }
+
   submitNewPost = () => {
     var updatedPosts = [...this.state.posts];
     var newPostInfo = {...this.state.newPostInfo}
 
     updatedPosts.push(newPostInfo);
+
+    axios.post('/posts', newPostInfo)
+      .then(response => {
+        console.log('response', response);
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
 
     this.setState({
       posts: updatedPosts,
