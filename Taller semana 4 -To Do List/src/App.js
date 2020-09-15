@@ -2,20 +2,37 @@ import React, { Component } from 'react';
 import Lists from "./Components/Lists/Lists.js"
 import Form from "./Components/Form/Form.js"
 import Appcss from './App.css';
+import axios from './config/axiosInstance.js';
 
 class App extends Component {
+
   state = {
     tasks: []
   }
+  componentDidMount() {
+    axios.get("/")
+      .then(response => {
+        this.drawTasks(response.data);
+      });
+  }
+  drawTasks = (newList) => {
+    this.setState({
+      tasks: newList.map((e) => { return { index: e.indice, text: e.texto, state: e.estado } })
+    });
+  }
   updateState = (index, state) => {
-    const newTask = { ...this.state.tasks[index] };
-    const newArr = [...this.state.tasks];
-    newTask.state = state;
-    newArr[index] = newTask;
-    this.setState({ tasks: newArr });
+    axios.put("/", null, {
+      params: { indice: index, estado: state }
+    }).then(response => {
+      this.drawTasks(response.data);
+    });
   }
   addTask = (val) => {
-    this.setState({ tasks: [...this.state.tasks, { index: this.state.tasks.length, text: val, state: 0 }] });
+    axios.post("/", null, {
+      params: { texto: val }
+    }).then(response => {
+      this.drawTasks(response.data);
+    });
   }
 
   render() {
