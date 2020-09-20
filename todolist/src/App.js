@@ -3,6 +3,7 @@ import styles from './App.module.css';
 import ListItems from './ListItems'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios';
 
 library.add(faTrash)
 
@@ -78,6 +79,25 @@ class App extends React.Component {
       items: items
     })
   }
+
+//COMPONENT
+componentDidMount () {
+  axios.get('./tasks.json')
+      .then(response => {
+          const items = response.data.slice(0,10);
+
+          const updatedItems = items.map(item => {
+              return {
+                text: item.text,
+                key: item.key,
+                checked: item.checked
+              }
+          });
+
+          this.setState({items: updatedItems})
+      });
+} //Traerá todo del JSON
+
   render() {
     return (
       <div className={styles.app}>
@@ -87,9 +107,7 @@ class App extends React.Component {
             <button type="submit">Añadir</button>
           </form>
           <p>{this.state.items.text}</p>
-
           <ListItems items={this.state.items} deleteItem={this.deleteItem} setUpdate={this.setUpdate} setStyle={this.setStyle}/>
-
         </header>
       </div>
     );

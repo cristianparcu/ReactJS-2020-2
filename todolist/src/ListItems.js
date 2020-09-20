@@ -8,7 +8,6 @@ function ListItems(props) {
     const listItems = items.map(item => {
         return <div className={!item.checked ? styles.list: `${styles.listChecked} ${styles.list}`} key={item.key}>
             <p>
-
                 <input type="checkbox" onChange={(e) => 
                     props.setStyle(item.key)}></input>
                 <input type="text" id={item.key} value={item.text} onChange={(e) => {
