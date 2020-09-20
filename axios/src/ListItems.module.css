@@ -1,0 +1,38 @@
+.list{
+    color: #6e3030;
+    width: 300px;
+    background-color: #a0a0a0;
+    height: 50px;
+    margin: 20px auto;
+    border-radius: 5px;
+}
+.listChecked{
+    color: #6e3030;
+    width: 300px;
+    background-color: #3f3f3f;
+    height: 50px;
+    margin: 20px auto;
+    border-radius: 5px;
+}
+.list p{
+    padding: 10px;
+    position: relative;
+}
+.list p span{
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+.faircons{
+    margin: 0 5px;
+    font-size: 15px;
+}
+.list p input{
+    background-color: transparent;
+    border: 0;
+    color: #D1CCC4;
+    font-size: 18px;
+}
+.list p input:focus{
+    outline: none;
+}
