@@ -1,0 +1,71 @@
+[
+    {
+      "userId": 1,
+        "id": 1,
+        "title": "CALL OF DUTY BLACK OPS-COLDWAR",
+        "URl":"https://sm.ign.com/ign_es/image/c/call-of-du/call-of-duty-black-ops-cold-war-cover-art-revealed_z44f.jpg",
+        "Consolas":"PS4, PS5, Xbox One, Xbox series X/S, Pc"
+    },
+    {
+      "userId": 1,
+        "id": 2,
+        "title": "CONTROL ULTIMATE EDITION",
+        "URl":"https://bitwares.files.wordpress.com/2020/08/control-ultimate-ed.jpg",
+        "Consolas":"PS4, PS5, Xbox One, Xbox series X/S, Pc"
+    },
+    {
+      "userId": 1,
+        "id": 3,
+        "title": "STARFIELD",
+        "URl":"https://as.com/meristation/imagenes/2020/09/02/noticias/1599019155_054987_1599019198_noticia_normal.jpg",
+        "Consolas":"PS5, Xbox series X/S, Pc"
+    },
+    {
+      "userId": 1,
+        "id": 4,
+        "title": "STRAY",
+        "URl":"https://i.ytimg.com/vi/u84hRUQlaio/maxresdefault.jpg",
+        "Consolas":"PS4, PS5"
+    },
+    {
+      "userId": 1,
+        "id": 5,
+        "title": "RATCHET & CLANK: RIFT APART",
+        "URl":"https://blog.latam.playstation.com/tachyon/sites/3/2020/08/Ratchet-and-Clank-Rift-Apart-featured-image.jpg?resize=1088,612&crop_strategy=smart",
+        "Consolas":"PS5"
+    },
+    {
+      "userId": 1,
+        "id": 6,
+        "title": "DEMON'S SOULS",
+        "URl":"https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2020/09/demons-souls-remake-2060467.jpg",
+        "Consolas":"PS5"
+    },
+    {
+      "userId": 1,
+        "id": 7,
+        "title": "RESIDENT EVIL 8: VILLAGE",
+        "URl":"https://areajugones.sport.es/wp-content/uploads/2020/07/Resident-Evil-8-Village.jpg",
+        "Consolas":"PS5, Xbox series X/S, Pc"
+    },
+    {
+      "userId": 1,
+        "id": 8,
+        "title": "SPIDER-MAN: MILES MORALES",
+        "URl":"https://www.alfabetajuega.com/wp-content/uploads/2020/07/D3OOAM2ON5BFNMACZFU6R34NHI.png.jpeg",
+        "Consolas":"PS4, PS5"
+    },
+    {
+      "userId": 1,
+        "id": 9,
+        "title": "CYBERPUNK 2077",
+        "URl":"https://playcrazygame.com/wp-content/uploads/2019/05/Cyberpunk-2077-A-New-Wallpaper-for-E3-2019.jpg",
+        "Consolas":"PS4, PS5, Xbox One, Xbox series X/S, Pc"
+    },
+    {
+      "userId": 1,
+        "id": 10,
+        "title": "FINAL FANTASY XVI",
+        "URl":"https://blog.latam.playstation.com/tachyon/sites/3/2020/09/Final-Fantasy-XVI-featured-image.jpg",
+        "Consolas":"PS5, Pc"
+    }]
