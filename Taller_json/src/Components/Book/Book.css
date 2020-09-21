@@ -1,0 +1,24 @@
+.book {
+    display: inline-block;
+    width: 300px;
+    height: 33rem;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 2px #ccc;
+    margin: 20px;
+    text-align: center;
+    padding: 10px;
+    padding-bottom: 15px;
+}
+
+.book h2 {
+    color: black;
+    
+}
+
+.book p {
+    color: #ccc;
+}
+.book img {
+    width: 308px;
+    height: 376px;
+}
