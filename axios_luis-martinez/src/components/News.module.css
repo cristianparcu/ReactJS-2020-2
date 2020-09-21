@@ -1,0 +1,20 @@
+.card {
+    margin: auto;
+    width: 50%;
+    background-color: #2c3e50;
+}
+
+.title {
+    font-size: large;
+    color: #1abc9c;
+}
+
+.body {
+    color: #ecf0f1;
+    font-size: medium;
+}
+
+.author {
+    font-size: small;
+    color: #bdc3c7;
+}

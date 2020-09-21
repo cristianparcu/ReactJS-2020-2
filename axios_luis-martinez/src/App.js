@@ -20,6 +20,7 @@ export default class App extends Component {
     render() {
         return (
             <div>
+                <header className="App-header">News!</header>
                 {this.state.news.map((i) => {
                     return (
                         <News
