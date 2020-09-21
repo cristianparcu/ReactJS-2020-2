@@ -30,6 +30,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        
         <Carousel peliculas={this.state.filmsList}/> 
       </div>
     );
