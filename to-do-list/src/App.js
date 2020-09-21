@@ -70,7 +70,7 @@ class App extends React.Component {
             <input
               className={Style.input}
               type="text"
-              placeholder="Añadir Tarea"
+              placeholder="Ingrese una tarea"
               value={this.state.currentItem.text}
               onChange={this.handleInput}
             ></input>

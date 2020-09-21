@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../../App";
-import FlipMove from "react-flip-move";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Grid from "@material-ui/core/Grid";
 import TaskS from "./Task.module.css";
@@ -13,6 +12,7 @@ function ListItems(props) {
         <p>
           <input
             type="text"
+            disabled="disabled"
             id={item.id}
             value={item.text}
             className={TaskS.input}
@@ -22,11 +22,9 @@ function ListItems(props) {
           />
           <Grid>
             <DeleteIcon
-              className="faicons"
               onClick={() => {
                 props.deleteItem(item.id);
               }}
-              icon="trash"
             />
           </Grid>
         </p>
@@ -35,9 +33,8 @@ function ListItems(props) {
   });
   return (
     <div>
-      <FlipMove duration={200} easing="ease-in-out">
         {lista}
-      </FlipMove>
+      
     </div>
   );
 }
