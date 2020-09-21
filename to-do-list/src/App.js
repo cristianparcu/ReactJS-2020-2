@@ -4,80 +4,90 @@ import Form from "./Components/Task/Task";
 import Style from "./Form.module.css";
 
 class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      items:[],
-      currentItem:{
-        text:'',
-        id:''
-      }
-    }
+      items: [],
+      currentItem: {
+        text: "",
+        id: "",
+      },
+    };
     this.addItem = this.addItem.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
     this.setUpdate = this.setUpdate.bind(this);
   }
-  addItem(e){
+  addItem(e) {
     e.preventDefault();
     const nuevoItem = this.state.currentItem;
-    if(nuevoItem.text !==""){
+    if (nuevoItem.text !== "") {
       const items = [...this.state.items, nuevoItem];
-    this.setState({
-      items: items,
-      currentItem:{
-        text:'',
-        id:''
-      }
-    })
+      this.setState({
+        items: items,
+        currentItem: {
+          text: "",
+          id: "",
+        },
+      });
     }
   }
-  handleInput(e){
+  handleInput(e) {
     this.setState({
-      currentItem:{
+      currentItem: {
         text: e.target.value,
-        id: Date.now()
-      }
-    })
+        id: Date.now(),
+      },
+    });
   }
-  deleteItem(id){
-    const filteredItems= this.state.items.filter(item =>
-      item.id!==id);
+  deleteItem(id) {
+    const filteredItems = this.state.items.filter((item) => item.id !== id);
     this.setState({
-      items: filteredItems
-    })
+      items: filteredItems,
+    });
   }
-  setUpdate(text,id){
+  setUpdate(text, id) {
     const items = this.state.items;
-    items.map(item=>{      
-      if(item.id===id){
-        console.log(item.id +"    "+id)
-        item.text= text;
+    items.map((item) => {
+      if (item.id === id) {
+        console.log(item.id + "    " + id);
+        item.text = text;
       }
-    })
+    });
     this.setState({
-      items: items
-    })
-   
+      items: items,
+    });
   }
- render(){
-  return (
-    <>
-    <div>
-      <Header/>
-    </div>
+  render() {
+    return (
+      <>
+        <div>
+          <Header />
+        </div>
 
-    <div className="App">
-        <form className={Style.form} onSubmit={this.addItem}>
-          <input className={Style.input} type="text" placeholder="Añadir Tarea" value= {this.state.currentItem.text} onChange={this.handleInput}></input>
-          <button className={Style.button} type="Submit">Añadir</button>
-          <Form items={this.state.items} deleteItem={this.deleteItem} setUpdate={this.setUpdate}/>
-        </form>
-        <p>{this.state.items.text}</p>    
-    </div>
-    </>
-  );
- }
+        <div className="App">
+          <form className={Style.form} onSubmit={this.addItem}>
+            <input
+              className={Style.input}
+              type="text"
+              placeholder="Añadir Tarea"
+              value={this.state.currentItem.text}
+              onChange={this.handleInput}
+            ></input>
+            <button className={Style.button} type="Submit">
+              Añadir
+            </button>
+            <Form
+              items={this.state.items}
+              deleteItem={this.deleteItem}
+              setUpdate={this.setUpdate}
+            />
+          </form>
+          <p>{this.state.items.text}</p>
+        </div>
+      </>
+    );
+  }
 }
 
 export default App;
