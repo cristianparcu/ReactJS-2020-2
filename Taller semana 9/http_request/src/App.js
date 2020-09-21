@@ -2,10 +2,14 @@ import React, {Component} from 'react'
 import Axios from 'axios'
 import Style from './App.module.css'
 import Card from "./components/item/card/card";
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
+import 'swiper/components/pagination/pagination.scss';
+import 'swiper/components/scrollbar/scrollbar.scss';
+
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 class App extends Component {
   constructor() {
@@ -24,12 +28,15 @@ class App extends Component {
   render() {
         return (
             <div className={Style.grid}>
+                <h1 className={Style.title}>Trabajo semana 9 <br/>Ricardo Rosa</h1>
                 <Swiper
                     spaceBetween={50}
                     slidesPerView={3}
+                    navigation
+                    pagination={{ clickable: true }}
                     loop={true}
-                    onSlideChange={() => console.log('slide change')}
                     onSwiper={(swiper) => console.log(swiper)}
+                    onSlideChange={() => console.log('slide change')}
                 >
                 {this.state.games.map(item => {
                     return(

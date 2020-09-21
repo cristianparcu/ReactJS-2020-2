@@ -20,16 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49f8ddfd-603b-40c2-aed5-24029956793c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/http_request/src/App.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/http_request/src/components/item/card/card.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/http_request/src/components/item/card/card.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http_request/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/http_request/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http_request/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/http_request/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http_request/src/App.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/http_request/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/http_request/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http_request/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/http_request/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http_request/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/http_request/src/App.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/http_request/src/App.module.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +68,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1600658716001</updated>
-      <workItem from="1600658717074" duration="4059000" />
+      <workItem from="1600658717074" duration="4937000" />
     </task>
     <servers />
   </component>

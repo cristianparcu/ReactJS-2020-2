@@ -1,4 +1,7 @@
 .grid{
-    margin: auto;
+    margin-top: 30%;
     width: 100%;
+}
+.title{
+    text-align: center;
 }
