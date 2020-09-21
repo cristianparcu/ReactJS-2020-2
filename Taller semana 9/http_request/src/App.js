@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react'
+import Axios from 'axios'
+import Style from './App.module.css'
+import Card from "./components/item/card/card";
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// Import Swiper styles
+import 'swiper/swiper.scss';
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state={games:[]}
+  }
+  componentDidMount() {
+    Axios.get('https://api.npoint.io/632ecc2c60060614e1e7',{}).then((res) =>{
+        const data = res.data
+        this.setState({games:data.juego})
+    }).catch((error)=>{
+        console.log('Error')
+    })
+  }
+
+  render() {
+        return (
+            <div className={Style.grid}>
+                <Swiper
+                    spaceBetween={50}
+                    slidesPerView={3}
+                    loop={true}
+                    onSlideChange={() => console.log('slide change')}
+                    onSwiper={(swiper) => console.log(swiper)}
+                >
+                {this.state.games.map(item => {
+                    return(
+                        <SwiperSlide>
+                        <Card img={item.imagen} key={item.id} name={item.nombre}/>
+                        </SwiperSlide>
+                    )
+                })}
+                </Swiper>
+            </div>
+        );
+    }
 }
 
 export default App;
