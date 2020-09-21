@@ -1,0 +1,22 @@
+[
+  {
+    "title":"Hamburguesa",
+    "precio":50,
+    "imagen":"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTCoQQj6Uynnt7KvLC0oqwenJo9FGKga1ZtOA&usqp=CAU"
+  },
+  {
+    "title":"Perro caliente",
+    "precio":100,
+    "imagen":"https://www.petalatino.com/wp-content/uploads/CarrotDog1.jpg"
+  },
+  {
+    "title":"Pasta",
+    "precio":20,
+    "imagen":"https://rasamalaysia.com/wp-content/uploads/2018/08/one-pan-pasta-thumb.jpg"
+  },
+  {
+    "title":"Arroz",
+    "precio":30,
+    "imagen":"https://www.recetasderechupete.com/wp-content/uploads/2019/08/Arroz-blanco-525x360.jpg"
+  }
+]
