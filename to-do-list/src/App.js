@@ -46,7 +46,6 @@ class App extends React.Component {
     this.setState({
       items: filteredItems
     })
-
   }
   setUpdate(text,id){
     const items = this.state.items;
@@ -69,14 +68,12 @@ class App extends React.Component {
     </div>
 
     <div className="App">
-        <form id="principal" className={Style.form} onSubmit={this.addItem}>
-          <input className={Style.input} type="text" placeholder="Agrega una tarea" value= {this.state.currentItem.text} onChange={this.handleInput}></input>
-          <button className={Style.button} type="Submit">Agregar</button>
+        <form className={Style.form} onSubmit={this.addItem}>
+          <input className={Style.input} type="text" placeholder="Añadir Tarea" value= {this.state.currentItem.text} onChange={this.handleInput}></input>
+          <button className={Style.button} type="Submit">Añadir</button>
           <Form items={this.state.items} deleteItem={this.deleteItem} setUpdate={this.setUpdate}/>
         </form>
-        <p>{this.state.items.text}</p>
-          
-      
+        <p>{this.state.items.text}</p>    
     </div>
     </>
   );

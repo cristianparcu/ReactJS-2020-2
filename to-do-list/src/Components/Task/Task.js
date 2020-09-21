@@ -22,7 +22,7 @@ function ListItems(props){
    
   </div>})
   return <div> 
-      <FlipMove duration={300} easing="ease-in-out">  
+      <FlipMove duration={200} easing="ease-in-out">  
       {lista} 
       </FlipMove>
   </div>;   //Flipmove, animacion, se retorna la lista para el render
