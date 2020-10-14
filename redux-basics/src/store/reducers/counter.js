@@ -22,6 +22,10 @@ const reducer = (state = initialState, action) => {
             return {
                 counter: state.counter - action.payload.value
             }
+        case actionTypes.SAVE:
+            return {
+                counter: 0
+            }
         default:
             return state;
     }
