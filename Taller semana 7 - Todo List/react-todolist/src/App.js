@@ -17,7 +17,6 @@ class App extends Component {
     const storedTodos = JSON.parse(localStorage.getItem("todos"));
     if (storedTodos) {
       this.setState({ todos: storedTodos });
-      console.log(storedTodos);
     } else {
       console.log("No hay todos almacenados");
     }
