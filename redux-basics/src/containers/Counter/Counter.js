@@ -8,29 +8,35 @@ import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
 
 class Counter extends Component {
-    render () {
+    render() {
         return (
             <div className="counter-container">
                 <CounterOutput value={this.props.ctr} />
                 <CounterControl label="Increment" clicked={() => this.props.onIncrementCounter()} />
-                <CounterControl label="Decrement" clicked={() => this.props.onDecrementCounter()}  />
-                <CounterControl label="Add 5" clicked={() => this.props.onAdd( 5 )}  />
-                <CounterControl label="Subtract 5" clicked={() => this.props.onSubtract( 5 )}  />
+                <CounterControl label="Decrement" clicked={() => this.props.onDecrementCounter()} />
+                <CounterControl label="Add 5" clicked={() => this.props.onAdd(5)} />
+                <CounterControl label="Subtract 5" clicked={() => this.props.onSubtract(5)} />
+                <CounterControl label="Save value" clicked={() => this.props.onSaved(this.props.ctr)} />
+                <ul>
+                    {this.props.values.map(value => <li>{value}</li>)}
+                </ul>
             </div>
+
         );
     }
 }
 
 const mapStateToProps = state => {
     return {
-        ctr: state.counterStore.counter
+        ctr: state.counterStore.counter,
+        values: state.persistStore.values
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIncrementCounter: () => dispatch({type: actionTypes.INCREMENT}),
-        onDecrementCounter: () => dispatch({type: actionTypes.DECREMENT}),
+        onIncrementCounter: () => dispatch({ type: actionTypes.INCREMENT }),
+        onDecrementCounter: () => dispatch({ type: actionTypes.DECREMENT }),
         onAdd: (value) => dispatch({
             type: actionTypes.ADD,
             payload: {
@@ -42,6 +48,12 @@ const mapDispatchToProps = dispatch => {
             payload: {
                 value: value
             }
+        }),
+        onSaved: (value)=>dispatch({
+           type:actionTypes.SAVE,
+           payload:{
+               value:value
+           }
         }),
     }
 }
