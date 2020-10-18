@@ -4,7 +4,7 @@ const initialState = {
     values : [5,7,10,15]
 }
 
-const reducer = { state= initialState, action} => {
+const reducer = ( state= initialState, action) => {
     const {type} = action;
     const {SAVE} = actionTypes;
 
@@ -19,7 +19,7 @@ const reducer = { state= initialState, action} => {
                 ...state,
                 values: updatedValues
             }
-        default;
+        default:
         return state;
     }
 }
