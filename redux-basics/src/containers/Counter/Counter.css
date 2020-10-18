@@ -16,7 +16,7 @@ ul{
   border: 1px solid black;
   border-radius: 10px;
   box-shadow: 5px 5px 0px -1px rgba(0,0,0,0.75);
-  margin-bottom: 2%;
+  margin: 0 1.5% 2% 1.5%;
   text-align: center;
   display: flex;
   justify-content: center;
