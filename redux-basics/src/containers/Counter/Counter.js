@@ -18,7 +18,7 @@ class Counter extends Component {
                 <CounterControl label="Subtract 5" clicked={() => this.props.onSubtract(5)} />
                 <CounterControl label="Save value" clicked={() => this.props.onSaved(this.props.ctr)} />
                 <ul>
-                    {this.props.values.map(value => <li>{value}</li>)}
+                  {this.props.values.map(value => <li>{value}</li>)}
                 </ul>
             </div>
 
