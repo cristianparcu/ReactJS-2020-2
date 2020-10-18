@@ -16,14 +16,21 @@ class Counter extends Component {
                 <CounterControl label="Decrement" clicked={() => this.props.onDecrementCounter()}  />
                 <CounterControl label="Add 5" clicked={() => this.props.onAdd( 5 )}  />
                 <CounterControl label="Subtract 5" clicked={() => this.props.onSubtract( 5 )}  />
+                <CounterControl label="Save Value" clicked={() => this.props.onSave(this.props.ctr)} />
+                <h2>Saved Values</h2>
+                <ul>
+                    {this.props.values.map(value => <li className="value-stored">{value}</li>)}
+                </ul>
             </div>
+
         );
     }
 }
 
 const mapStateToProps = state => {
     return {
-        ctr: state.counterStore.counter
+        ctr: state.counterStore.counter,
+        values: state.persistStore.values
     }
 }
 
@@ -43,6 +50,13 @@ const mapDispatchToProps = dispatch => {
                 value: value
             }
         }),
+        onSave: (value) => dispatch({
+            type: actionTypes.SAVE,
+            payload: {
+                value: value
+            }
+        })
+
     }
 }
 
