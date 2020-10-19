@@ -11,10 +11,20 @@ export const decrement = () => ({
     type: DECREMENT
 });
 
-export const add = (payload) => ({
-    type: ADD,
-    payload: { ...payload }
-});
+const addResult = ( payload ) => {
+    return {
+        type: ADD,
+        payload: { ...payload }
+    }
+};
+
+export const add = (payload) => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(addResult(payload))
+        }, 2000);
+    }
+};
 
 export const subtract = (payload) => ({
     type: SUBTRACT,
