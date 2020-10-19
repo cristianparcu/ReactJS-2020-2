@@ -15,10 +15,16 @@ class Counter extends Component {
                 <CounterControl label="Increment" clicked={() => this.props.onIncrementCounter()} />
                 <CounterControl label="Decrement" clicked={() => this.props.onDecrementCounter()}  />
                 <CounterControl label="Add 5" clicked={() => this.props.onAdd( 5 )}  />
-                <CounterControl label="Subtract 5" clicked={() => this.props.onSubtract( 5 )}  />
+                <CounterControl label="Subtract 5" clicked={() => this.subtract( 5 )}  />
             </div>
         );
     }
+
+    subtract (value) {
+      setTimeout(() => {
+          this.props.onSubtract( value )
+      }, 2000);
+  }
 }
 
 const mapStateToProps = state => {
