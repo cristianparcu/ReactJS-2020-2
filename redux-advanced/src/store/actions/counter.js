@@ -1,19 +1,16 @@
-export const INCREMENT = 'INCREMENT';
-export const DECREMENT = 'DECREMENT';
-export const ADD = 'ADD';
-export const SUBTRACT = 'SUBTRACT';
+import * as actionTypes from './actionTypes';
 
 export const increment = () => ({
-    type: INCREMENT
+    type: actionTypes.INCREMENT
 });
 
 export const decrement = () => ({
-    type: DECREMENT
+    type: actionTypes.DECREMENT
 });
 
 const addResult = ( payload ) => {
     return {
-        type: ADD,
+        type: actionTypes.ADD,
         payload: { ...payload }
     }
 };
@@ -27,6 +24,6 @@ export const add = (payload) => {
 };
 
 export const subtract = (payload) => ({
-    type: SUBTRACT,
+    type: actionTypes.SUBTRACT,
     payload: { ...payload }
 });
