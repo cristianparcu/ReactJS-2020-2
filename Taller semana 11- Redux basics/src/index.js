@@ -4,10 +4,13 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import App from './App';
 
+
+import saveReducer from './store/reducers/persists';
 import counterReducer from './store/reducers/counter';
 
 const rootReducer = combineReducers ({
-    counterStore: counterReducer
+    counterStore: counterReducer,
+    persistStore: saveReducer
 });
 
 const store = createStore(rootReducer);
