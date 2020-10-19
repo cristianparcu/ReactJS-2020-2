@@ -1,14 +1,14 @@
 import * as actionTypes from '../actions';
 
 const initialState = {
-  counter: []
+  values: []
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SAVE:
         return {
-            counter: [...state.counter, action.payload.value]
+            values: [...state.values, action.payload.value]
         }
     default:
         return state;
