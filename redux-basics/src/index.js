@@ -5,9 +5,11 @@ import { Provider } from 'react-redux';
 import App from './App';
 
 import counterReducer from './store/reducers/counter';
+import reducer from './store/reducers/persist';
 
 const rootReducer = combineReducers ({
-    counterStore: counterReducer
+    counterStore: counterReducer,
+    persistStore: reducer
 });
 
 const store = createStore(rootReducer);
