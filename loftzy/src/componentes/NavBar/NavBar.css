@@ -1,0 +1,11 @@
+.root {
+  background-color: #ff5722;
+  display: flex;
+}
+.signOut {
+  flex-grow: 1;
+}
+.link {
+  text-decoration: none;
+  color: #ffffff;
+}

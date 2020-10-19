@@ -1,0 +1,12 @@
+.table {
+  min-width: 650;
+  display: flex;
+  text-align: center;
+  margin: 0 25%;
+}
+.box {
+  display: flex;
+  flex-flow: column wrap;
+  padding: 3% 5%;
+  margin: 3% 35% 5%;
+}

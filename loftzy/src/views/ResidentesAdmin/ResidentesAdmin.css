@@ -1,0 +1,8 @@
+.coloresp{
+    background-color: red;
+}
+.paper{
+    /* padding: theme.spacing(2); */
+    margin: 'auto';
+    max-width: 500px;
+}

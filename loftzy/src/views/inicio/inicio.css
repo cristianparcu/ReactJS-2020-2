@@ -1,0 +1,18 @@
+.inicioContainer {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.bg {
+  margin-bottom: 10px;
+  width: 500px;
+  height: 300px;
+}
+.box {
+  display: flex;
+  flex-flow: column wrap;
+  padding: 3% 5%;
+  min-width: 300px;
+}

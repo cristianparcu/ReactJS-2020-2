@@ -1,0 +1,15 @@
+.body {
+  padding: 50px;
+  margin: 0px 100px;
+}
+.buttons {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  margin: 3%;
+}
+.btn {
+  text-decoration: none;
+  margin: 5%;
+  background-color: teal;
+}
