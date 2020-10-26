@@ -9,7 +9,6 @@ import Posts from '../../components/Posts/Posts';
 import NewPost from '../../components/NewPost/NewPost';
 import Spinner from '../../components/Spinner/Spinner';
 
-
 class HomePage extends Component {
     state = {
         isUserLoggedIn: this.props.isUserLoggedIn,
@@ -30,6 +29,12 @@ class HomePage extends Component {
 
     componentDidMount () {
         if (this.state.isUserLoggedIn) {
+            this.props.onFetchPosts();
+        }
+    }
+
+    componentWillUpdate (nextProps, nextState) {
+        if (!this.state.isUserLoggedIn && nextState.isUserLoggedIn) {
             this.props.onFetchPosts();
         }
     }

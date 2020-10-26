@@ -1,7 +1,8 @@
 export {
     logIn,
     logOut,
-    signUp
+    signUp,
+    persistAuthentication
 } from './authentication';
 export {
     savePost,

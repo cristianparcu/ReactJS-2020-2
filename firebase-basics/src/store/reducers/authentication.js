@@ -4,7 +4,9 @@ import updateObject from '../utility';
 const initialState = {
     isUserLoggedIn: false,
     userLoggedIn: {
-        userName: ''
+        userName: '',
+        idToken: '',
+        localId: ''
     },
     loadingAuth: false
 }
@@ -13,7 +15,9 @@ const login = (state, action) => {
     return updateObject(state, {
         isUserLoggedIn: true,
         userLoggedIn: {
-            userName: action.payload.userName
+          userName: action.payload.userName,
+          idToken: action.payload.idToken,
+          localId: action.payload.localId
         }
     });
 }
@@ -22,7 +26,9 @@ const signUp = (state, action) => {
     return updateObject(state, {
         isUserLoggedIn: true,
         userLoggedIn: {
-            userName: action.payload.userName
+          userName: action.payload.userName,
+          idToken: action.payload.idToken,
+          localId: action.payload.localId
         }
     });
 }
@@ -31,7 +37,9 @@ const logOut = (state, action) => {
     return updateObject(state, {
         isUserLoggedIn: false,
         userLoggedIn: {
-            userName: ''
+          userName: '',
+          idToken: '',
+          localId: ''
         }
     });
 }

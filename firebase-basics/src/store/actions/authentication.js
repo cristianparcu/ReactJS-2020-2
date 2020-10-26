@@ -15,32 +15,49 @@ const endAuthLoading = () => {
   }
 }
 
-const saveSession = (userName) => {
+const saveSession = (userName, token, localId) => {
   return {
       type: actionTypes.LOGIN,
       payload: {
-          userName: userName
+          userName: userName,
+          idToken: token,
+          localId: localId
       }
   };
 };
 
-const saveSignUp = (userName) => {
+const saveSignUp = (userName, token, localId) => {
   return {
       type: actionTypes.SIGN_UP,
       payload: {
-          userName: userName
+          userName: userName,
+          idToken: token,
+          localId: localId
       }
   };
 };
 
 export const logIn = (authData, onSuccessCallback) => {
   return dispatch => {
-      dispatch(startAuthLoading());
+      dispatch(startAuthLoading())
       axios.post('/accounts:signInWithPassword?key='+API_KEY, authData)
           .then(response => {
+              const userEmail = authData.email;
+              const token = response.data.idToken;
+              const localId = response.data.localId;
+              let userSession = {
+                  token,
+                  userEmail,
+                  localId
+              };
+
+              userSession = JSON.stringify(userSession);
+
               console.log(response);
 
-              dispatch(saveSession(authData.email));
+              localStorage.setItem('userSession', userSession);
+
+              dispatch(saveSession(userEmail, token, localId));
               dispatch(endAuthLoading());
 
               if (onSuccessCallback) {
@@ -60,22 +77,49 @@ export const signUp = (authData, onSuccessCallback) => {
       dispatch(startAuthLoading());
       axios.post('/accounts:signUp?key='+API_KEY, authData)
           .then(response => {
-              console.log(response);
+            const userEmail = authData.email;
+            const token = response.data.idToken;
+            const localId = response.data.localId;
+            let userSession = {
+                token,
+                userEmail,
+                localId
+            };
 
-              dispatch(saveSignUp(authData.email));
-              dispatch(endAuthLoading());
+            userSession = JSON.stringify(userSession);
 
-              if (onSuccessCallback) {
-                  onSuccessCallback();
-              }
-          })
-          .catch(error => {
-              console.log(error);
+            console.log(response);
 
-              dispatch(endAuthLoading());
-          })
+            localStorage.setItem('userSession', userSession);
+
+            dispatch(saveSignUp(userEmail, token, localId));
+            dispatch(endAuthLoading());
+
+            if (onSuccessCallback) {
+                onSuccessCallback();
+            }
+        })
+        .catch(error => {
+            console.log(error);
+
+            dispatch(endAuthLoading());
+        })
   }
 };
+
+export const persistAuthentication = () => {
+  return dispatch => {
+      let userSession = localStorage.getItem('userSession');
+
+      if(!userSession) {
+          dispatch(logOut());
+      } else {
+          userSession = JSON.parse(userSession);
+
+          dispatch(saveSession(userSession.userEmail, userSession.token, userSession.localId));
+      }
+  }
+}
 
 export const logOut = () => {
   return {
