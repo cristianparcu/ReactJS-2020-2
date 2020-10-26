@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './SignUp.css';
+
+import * as actionCreators from '../../store/actions/';
 
 class SignUp extends Component {
     state = {
-        isUserLoggedIn: false,
+        isUserLoggedIn: this.props.isUserLoggedIn,
         userName: '',
         password: ''
     }
@@ -14,6 +17,12 @@ class SignUp extends Component {
         }
     }
 
+    componentWillReceiveProps (nextState) {
+        this.setState({
+            isUserLoggedIn: nextState.isUserLoggedIn
+        });
+    }
+
     render () {
         return (
             <div className="sign-up--form">
@@ -22,20 +31,20 @@ class SignUp extends Component {
                     <p>Username:</p>
                     <input type="text"
                         value={this.state.userName}
-                        onChange={(event) => {this.updateSignInInfo(event, 'userName')}}
+                        onChange={(event) => {this.updateSignUpInfo(event, 'userName')}}
                     />
                     <p>Password:</p>
                     <input type="password"
                         value={this.state.password}
-                        onChange={(event) => {this.updateSignInInfo(event, 'password')}}
+                        onChange={(event) => {this.updateSignUpInfo(event, 'password')}}
                     /><br/>
-                    <button onClick = {this.submitSignInForm}>Submit</button>
+                    <button onClick = {this.submitSignUpForm}>Submit</button>
                 </div>
             </div>
         );
     }
 
-    updateSignInInfo = (event, type) => {
+    updateSignUpInfo = (event, type) => {
         var updatedLoginInfo = {
           ...this.state
         }
@@ -48,10 +57,22 @@ class SignUp extends Component {
         });
     }
 
-    submitSignInForm = () => {
-        console.log('User Signed Up!', this.state);
+    submitSignUpForm = () => {
+        this.props.onUserSignUp(this.state.userName);
         this.props.history.push('/');
     }
 }
 
-export default SignUp;
+const mapStateToProps = state => {
+    return {
+        isUserLoggedIn: state.authenticationStore.isUserLoggedIn
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onUserSignUp: (userName) => dispatch(actionCreators.signUp(userName))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

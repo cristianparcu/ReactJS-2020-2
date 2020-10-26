@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './LogIn.css';
+
+import * as actionCreators from '../../store/actions/';
 
 class LogIn extends Component {
     state = {
-        isUserLoggedIn: false,
+        isUserLoggedIn: this.props.isUserLoggedIn,
         userName: '',
         password: ''
     }
@@ -12,6 +15,12 @@ class LogIn extends Component {
         if (this.state.isUserLoggedIn) {
             this.props.history.push('/');
         }
+    }
+
+    componentWillReceiveProps (nextState) {
+        this.setState({
+            isUserLoggedIn: nextState.isUserLoggedIn
+        });
     }
 
     render () {
@@ -49,9 +58,21 @@ class LogIn extends Component {
     }
 
     submitLoginForm = () => {
-        console.log('User logged in!', this.state);
+        this.props.onUserLogin(this.state.userName);
         this.props.history.push('/');
     }
 }
 
-export default LogIn;
+const mapStateToProps = state => {
+    return {
+        isUserLoggedIn: state.authenticationStore.isUserLoggedIn
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onUserLogin: (userName) => dispatch(actionCreators.logIn(userName))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn);
