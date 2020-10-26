@@ -7,6 +7,7 @@ import * as actionCreators from '../../store/actions/';
 import Button from '../../components/Button/Button';
 import Posts from '../../components/Posts/Posts';
 import NewPost from '../../components/NewPost/NewPost';
+import Spinner from '../../components/Spinner/Spinner';
 
 
 class HomePage extends Component {
@@ -50,9 +51,19 @@ class HomePage extends Component {
                     updateNewPostData = {this.updateNewPostData}
                     submitNewPost = {this.submitNewPost}
                 />
-                <Posts posts = {this.state.posts}/>
+                {this.renderPosts()}
             </div>
         );
+    }
+
+    renderPosts = () => {
+        let content = <Posts posts = {this.state.posts}/>;
+
+        if(this.props.loadingPosts) {
+            content = <Spinner />
+        }
+
+        return content;
     }
 
     updateNewPostData = (event, type) => {
@@ -100,7 +111,8 @@ const mapStateToProps = state => {
     return {
         isUserLoggedIn: state.authenticationStore.isUserLoggedIn,
         userLoggedIn: state.authenticationStore.userLoggedIn,
-        posts: state.postsStore.posts
+        posts: state.postsStore.posts,
+        loadingPosts: state.postsStore.loadingPosts
     }
 }
 

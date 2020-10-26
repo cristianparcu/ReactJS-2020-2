@@ -5,7 +5,8 @@ const initialState = {
     isUserLoggedIn: false,
     userLoggedIn: {
         userName: ''
-    }
+    },
+    loadingAuth: false
 }
 
 const login = (state, action) => {
@@ -35,11 +36,21 @@ const logOut = (state, action) => {
     });
 }
 
+const startLoading = (state, action) => {
+  return updateObject(state, { loadingAuth: true });
+}
+
+const endLoading = (state, action) => {
+  return updateObject(state, { loadingAuth: false });
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.LOGIN: return login(state, action);
         case actionTypes.SIGN_UP: return signUp(state, action);
         case actionTypes.LOG_OUT: return logOut(state, action);
+        case actionTypes.START_LOADING_AUTH: return startLoading(state, action);
+        case actionTypes.END_LOADING_AUTH: return endLoading(state, action);
         default: return state;
     }
 }
