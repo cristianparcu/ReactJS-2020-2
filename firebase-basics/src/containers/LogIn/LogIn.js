@@ -70,8 +70,14 @@ class LogIn extends Component {
     }
 
     submitLoginForm = () => {
-        this.props.onUserLogin(this.state.userName);
-        this.props.history.push('/');
+        const userData = {
+            email: this.state.userName,
+            password: this.state.password
+        };
+
+        this.props.onUserLogin(userData, () => {
+            this.props.history.push('/');
+        });
     }
 }
 
@@ -84,7 +90,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUserLogin: (userName) => dispatch(actionCreators.logIn(userName))
+        onUserLogin: (authData, onSuccessCallback) => dispatch(actionCreators.logIn(authData, onSuccessCallback))
     }
 }
 
