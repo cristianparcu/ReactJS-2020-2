@@ -1,0 +1,24 @@
+.post {
+    display: inline-block;
+    width: 300px;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 2px #ccc;
+    margin: 20px;
+    text-align: center;
+    padding: 10px;
+    padding-bottom: 15px;
+}
+
+.post h2 {
+    color: black;
+}
+
+.post--author {
+    color: #ccc;
+}
+
+.post--content {
+    text-align: justify;
+    color: black;
+    word-wrap: break-word;
+}
