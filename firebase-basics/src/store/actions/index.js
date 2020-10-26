@@ -4,5 +4,6 @@ export {
     signUp
 } from './authentication';
 export {
-    savePost
+    savePost,
+    fetchPosts
 } from './posts';

@@ -27,6 +27,12 @@ class HomePage extends Component {
         });
     }
 
+    componentDidMount () {
+        if (this.state.isUserLoggedIn) {
+            this.props.onFetchPosts();
+        }
+    }
+
     render () {
         return (
             this.state.isUserLoggedIn ? this.onUserLoggedIn() : this.onUserLoggedOut()
@@ -101,6 +107,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onSavePost: (post) => dispatch(actionCreators.savePost(post)),
+        onFetchPosts: () =>dispatch(actionCreators.fetchPosts()),
         onLogOut: () => dispatch(actionCreators.logOut())
     }
 }
