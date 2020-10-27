@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './SignUp.css';
-
 import Spinner from '../../components/Spinner/Spinner';
-
 import * as actionCreators from '../../store/actions/';
+
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
 
 class SignUp extends Component {
     state = {
@@ -12,11 +15,11 @@ class SignUp extends Component {
         userName: '',
         password: ''
     }
-
-    componentDidUpdate () {
-        if (this.state.isUserLoggedIn) {
+    componentDidUpdate() {
+        if (this.state.isUserLoggedIn)
             this.props.history.push('/');
-        }
+        else if (this.props.error !== '' && !this.props.loadingAuth)
+            this.showError();
     }
 
     componentWillReceiveProps (nextState) {
@@ -68,7 +71,14 @@ class SignUp extends Component {
           password: updatedLoginInfo.password
         });
     }
-
+    showError = () => {
+        MySwal.fire({
+            icon: 'error',
+            text: this.props.error
+        }).then(() => {
+            this.props.afterErrorShow();
+        });
+    }
     submitSignUpForm = () => {
       const userData = {
         email: this.state.userName,
@@ -84,13 +94,15 @@ class SignUp extends Component {
 const mapStateToProps = state => {
     return {
         isUserLoggedIn: state.authenticationStore.isUserLoggedIn,
-        loadingAuth: state.authenticationStore.loadingAuth
+        loadingAuth: state.authenticationStore.loadingAuth,
+        error: state.authenticationStore.error
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUserSignUp: (authData, onSuccessCallback) => dispatch(actionCreators.signUp(authData, onSuccessCallback))
+        onUserSignUp: (authData, onSuccessCallback) => dispatch(actionCreators.signUp(authData, onSuccessCallback)),
+        afterErrorShow: ()=>dispatch(actionCreators.cleanError())
     }
 }
 

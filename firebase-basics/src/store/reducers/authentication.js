@@ -8,7 +8,8 @@ const initialState = {
         idToken: '',
         localId: ''
     },
-    loadingAuth: false
+    loadingAuth: false,
+    error:''
 }
 
 const login = (state, action) => {
@@ -43,6 +44,27 @@ const logOut = (state, action) => {
         }
     });
 }
+const setError = (state, action) => {
+  let textError = '';
+  switch (action.payload.error) {
+    case 'INVALID_EMAIL':
+      textError = 'Check your email, please';
+      break;
+    case 'MISSING_PASSWORD':
+      textError = 'It seems that you have not entered password';
+      break;
+    case 'EMAIL_NOT_FOUND':
+    case 'INVALID_PASSWORD':
+      textError = 'Verify your email or password,please';
+      break;
+    default:
+      textError = action.payload.error;
+      break;
+  }
+  return updateObject(state, {
+    error: textError
+  });
+}
 
 const startLoading = (state, action) => {
   return updateObject(state, { loadingAuth: true });
@@ -59,6 +81,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.LOG_OUT: return logOut(state, action);
         case actionTypes.START_LOADING_AUTH: return startLoading(state, action);
         case actionTypes.END_LOADING_AUTH: return endLoading(state, action);
+        case actionTypes.ERROR: return setError(state, action);
         default: return state;
     }
 }

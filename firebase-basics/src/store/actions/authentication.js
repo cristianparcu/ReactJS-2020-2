@@ -15,6 +15,15 @@ const endAuthLoading = () => {
   }
 }
 
+const setError = errorText => {
+    return {
+        type: actionTypes.ERROR,
+        payload: {
+            error: errorText
+        }
+    }
+}
+
 const saveSession = (userName, token, localId) => {
   return {
       type: actionTypes.LOGIN,
@@ -64,9 +73,8 @@ export const logIn = (authData, onSuccessCallback) => {
                   onSuccessCallback();
               }
           })
-          .catch(error => {
-              console.log(error);
-
+          .catch(errorObj => {
+              dispatch(setError(errorObj.response.data.error.message));
               dispatch(endAuthLoading());
           })
   }
@@ -99,9 +107,8 @@ export const signUp = (authData, onSuccessCallback) => {
                 onSuccessCallback();
             }
         })
-        .catch(error => {
-            console.log(error);
-
+        .catch(errorObj => {
+            dispatch(setError(errorObj.response.data.error.message));
             dispatch(endAuthLoading());
         })
   }
@@ -122,7 +129,16 @@ export const persistAuthentication = () => {
 }
 
 export const logOut = () => {
+    localStorage.setItem('userSession', '');    
   return {
       type: actionTypes.LOG_OUT
+  };
+};
+export const cleanError = () => {
+  return {
+      type: actionTypes.ERROR,
+      payload:{
+          error:''
+      }
   };
 };

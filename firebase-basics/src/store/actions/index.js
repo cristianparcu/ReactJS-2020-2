@@ -2,6 +2,7 @@ export {
     logIn,
     logOut,
     signUp,
+    cleanError,
     persistAuthentication
 } from './authentication';
 export {
