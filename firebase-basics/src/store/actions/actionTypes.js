@@ -1,4 +1,5 @@
 export const LOGIN = 'LOGIN';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const SIGN_UP = 'SIGN_UP';
 export const LOG_OUT = 'LOG_OUT';
 export const START_LOADING_AUTH = 'START_LOADING_AUTH';
