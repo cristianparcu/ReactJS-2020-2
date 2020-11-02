@@ -4,6 +4,10 @@ export const LOG_OUT = 'LOG_OUT';
 export const START_LOADING_AUTH = 'START_LOADING_AUTH';
 export const END_LOADING_AUTH = 'END_LOADING_AUTH';
 
+export const RUN_ERRORS = 'RUN_ERRORS';
+
+export const DELETE_LAST_ERROR = 'DELETE_LAST_ERROR';
+
 export const SAVE_POST = 'SAVE_POST';
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const START_LOADING_POSTS = 'START_LOADING_POSTS';

@@ -1,7 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../instances/axios-authentication';
 
-const API_KEY = 'AIzaSyDYkIUTN0J0neg-zWIE1xCrlH34_Emt6VU'
+const API_KEY = 'AIzaSyBpGdtHnzQOgNkv6ms86KTv_fsaO_yZONc'
 
 const startAuthLoading = () => {
   return {
@@ -37,6 +37,15 @@ const saveSignUp = (userName, token, localId) => {
   };
 };
 
+const runErrors = (error) => {
+    return {
+        type: actionTypes.RUN_ERRORS,
+        payload: {
+            error: error
+        }
+    }
+}
+
 export const logIn = (authData, onSuccessCallback) => {
   return dispatch => {
       dispatch(startAuthLoading())
@@ -65,8 +74,8 @@ export const logIn = (authData, onSuccessCallback) => {
               }
           })
           .catch(error => {
-              console.log(error);
-
+              //console.log(error);
+              dispatch(runErrors(error));
               dispatch(endAuthLoading());
           })
   }
@@ -100,8 +109,8 @@ export const signUp = (authData, onSuccessCallback) => {
             }
         })
         .catch(error => {
-            console.log(error);
-
+            //console.log(error);
+            dispatch(runErrors(error));
             dispatch(endAuthLoading());
         })
   }
@@ -122,6 +131,8 @@ export const persistAuthentication = () => {
 }
 
 export const logOut = () => {
+    localStorage.removeItem('userSession');
+    
   return {
       type: actionTypes.LOG_OUT
   };

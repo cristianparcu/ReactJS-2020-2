@@ -10,7 +10,8 @@ class SignUp extends Component {
     state = {
         isUserLoggedIn: this.props.isUserLoggedIn,
         userName: '',
-        password: ''
+        password: '',
+        error: this.props.error
     }
 
     componentDidUpdate () {
@@ -26,6 +27,8 @@ class SignUp extends Component {
     }
 
     render () {
+        var {code, message} = this.props.error;
+        var errorMessage = this.props.error.code !== undefined ? "Error " + code + ": " + message:"Bienvenido";
         return (
             <div className="sign-up--form">
                 <h1 style = {{textAlign: 'center'}}>Sign up</h1>
@@ -40,6 +43,7 @@ class SignUp extends Component {
                         value={this.state.password}
                         onChange={(event) => {this.updateSignUpInfo(event, 'password')}}
                     /><br/>
+                    <h3 className="error-msg">{errorMessage}</h3>
                     {this.renderSubmitButton()}
                 </div>
             </div>
@@ -52,6 +56,8 @@ class SignUp extends Component {
       if(this.props.loadingAuth) {
           content = <Spinner />
       }
+      
+        //BORRAR EL MENSAJE DE ERROR EN EL DIV.
 
       return content;
   }
@@ -84,7 +90,8 @@ class SignUp extends Component {
 const mapStateToProps = state => {
     return {
         isUserLoggedIn: state.authenticationStore.isUserLoggedIn,
-        loadingAuth: state.authenticationStore.loadingAuth
+        loadingAuth: state.authenticationStore.loadingAuth,
+        error: state.authenticationStore.error
     }
 }
 

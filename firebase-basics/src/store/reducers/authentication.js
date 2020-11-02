@@ -8,7 +8,8 @@ const initialState = {
         idToken: '',
         localId: ''
     },
-    loadingAuth: false
+    loadingAuth: false,
+    error: {}
 }
 
 const login = (state, action) => {
@@ -52,6 +53,10 @@ const endLoading = (state, action) => {
   return updateObject(state, { loadingAuth: false });
 }
 
+const runErrors = (state, action) => {
+  var e = action.payload.error;
+  return updateObject(state, {error: e.response.data.error});
+}
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.LOGIN: return login(state, action);
@@ -59,6 +64,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.LOG_OUT: return logOut(state, action);
         case actionTypes.START_LOADING_AUTH: return startLoading(state, action);
         case actionTypes.END_LOADING_AUTH: return endLoading(state, action);
+        case actionTypes.RUN_ERRORS: return runErrors(state, action);
         default: return state;
     }
 }

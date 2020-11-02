@@ -10,7 +10,8 @@ class LogIn extends Component {
     state = {
         isUserLoggedIn: this.props.isUserLoggedIn,
         userName: '',
-        password: ''
+        password: '',
+        error: this.props.error
     }
 
     componentDidUpdate () {
@@ -26,6 +27,8 @@ class LogIn extends Component {
     }
 
     render () {
+        var {code, message} = this.props.error;
+        var errorMessage = this.props.error.code !== undefined ? "Error " + code + ": " + message:"Bienvenido";
         return (
             <div className="login--form">
                 <h1 style = {{textAlign: 'center'}}>Log in</h1>
@@ -40,6 +43,7 @@ class LogIn extends Component {
                         value={this.state.password}
                         onChange={(event) => {this.updateLoginInfo(event, 'password')}}
                     /><br/>
+                    <h3 className="error-msg">{errorMessage}</h3>
                     {this.renderSubmitButton()}
                 </div>
             </div>
@@ -75,6 +79,8 @@ class LogIn extends Component {
             password: this.state.password
         };
 
+        //BORRAR EL MENSAJE DE ERROR EN EL DIV.
+
         this.props.onUserLogin(userData, () => {
             this.props.history.push('/');
         });
@@ -84,7 +90,8 @@ class LogIn extends Component {
 const mapStateToProps = state => {
     return {
         isUserLoggedIn: state.authenticationStore.isUserLoggedIn,
-        loadingAuth: state.authenticationStore.loadingAuth
+        loadingAuth: state.authenticationStore.loadingAuth,
+        error: state.authenticationStore.error
     }
 }
 
