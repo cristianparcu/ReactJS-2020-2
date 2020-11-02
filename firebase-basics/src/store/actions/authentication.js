@@ -77,7 +77,7 @@ export const logIn = (authData, onSuccessCallback) => {
           })
           .catch(error => {
               console.log(error);
-
+              dispatch(loginError());
               dispatch(endAuthLoading());
           })
   }
@@ -112,7 +112,7 @@ export const signUp = (authData, onSuccessCallback) => {
         })
         .catch(error => {
             console.log(error);
-
+            dispatch(signUpError());
             dispatch(endAuthLoading());
         })
   }
