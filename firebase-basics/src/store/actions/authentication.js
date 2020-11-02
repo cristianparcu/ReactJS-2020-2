@@ -37,6 +37,17 @@ const saveSignUp = (userName, token, localId) => {
   };
 };
 
+export const loginError = () => {
+    return {
+        type: actionTypes.LOGIN_ERROR
+    }
+}
+export const signUpError = () => {
+    return {
+        type: actionTypes.SIGN_UP_ERROR
+    }
+}
+
 export const logIn = (authData, onSuccessCallback) => {
   return dispatch => {
       dispatch(startAuthLoading())

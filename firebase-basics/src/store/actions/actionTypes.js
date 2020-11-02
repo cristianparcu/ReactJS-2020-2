@@ -1,5 +1,7 @@
 export const LOGIN = 'LOGIN';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const SIGN_UP = 'SIGN_UP';
+export const SIGN_UP_ERROR = 'SIGN_UP_ERROR';
 export const LOG_OUT = 'LOG_OUT';
 export const START_LOADING_AUTH = 'START_LOADING_AUTH';
 export const END_LOADING_AUTH = 'END_LOADING_AUTH';
@@ -8,3 +10,4 @@ export const SAVE_POST = 'SAVE_POST';
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const START_LOADING_POSTS = 'START_LOADING_POSTS';
 export const END_LOADING_POSTS = 'END_LOADING_POSTS';
+

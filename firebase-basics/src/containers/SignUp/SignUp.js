@@ -29,6 +29,10 @@ class SignUp extends Component {
         return (
             <div className="sign-up--form">
                 <h1 style = {{textAlign: 'center'}}>Sign up</h1>
+                {this.props.error ? (
+                    <div className="error">
+                        <p>Usuario o contraseña no son correctos, verifique e intente nuevamente.</p>
+                    </div>) : ("")}
                 <div>
                     <p>Username:</p>
                     <input type="text"
@@ -84,7 +88,8 @@ class SignUp extends Component {
 const mapStateToProps = state => {
     return {
         isUserLoggedIn: state.authenticationStore.isUserLoggedIn,
-        loadingAuth: state.authenticationStore.loadingAuth
+        loadingAuth: state.authenticationStore.loadingAuth,
+        error: state.authenticationStore.signUpError
     }
 }
 

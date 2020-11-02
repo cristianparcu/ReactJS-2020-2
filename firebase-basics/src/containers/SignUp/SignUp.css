@@ -18,3 +18,13 @@
     left: 50%;
     margin-left: -50px;
 }
+.error{
+    display: flex;
+    flex-wrap: nowrap;
+    border: #A84155 5px solid;
+    background-color: #cccccc;
+    color: black;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+}

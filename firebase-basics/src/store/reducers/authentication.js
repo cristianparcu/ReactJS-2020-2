@@ -3,12 +3,15 @@ import updateObject from '../utility';
 
 const initialState = {
     isUserLoggedIn: false,
+    loginError: false,
     userLoggedIn: {
         userName: '',
         idToken: '',
         localId: ''
     },
-    loadingAuth: false
+    loadingAuth: false,
+    error: false,
+    signUpError: false
 }
 
 const login = (state, action) => {
@@ -51,7 +54,12 @@ const startLoading = (state, action) => {
 const endLoading = (state, action) => {
   return updateObject(state, { loadingAuth: false });
 }
-
+const error = (state, action) => {
+    return updateObject(state, { error: true });
+}
+const signInError = (state, action) => {
+    return updateObject(state, { signInError: true });
+}
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.LOGIN: return login(state, action);
@@ -59,6 +67,8 @@ const reducer = (state = initialState, action) => {
         case actionTypes.LOG_OUT: return logOut(state, action);
         case actionTypes.START_LOADING_AUTH: return startLoading(state, action);
         case actionTypes.END_LOADING_AUTH: return endLoading(state, action);
+        case actionTypes.LOGIN_ERROR: return error(state, action);
+        case actionTypes.SIGN_UP_ERROR: return signInError(state, action);
         default: return state;
     }
 }
