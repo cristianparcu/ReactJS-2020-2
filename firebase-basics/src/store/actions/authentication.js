@@ -37,6 +37,75 @@ const saveSignUp = (userName, token, localId) => {
   };
 };
 
+const setError = (error) =>{
+    switch (error){
+        case "INVALID_EMAIL":
+        return {
+            type:actionTypes.ERROR,
+            payload:{
+                message : "Your email address appears to be malformed."
+            }
+        };
+      case "INVALID_PASSWORD":
+        return {
+            type:actionTypes.ERROR,
+            payload:{
+                message : "Your password is wrong."
+            }
+        };
+
+      case "USER_NOT_FOUND":
+        return {
+            type:actionTypes.ERROR,
+            payload:{
+                message : "User with this email doesn't exist."
+            }
+        };
+      case "USER_DISABLED":
+       return  {
+           type:actionTypes.ERROR,
+        payload:{
+            message : "User with this email has been disabled."
+        }
+    };
+      case "TOO_MANY_ATTEMPTS_TRY_LATER : Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.":
+        return {
+            type:actionTypes.ERROR,
+            payload:{
+                message : "Too many requests. Try again later."
+            }
+        };
+        case "MISSING_PASSWORD":
+        return {
+            type:actionTypes.ERROR,
+            payload:{
+                message : "Type a password please"
+            }
+        };
+        case "EMAIL_NOT_FOUND":
+            return {
+                type:actionTypes.ERROR,
+                payload:{
+                    message : "this email doesnt exist donut"
+                }
+            };
+      case "OPERATION_NOT_ALLOWED":
+        return {
+            type:actionTypes.ERROR,
+            payload:{
+                message : "Signing in with Email and Password is not enabled."
+            }
+        };
+      default:
+       return  {
+        type:actionTypes.ERROR,
+        payload:{
+            message : "Hmmmm somethings wrong..."
+        }
+    };
+    }
+}
+
 export const logIn = (authData, onSuccessCallback) => {
   return dispatch => {
       dispatch(startAuthLoading())
@@ -65,8 +134,8 @@ export const logIn = (authData, onSuccessCallback) => {
               }
           })
           .catch(error => {
-              console.log(error);
-
+              console.log(error.response.data.error.message);
+              dispatch(setError(error.response.data.error.message))
               dispatch(endAuthLoading());
           })
   }

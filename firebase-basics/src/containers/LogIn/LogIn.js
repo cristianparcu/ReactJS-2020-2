@@ -28,6 +28,7 @@ class LogIn extends Component {
     render () {
         return (
             <div className="login--form">
+                {this.props.error}
                 <h1 style = {{textAlign: 'center'}}>Log in</h1>
                 <div>
                     <p>Username:</p>
@@ -84,7 +85,8 @@ class LogIn extends Component {
 const mapStateToProps = state => {
     return {
         isUserLoggedIn: state.authenticationStore.isUserLoggedIn,
-        loadingAuth: state.authenticationStore.loadingAuth
+        loadingAuth: state.authenticationStore.loadingAuth,
+        error: state.authenticationStore.error
     }
 }
 
