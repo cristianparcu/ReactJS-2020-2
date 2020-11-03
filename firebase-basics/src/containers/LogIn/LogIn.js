@@ -40,11 +40,16 @@ class LogIn extends Component {
                         value={this.state.userName}
                         onChange={(event) => {this.updateLoginInfo(event, 'userName')}}
                     />
+                    <br />
+                    {this.displayError("email")}
                     <p>Password:</p>
                     <input type="password"
                         value={this.state.password}
                         onChange={(event) => {this.updateLoginInfo(event, 'password')}}
-                    /><br/>
+                    />
+                    <br />
+                    {this.displayError("password")}
+                    <br/>
                     {this.displayError()}
                     {this.renderSubmitButton()}
                 </div>
@@ -52,12 +57,21 @@ class LogIn extends Component {
         );
     }
 
-    displayError = () => {
+    displayError = (input) => {
         var {code, message} = this.props.errorMessage;
-        var errorMsj = this.props.errorMessage.code !== undefined ? "Error " + code + ": " + message : "Bienvenido"
     
-        return <h3>{errorMsj}</h3>
-    };
+        if (this.props.errorMessage.code !== undefined) {
+          if (message === "INVALID_EMAIL" || message === "EMAIL_EXISTS") {
+            if(input === "email") {
+              return <span className = "error">{`Error ${code}: ${message}`}</span>
+            }
+          } else {
+            if (input === "password") {
+              return <span className = "error">{`Error ${code}: ${message}`}</span>
+            }
+          }
+        }
+      };
 
     renderSubmitButton = () => {
         let content = <button onClick = {this.submitLoginForm}>Submit</button>;

@@ -43,6 +43,8 @@ class SignUp extends Component {
               this.updateSignUpInfo(event, "userName");
             }}
           />
+          <br />
+          {this.displayError("email")}
           <p>Password:</p>
           <input
             type="password"
@@ -52,6 +54,8 @@ class SignUp extends Component {
             }}
           />
           <br />
+          {this.displayError("password")}
+          <br />
           {this.displayError()}
           {this.renderSubmitButton()}
         </div>
@@ -59,11 +63,20 @@ class SignUp extends Component {
     );
   }
 
-  displayError = () => {
+  displayError = (input) => {
     var {code, message} = this.props.errorMessage;
-    var errorMsj = this.props.errorMessage.code !== undefined ? "Error " + code + ": " + message : "Bienvenido"
 
-    return <h3>{errorMsj}</h3>
+    if (this.props.errorMessage.code !== undefined) {
+      if (message === "INVALID_EMAIL" || message === "EMAIL_EXISTS") {
+        if(input === "email") {
+          return <span className = "error">{`Error ${code}: ${message}`}</span>
+        }
+      } else {
+        if (input === "password") {
+          return <span className = "error">{`Error ${code}: ${message}`}</span>
+        }
+      }
+    }
   };
 
   renderSubmitButton = () => {
