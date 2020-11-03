@@ -115,9 +115,9 @@ export const signUp = (authData, onSuccessCallback) => {
       .catch((error) => {
         console.log(error);
 
-        dispatch(endAuthLoading());
-
         dispatch(displayError(error));
+
+        dispatch(endAuthLoading());
       });
   };
 };

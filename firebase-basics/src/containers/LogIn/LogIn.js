@@ -14,6 +14,10 @@ class LogIn extends Component {
         errorMessage: this.props.errorMessage
     }
 
+    componentDidMount() {
+        this.props.onClean();
+    }
+
     componentDidUpdate () {
         if (this.state.isUserLoggedIn) {
             this.props.history.push('/');
@@ -41,11 +45,19 @@ class LogIn extends Component {
                         value={this.state.password}
                         onChange={(event) => {this.updateLoginInfo(event, 'password')}}
                     /><br/>
+                    {this.displayError()}
                     {this.renderSubmitButton()}
                 </div>
             </div>
         );
     }
+
+    displayError = () => {
+        var {code, message} = this.props.errorMessage;
+        var errorMsj = this.props.errorMessage.code !== undefined ? "Error " + code + ": " + message : "Bienvenido"
+    
+        return <h3>{errorMsj}</h3>
+    };
 
     renderSubmitButton = () => {
         let content = <button onClick = {this.submitLoginForm}>Submit</button>;
@@ -86,13 +98,14 @@ const mapStateToProps = state => {
     return {
         isUserLoggedIn: state.authenticationStore.isUserLoggedIn,
         loadingAuth: state.authenticationStore.loadingAuth,
-        errorMessage: state.authenticationStore.errorMessage
+        errorMessage: state.authenticationStore.errMessage
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUserLogin: (authData, onSuccessCallback) => dispatch(actionCreators.logIn(authData, onSuccessCallback))
+        onUserLogin: (authData, onSuccessCallback) => dispatch(actionCreators.logIn(authData, onSuccessCallback)),
+        onClean: () => dispatch(actionCreators.cleanError())
     }
 }
 

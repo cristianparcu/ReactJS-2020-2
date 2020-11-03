@@ -15,6 +15,7 @@ class SignUp extends Component {
   };
 
   componentDidMount() {
+      this.props.onClean();
   }
 
   componentDidUpdate() {
