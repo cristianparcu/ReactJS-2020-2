@@ -26,6 +26,10 @@ class LogIn extends Component {
         });
     }
 
+    componentDidMount(){
+        this.props.onClean();
+    }
+
     render () {
         var {code, message} = this.props.error;
         var errorMessage = this.props.error.code !== undefined ? "Error " + code + ": " + message:"Bienvenido";
@@ -43,7 +47,7 @@ class LogIn extends Component {
                         value={this.state.password}
                         onChange={(event) => {this.updateLoginInfo(event, 'password')}}
                     /><br/>
-                    <h3 className="error-msg">{errorMessage}</h3>
+                    <h3 className="error-msg" >{errorMessage}</h3>
                     {this.renderSubmitButton()}
                 </div>
             </div>
@@ -97,7 +101,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUserLogin: (authData, onSuccessCallback) => dispatch(actionCreators.logIn(authData, onSuccessCallback))
+        onUserLogin: (authData, onSuccessCallback) => dispatch(actionCreators.logIn(authData, onSuccessCallback)),
+        onClean: ()=> dispatch(actionCreators.reloadError())
     }
 }
 

@@ -26,6 +26,10 @@ class SignUp extends Component {
         });
     }
 
+    componentDidMount(){
+        this.props.onClean();
+    }
+
     render () {
         var {code, message} = this.props.error;
         var errorMessage = this.props.error.code !== undefined ? "Error " + code + ": " + message:"Bienvenido";
@@ -97,7 +101,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUserSignUp: (authData, onSuccessCallback) => dispatch(actionCreators.signUp(authData, onSuccessCallback))
+        onUserSignUp: (authData, onSuccessCallback) => dispatch(actionCreators.signUp(authData, onSuccessCallback)),
+        onClean: ()=> dispatch(actionCreators.reloadError())
     }
 }
 

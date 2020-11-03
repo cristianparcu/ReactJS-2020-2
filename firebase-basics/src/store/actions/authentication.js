@@ -46,6 +46,12 @@ const runErrors = (error) => {
     }
 }
 
+export const reloadError = () => {
+    return {
+        type: actionTypes.RELOAD_ERROR
+    }
+}
+
 export const logIn = (authData, onSuccessCallback) => {
   return dispatch => {
       dispatch(startAuthLoading())
