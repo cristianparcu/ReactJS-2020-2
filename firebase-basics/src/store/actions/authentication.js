@@ -37,6 +37,41 @@ const saveSignUp = (userName, token, localId) => {
   };
 };
 
+const Error = (error) => {
+    switch(error){
+        case "Wrong_Email":
+            return{
+                type:actionTypes.Error_Handing,
+                payload:{
+                    message: "Review your Email, Something wrong"
+                }
+            };
+        case "Wrong_password":
+            return{
+                type:actionTypes.Error_Handing,
+                payload:{
+                    message: "Remember your password, It's wrong"
+                }
+            };
+        case "Strange_user":
+            return{
+                type:actionTypes.Error_Handing,
+                payload:{
+                    message: "You are not in our database"
+                }
+            };
+        default:
+            return{
+                type:actionTypes.Error_Handing,
+                payload:{
+                    message: "review otherwise you are a bad person to find"
+                }
+            };
+
+    }
+}
+
+
 export const logIn = (authData, onSuccessCallback) => {
   return dispatch => {
       dispatch(startAuthLoading())
@@ -66,7 +101,9 @@ export const logIn = (authData, onSuccessCallback) => {
           })
           .catch(error => {
               console.log(error);
-
+              
+              dispatch(Error(error.response.data.error.message))
+              console.log(error.response.data.error.message);
               dispatch(endAuthLoading());
           })
   }
@@ -101,7 +138,9 @@ export const signUp = (authData, onSuccessCallback) => {
         })
         .catch(error => {
             console.log(error);
-
+            
+            dispatch(Error(error.response.data.error.message))
+            console.log(error.response.data.error.message);
             dispatch(endAuthLoading());
         })
   }

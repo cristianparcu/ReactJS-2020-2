@@ -5,6 +5,7 @@ import './LogIn.css';
 import Spinner from '../../components/Spinner/Spinner';
 
 import * as actionCreators from '../../store/actions/';
+import { Error_Handing } from '../../store/actions/actionTypes';
 
 class LogIn extends Component {
     state = {
@@ -28,6 +29,7 @@ class LogIn extends Component {
     render () {
         return (
             <div className="login--form">
+                {this.props.error}
                 <h1 style = {{textAlign: 'center'}}>Log in</h1>
                 <div>
                     <p>Username:</p>
@@ -84,7 +86,9 @@ class LogIn extends Component {
 const mapStateToProps = state => {
     return {
         isUserLoggedIn: state.authenticationStore.isUserLoggedIn,
-        loadingAuth: state.authenticationStore.loadingAuth
+        loadingAuth: state.authenticationStore.loadingAuth,
+        error: state.authenticationStore.error
+        
     }
 }
 

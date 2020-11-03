@@ -44,6 +44,40 @@ const logOut = (state, action) => {
     });
 }
 
+const Error = (error) => {
+  switch(error){
+      case "Wrong_Email":
+          return{
+              type:actionTypes.Error_Handing,
+              payload:{
+                  message: "Review your Email, Something wrong"
+              }
+          };
+      case "Wrong_password":
+          return{
+              type:actionTypes.Error_Handing,
+              payload:{
+                  message: "Remember your password, It's wrong"
+              }
+          };
+      case "Strange_user":
+          return{
+              type:actionTypes.Error_Handing,
+              payload:{
+                  message: "You are not in our database"
+              }
+          };
+      default:
+          return{
+              type:actionTypes.Error_Handing,
+              payload:{
+                  message: "review otherwise you are a bad person to find"
+              }
+          };
+
+  }
+}
+
 const startLoading = (state, action) => {
   return updateObject(state, { loadingAuth: true });
 }
