@@ -37,9 +37,9 @@ const saveSignUp = (userName, token, localId) => {
   };
 };
 
-const Error = (error) => {
+const Error_Handing = (error) => {
     switch(error){
-        case "Wrong_Email":
+        case "INVALID_EMAIL":
             return{
                 type:actionTypes.Error_Handing,
                 payload:{
@@ -102,7 +102,7 @@ export const logIn = (authData, onSuccessCallback) => {
           .catch(error => {
               console.log(error);
               
-              dispatch(Error(error.response.data.error.message))
+              dispatch(Error_Handing(error.response.data.error.message))
               console.log(error.response.data.error.message);
               dispatch(endAuthLoading());
           })
@@ -139,7 +139,7 @@ export const signUp = (authData, onSuccessCallback) => {
         .catch(error => {
             console.log(error);
             
-            dispatch(Error(error.response.data.error.message))
+            dispatch(Error_Handing(error.response.data.error.message))
             console.log(error.response.data.error.message);
             dispatch(endAuthLoading());
         })

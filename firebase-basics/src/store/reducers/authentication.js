@@ -8,7 +8,14 @@ const initialState = {
         idToken: '',
         localId: ''
     },
-    loadingAuth: false
+    loadingAuth: false,
+    error:''
+}
+
+const Error_Handing = (state, action) =>{
+    return updateObject(state,{
+        error: action.payload.message
+    })
 }
 
 const login = (state, action) => {
@@ -18,7 +25,8 @@ const login = (state, action) => {
           userName: action.payload.userName,
           idToken: action.payload.idToken,
           localId: action.payload.localId
-        }
+        },
+        error: ''
     });
 }
 
@@ -29,7 +37,8 @@ const signUp = (state, action) => {
           userName: action.payload.userName,
           idToken: action.payload.idToken,
           localId: action.payload.localId
-        }
+        },
+        error: ''
     });
 }
 
@@ -44,39 +53,39 @@ const logOut = (state, action) => {
     });
 }
 
-const Error = (error) => {
-  switch(error){
-      case "Wrong_Email":
-          return{
-              type:actionTypes.Error_Handing,
-              payload:{
-                  message: "Review your Email, Something wrong"
-              }
-          };
-      case "Wrong_password":
-          return{
-              type:actionTypes.Error_Handing,
-              payload:{
-                  message: "Remember your password, It's wrong"
-              }
-          };
-      case "Strange_user":
-          return{
-              type:actionTypes.Error_Handing,
-              payload:{
-                  message: "You are not in our database"
-              }
-          };
-      default:
-          return{
-              type:actionTypes.Error_Handing,
-              payload:{
-                  message: "review otherwise you are a bad person to find"
-              }
-          };
+// const Error = (error) => {
+//   switch(error){
+//       case "Wrong_Email":
+//           return{
+//               type:actionTypes.Error_Handing,
+//               payload:{
+//                   message: "Review your Email, Something wrong"
+//               }
+//           };
+//       case "Wrong_password":
+//           return{
+//               type:actionTypes.Error_Handing,
+//               payload:{
+//                   message: "Remember your password, It's wrong"
+//               }
+//           };
+//       case "Strange_user":
+//           return{
+//               type:actionTypes.Error_Handing,
+//               payload:{
+//                   message: "You are not in our database"
+//               }
+//           };
+//       default:
+//           return{
+//               type:actionTypes.Error_Handing,
+//               payload:{
+//                   message: "review otherwise you are a bad person to find"
+//               }
+//           };
 
-  }
-}
+//   }
+// }
 
 const startLoading = (state, action) => {
   return updateObject(state, { loadingAuth: true });
@@ -93,6 +102,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.LOG_OUT: return logOut(state, action);
         case actionTypes.START_LOADING_AUTH: return startLoading(state, action);
         case actionTypes.END_LOADING_AUTH: return endLoading(state, action);
+        case actionTypes.Error_Handing: return Error_Handing(state,action);
         default: return state;
     }
 }
