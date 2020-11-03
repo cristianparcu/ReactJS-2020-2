@@ -26,6 +26,8 @@ class SignUp extends Component {
     }
 
     render () {
+        var {code,message}= this.props.error;
+        var mensajeError= this.props.error.code !== undefined ? "Fallo" + code + ": " + message:"Nuevo registro"
         return (
             <div className="sign-up--form">
                 <h1 style = {{textAlign: 'center'}}>Sign up</h1>
@@ -40,6 +42,7 @@ class SignUp extends Component {
                         value={this.state.password}
                         onChange={(event) => {this.updateSignUpInfo(event, 'password')}}
                     /><br/>
+                    <h2 className="error-msg">{mensajeError}</h2>
                     {this.renderSubmitButton()}
                 </div>
             </div>
@@ -84,13 +87,15 @@ class SignUp extends Component {
 const mapStateToProps = state => {
     return {
         isUserLoggedIn: state.authenticationStore.isUserLoggedIn,
-        loadingAuth: state.authenticationStore.loadingAuth
+        loadingAuth: state.authenticationStore.loadingAuth,
+        error: state.authenticationStore.error
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUserSignUp: (authData, onSuccessCallback) => dispatch(actionCreators.signUp(authData, onSuccessCallback))
+        onUserSignUp: (authData, onSuccessCallback) => dispatch(actionCreators.signUp(authData, onSuccessCallback)),
+        onClean: () => dispatch(actionCreators.reloadError())
     }
 }
 

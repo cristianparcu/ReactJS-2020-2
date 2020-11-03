@@ -10,7 +10,8 @@ class LogIn extends Component {
     state = {
         isUserLoggedIn: this.props.isUserLoggedIn,
         userName: '',
-        password: ''
+        password: '',
+        error: this.props.error
     }
 
     componentDidUpdate () {
@@ -25,7 +26,13 @@ class LogIn extends Component {
         });
     }
 
+    componentDidMount(){
+        this.props.onClean();
+    }
+
     render () {
+        var {code, message} = this.props.error;
+        var errorMessage = this.props.error.code !== undefined ? "Fallo " + code + ": " + message:"Bienvenido de nuevo.";
         return (
             <div className="login--form">
                 <h1 style = {{textAlign: 'center'}}>Log in</h1>
@@ -40,11 +47,13 @@ class LogIn extends Component {
                         value={this.state.password}
                         onChange={(event) => {this.updateLoginInfo(event, 'password')}}
                     /><br/>
+                    <h2 className="error-msg" >{errorMessage}</h2>
                     {this.renderSubmitButton()}
                 </div>
             </div>
         );
     }
+
 
     renderSubmitButton = () => {
         let content = <button onClick = {this.submitLoginForm}>Submit</button>;
@@ -84,13 +93,15 @@ class LogIn extends Component {
 const mapStateToProps = state => {
     return {
         isUserLoggedIn: state.authenticationStore.isUserLoggedIn,
-        loadingAuth: state.authenticationStore.loadingAuth
+        loadingAuth: state.authenticationStore.loadingAuth,
+        error: state.authenticationStore.error
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUserLogin: (authData, onSuccessCallback) => dispatch(actionCreators.logIn(authData, onSuccessCallback))
+        onUserLogin: (authData, onSuccessCallback) => dispatch(actionCreators.logIn(authData, onSuccessCallback)),
+        onClean: ()=> dispatch(actionCreators.reloadError())
     }
 }
 
