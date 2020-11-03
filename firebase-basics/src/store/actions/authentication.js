@@ -37,6 +37,32 @@ const saveSignUp = (userName, token, localId) => {
   };
 };
 
+const handleError = (error) =>{
+    switch (error){
+        case "INVALID_EMAIL":
+        return {
+            type:actionTypes.ERROR,
+            payload:{
+                message : "Invalid email address"
+            }
+        };
+      case "INVALID_PASSWORD":
+        return {
+            type:actionTypes.ERROR,
+            payload:{
+                message : "Ivalid password"
+            }
+        };
+        case "NO_PASSWORD":
+        return {
+            type:actionTypes.ERROR,
+            payload:{
+                message : "password is missing"
+            }
+        };
+    };
+}
+
 export const logIn = (authData, onSuccessCallback) => {
   return dispatch => {
       dispatch(startAuthLoading())
@@ -65,9 +91,9 @@ export const logIn = (authData, onSuccessCallback) => {
               }
           })
           .catch(error => {
-              console.log(error);
-
-              dispatch(endAuthLoading());
+            console.log(error.response.data.error.message);
+            dispatch(handleError(error.response.data.error.message))
+            dispatch(endAuthLoading());
           })
   }
 };
@@ -88,7 +114,7 @@ export const signUp = (authData, onSuccessCallback) => {
 
             userSession = JSON.stringify(userSession);
 
-            console.log(response);
+            console.log(response.message);
 
             localStorage.setItem('userSession', userSession);
 
@@ -100,8 +126,7 @@ export const signUp = (authData, onSuccessCallback) => {
             }
         })
         .catch(error => {
-            console.log(error);
-
+            console.log(error.body);
             dispatch(endAuthLoading());
         })
   }
@@ -126,3 +151,6 @@ export const logOut = () => {
       type: actionTypes.LOG_OUT
   };
 };
+
+
+

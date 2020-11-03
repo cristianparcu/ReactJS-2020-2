@@ -13,11 +13,13 @@ class LogIn extends Component {
         password: ''
     }
 
-    componentDidUpdate () {
-        if (this.state.isUserLoggedIn) {
+    componentDidUpdate() {
+        if (this.state.isUserLoggedIn)
             this.props.history.push('/');
-        }
+        else if (!this.props.loadingAuth)
+        this.showError();
     }
+    
 
     componentWillReceiveProps (nextState) {
         this.setState({
@@ -92,6 +94,10 @@ const mapDispatchToProps = dispatch => {
     return {
         onUserLogin: (authData, onSuccessCallback) => dispatch(actionCreators.logIn(authData, onSuccessCallback))
     }
+}
+
+const showError = () => {
+    return console.log(this.props.error)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogIn);
