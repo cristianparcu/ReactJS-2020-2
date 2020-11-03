@@ -1,128 +1,155 @@
-import * as actionTypes from './actionTypes';
-import axios from '../../instances/axios-authentication';
+import * as actionTypes from "./actionTypes";
+import axios from "../../instances/axios-authentication";
 
-const API_KEY = 'AIzaSyDYkIUTN0J0neg-zWIE1xCrlH34_Emt6VU'
+const API_KEY = "AIzaSyDYkIUTN0J0neg-zWIE1xCrlH34_Emt6VU";
+
+const displayError = (error) => {
+  return {
+    type: actionTypes.ERR_DISPLAY,
+    payload: {
+      error: error
+    },
+  };
+};
 
 const startAuthLoading = () => {
   return {
-      type: actionTypes.START_LOADING_AUTH
-  }
-}
+    type: actionTypes.START_LOADING_AUTH,
+  };
+};
 
 const endAuthLoading = () => {
   return {
-      type: actionTypes.END_LOADING_AUTH
-  }
-}
+    type: actionTypes.END_LOADING_AUTH,
+  };
+};
 
 const saveSession = (userName, token, localId) => {
   return {
-      type: actionTypes.LOGIN,
-      payload: {
-          userName: userName,
-          idToken: token,
-          localId: localId
-      }
+    type: actionTypes.LOGIN,
+    payload: {
+      userName: userName,
+      idToken: token,
+      localId: localId,
+    },
   };
 };
 
 const saveSignUp = (userName, token, localId) => {
   return {
-      type: actionTypes.SIGN_UP,
-      payload: {
-          userName: userName,
-          idToken: token,
-          localId: localId
-      }
+    type: actionTypes.SIGN_UP,
+    payload: {
+      userName: userName,
+      idToken: token,
+      localId: localId,
+    },
   };
 };
 
 export const logIn = (authData, onSuccessCallback) => {
-  return dispatch => {
-      dispatch(startAuthLoading())
-      axios.post('/accounts:signInWithPassword?key='+API_KEY, authData)
-          .then(response => {
-              const userEmail = authData.email;
-              const token = response.data.idToken;
-              const localId = response.data.localId;
-              let userSession = {
-                  token,
-                  userEmail,
-                  localId
-              };
+  return (dispatch) => {
+    dispatch(startAuthLoading());
+    axios
+      .post("/accounts:signInWithPassword?key=" + API_KEY, authData)
+      .then((response) => {
+        const userEmail = authData.email;
+        const token = response.data.idToken;
+        const localId = response.data.localId;
+        let userSession = {
+          token,
+          userEmail,
+          localId,
+        };
 
-              userSession = JSON.stringify(userSession);
+        userSession = JSON.stringify(userSession);
 
-              console.log(response);
+        console.log(response);
 
-              localStorage.setItem('userSession', userSession);
+        localStorage.setItem("userSession", userSession);
 
-              dispatch(saveSession(userEmail, token, localId));
-              dispatch(endAuthLoading());
+        dispatch(saveSession(userEmail, token, localId));
+        dispatch(endAuthLoading());
 
-              if (onSuccessCallback) {
-                  onSuccessCallback();
-              }
-          })
-          .catch(error => {
-              console.log(error);
+        if (onSuccessCallback) {
+          onSuccessCallback();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
 
-              dispatch(endAuthLoading());
-          })
-  }
+        dispatch(endAuthLoading());
+
+        dispatch(displayError(error));
+      });
+  };
 };
 
 export const signUp = (authData, onSuccessCallback) => {
-  return dispatch => {
-      dispatch(startAuthLoading());
-      axios.post('/accounts:signUp?key='+API_KEY, authData)
-          .then(response => {
-            const userEmail = authData.email;
-            const token = response.data.idToken;
-            const localId = response.data.localId;
-            let userSession = {
-                token,
-                userEmail,
-                localId
-            };
+  return (dispatch) => {
+    dispatch(startAuthLoading());
+    axios
+      .post("/accounts:signUp?key=" + API_KEY, authData)
+      .then((response) => {
+        const userEmail = authData.email;
+        const token = response.data.idToken;
+        const localId = response.data.localId;
+        let userSession = {
+          token,
+          userEmail,
+          localId,
+        };
 
-            userSession = JSON.stringify(userSession);
+        userSession = JSON.stringify(userSession);
 
-            console.log(response);
+        console.log(response);
 
-            localStorage.setItem('userSession', userSession);
+        localStorage.setItem("userSession", userSession);
 
-            dispatch(saveSignUp(userEmail, token, localId));
-            dispatch(endAuthLoading());
+        dispatch(saveSignUp(userEmail, token, localId));
+        dispatch(endAuthLoading());
 
-            if (onSuccessCallback) {
-                onSuccessCallback();
-            }
-        })
-        .catch(error => {
-            console.log(error);
+        if (onSuccessCallback) {
+          onSuccessCallback();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
 
-            dispatch(endAuthLoading());
-        })
-  }
+        dispatch(endAuthLoading());
+
+        dispatch(displayError(error));
+      });
+  };
 };
 
 export const persistAuthentication = () => {
-  return dispatch => {
-      let userSession = localStorage.getItem('userSession');
+  return (dispatch) => {
+    let userSession = localStorage.getItem("userSession");
 
-      if(!userSession) {
-          dispatch(logOut());
-      } else {
-          userSession = JSON.parse(userSession);
+    if (!userSession) {
+      dispatch(logOut());
+    } else {
+      userSession = JSON.parse(userSession);
 
-          dispatch(saveSession(userSession.userEmail, userSession.token, userSession.localId));
-      }
-  }
-}
+      dispatch(
+        saveSession(
+          userSession.userEmail,
+          userSession.token,
+          userSession.localId
+        )
+      );
+    }
+  };
+};
 
 export const logOut = () => {
   return {
-      type: actionTypes.LOG_OUT
+    type: actionTypes.LOG_OUT,
+  };
+};
+
+export const cleanError = () => {
+  return {
+    type: actionTypes.ERR_CLEANER,
   };
 };

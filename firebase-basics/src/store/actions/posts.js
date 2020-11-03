@@ -1,6 +1,16 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../instances/axios-posts';
 
+
+const displayError = (error) => {
+    return {
+        type: actionTypes.ERR_DISPLAY,
+        payload: {
+            message: error.response.data.error.message
+        }
+    }
+}
+
 const startPostsLoading = () => {
     return {
         type: actionTypes.START_LOADING_POSTS
@@ -37,6 +47,8 @@ export const savePost = post => {
                 console.log(error);
 
                 dispatch(endPostsLoading());
+
+                dispatch(displayError(error));
             })
     }
 };
@@ -68,6 +80,8 @@ export const fetchPosts = () => {
                 console.log(error);
 
                 dispatch(endPostsLoading());
+
+                dispatch(displayError(error));
             })
     }
 }

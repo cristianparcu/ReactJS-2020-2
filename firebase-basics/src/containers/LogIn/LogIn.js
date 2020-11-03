@@ -10,7 +10,8 @@ class LogIn extends Component {
     state = {
         isUserLoggedIn: this.props.isUserLoggedIn,
         userName: '',
-        password: ''
+        password: '',
+        errorMessage: this.props.errorMessage
     }
 
     componentDidUpdate () {
@@ -84,7 +85,8 @@ class LogIn extends Component {
 const mapStateToProps = state => {
     return {
         isUserLoggedIn: state.authenticationStore.isUserLoggedIn,
-        loadingAuth: state.authenticationStore.loadingAuth
+        loadingAuth: state.authenticationStore.loadingAuth,
+        errorMessage: state.authenticationStore.errorMessage
     }
 }
 
