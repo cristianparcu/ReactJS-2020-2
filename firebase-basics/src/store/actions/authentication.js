@@ -72,6 +72,25 @@ export const logIn = (authData, onSuccessCallback) => {
   }
 };
 
+const handleError = (error)=>{
+    switch (error){
+        case "Invalid-Username":
+            return {
+                type:actionTypes.ERROR,
+                payload:{
+                    message : "The username entered is invalid"
+                }
+            };
+        case "Invalid-Password":
+            return{
+                type:actionTypes.ERROR,
+                payload:{
+                    message : "The password provided is invalid"
+                }
+            };
+    };
+}
+
 export const signUp = (authData, onSuccessCallback) => {
   return dispatch => {
       dispatch(startAuthLoading());

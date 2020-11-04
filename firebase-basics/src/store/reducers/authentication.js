@@ -33,6 +33,12 @@ const signUp = (state, action) => {
     });
 }
 
+const handleError = (state, action) =>{
+  return updateObject(state,{
+    error: action.payload.message
+  });
+}
+
 const logOut = (state, action) => {
     return updateObject(state, {
         isUserLoggedIn: false,
