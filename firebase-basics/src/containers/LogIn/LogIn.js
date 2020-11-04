@@ -17,6 +17,8 @@ class LogIn extends Component {
     componentDidUpdate () {
         if (this.state.isUserLoggedIn) {
             this.props.history.push('/');
+        }else if (this.state.erros!=false){
+            <Error />
         }
     }
 
@@ -54,9 +56,7 @@ class LogIn extends Component {
             content = <Spinner />
         }
 
-        if(this.props.errors){
-            content = <Error />
-        }
+        
 
         return content;
     }
