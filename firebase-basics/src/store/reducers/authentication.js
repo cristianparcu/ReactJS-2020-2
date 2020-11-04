@@ -8,7 +8,8 @@ const initialState = {
         idToken: '',
         localId: ''
     },
-    loadingAuth: false
+    loadingAuth: false,
+    handlingError: null
 }
 
 const login = (state, action) => {
@@ -34,6 +35,8 @@ const signUp = (state, action) => {
 }
 
 const logOut = (state, action) => {
+    console.log('logout')
+    localStorage.removeItem('userSession')
     return updateObject(state, {
         isUserLoggedIn: false,
         userLoggedIn: {
@@ -52,6 +55,14 @@ const endLoading = (state, action) => {
   return updateObject(state, { loadingAuth: false });
 }
 
+const handleErrorFirebase = (state, action) => {
+  return updateObject(state, { handlingError: action.payload.error });
+}
+
+const cleanErrors = (state, action) => {
+  return updateObject(state, { handlingError: null })
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.LOGIN: return login(state, action);
@@ -59,6 +70,8 @@ const reducer = (state = initialState, action) => {
         case actionTypes.LOG_OUT: return logOut(state, action);
         case actionTypes.START_LOADING_AUTH: return startLoading(state, action);
         case actionTypes.END_LOADING_AUTH: return endLoading(state, action);
+        case actionTypes.ERROR_FIREBASE: return handleErrorFirebase(state, action);
+        case actionTypes.CLEAN_ERRORS: return cleanErrors(state, action);
         default: return state;
     }
 }

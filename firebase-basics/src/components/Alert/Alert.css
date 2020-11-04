@@ -1,0 +1,13 @@
+.alert-window{
+  /* background-color: red; */
+  position: absolute;
+  left: 50%;
+  margin-left: -35%;
+  top: 50px;
+  width: 70%;
+  min-height: 50px;
+  z-index: 3;
+  padding: 20px;
+  word-wrap: break-word;
+  border: 1px dashed peru;
+}

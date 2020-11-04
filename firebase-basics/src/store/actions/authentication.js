@@ -1,7 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../instances/axios-authentication';
 
-const API_KEY = 'AIzaSyDYkIUTN0J0neg-zWIE1xCrlH34_Emt6VU'
+const API_KEY = 'AIzaSyBTEWFx8g-39n1YWIwJxgCJbCILMl4jSN0'
 
 const startAuthLoading = () => {
   return {
@@ -65,8 +65,8 @@ export const logIn = (authData, onSuccessCallback) => {
               }
           })
           .catch(error => {
-              console.log(error);
-
+              console.log({error});
+              dispatch(errorEmailFirebase(error.response.data.error.message));
               dispatch(endAuthLoading());
           })
   }
@@ -100,8 +100,8 @@ export const signUp = (authData, onSuccessCallback) => {
             }
         })
         .catch(error => {
-            console.log(error);
-
+            console.log({error});
+            dispatch(errorEmailFirebase(error.response.data.error.message));
             dispatch(endAuthLoading());
         })
   }
@@ -126,3 +126,26 @@ export const logOut = () => {
       type: actionTypes.LOG_OUT
   };
 };
+
+const errorEmailFirebase = (error) => {
+    return {
+        type: actionTypes.ERROR_FIREBASE,
+        payload: {
+            error
+        }
+    };
+}
+
+export const cleanErrors = () => {
+    /*return dispatch => {
+      dispatch(
+        {
+        type: actionTypes.CLEAN_ERRORS,
+        payload: {}
+      });
+    }*/
+    return {
+        type: actionTypes.CLEAN_ERRORS,
+        payload: {}
+    }
+  }
