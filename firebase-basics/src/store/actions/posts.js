@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../instances/axios-posts';
+import * as errors from "../actions/error";
 
 const startPostsLoading = () => {
     return {
@@ -35,7 +36,9 @@ export const savePost = post => {
             })
             .catch(error => {
                 console.log(error);
-
+                const lowerCaseerror = error.response.data.error.message.toLowerCase();
+                const parsedError = lowerCaseerror.replace('_',' ');
+                dispatch(errors.saveError(parsedError));
                 dispatch(endPostsLoading());
             })
     }
@@ -66,7 +69,9 @@ export const fetchPosts = () => {
             })
             .catch(error => {
                 console.log(error);
-
+                const lowerCaseerror = error.response.data.error.message.toLowerCase();
+                const parsedError = lowerCaseerror.replace('_',' ');
+                dispatch(errors.saveError(parsedError));
                 dispatch(endPostsLoading());
             })
     }

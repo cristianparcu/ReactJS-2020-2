@@ -8,6 +8,7 @@ import Button from '../../components/Button/Button';
 import Posts from '../../components/Posts/Posts';
 import NewPost from '../../components/NewPost/NewPost';
 import Spinner from '../../components/Spinner/Spinner';
+import Swal from 'sweetalert2';
 
 class HomePage extends Component {
     state = {
@@ -17,19 +18,33 @@ class HomePage extends Component {
             title: "",
             author: "",
             content: ""
-        }
+        },
+        error:''
     }
 
     componentWillReceiveProps (nextState) {
         this.setState({
             isUserLoggedIn: nextState.isUserLoggedIn,
-            posts: nextState.posts
+            posts: nextState.posts,
+            error:nextState.error
         });
     }
 
     componentDidMount () {
         if (this.state.isUserLoggedIn) {
             this.props.onFetchPosts();
+        }else if(this.state.error!==''){
+            Swal
+			.fire({
+				title: "Ha ocurrido un error",
+				text: this.state.error,
+				icon: "error",
+				confirmButtonText: "Entendido",
+				
+			})
+			.then( (result) => {
+				this.props.onClearError();
+			});
         }
     }
 
@@ -117,7 +132,8 @@ const mapStateToProps = state => {
         isUserLoggedIn: state.authenticationStore.isUserLoggedIn,
         userLoggedIn: state.authenticationStore.userLoggedIn,
         posts: state.postsStore.posts,
-        loadingPosts: state.postsStore.loadingPosts
+        loadingPosts: state.postsStore.loadingPosts,
+        error:state.errorStore.error
     }
 }
 
@@ -125,7 +141,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onSavePost: (post) => dispatch(actionCreators.savePost(post)),
         onFetchPosts: () =>dispatch(actionCreators.fetchPosts()),
-        onLogOut: () => dispatch(actionCreators.logOut())
+        onLogOut: () => dispatch(actionCreators.logOut()),
+        onClearError: () => dispatch(actionCreators.clearError())
     }
 }
 
