@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './LogIn.css';
-
+import Swal from 'sweetalert2';
 import Spinner from '../../components/Spinner/Spinner';
 
 import * as actionCreators from '../../store/actions/';
@@ -10,18 +10,32 @@ class LogIn extends Component {
     state = {
         isUserLoggedIn: this.props.isUserLoggedIn,
         userName: '',
-        password: ''
+        password: '',
+        error:''
     }
 
     componentDidUpdate () {
         if (this.state.isUserLoggedIn) {
             this.props.history.push('/');
+        }else if(this.state.error!==''){
+            Swal
+			.fire({
+				title: "Error",
+				text: this.state.error,
+				icon: "error",
+				confirmButtonText: "Aceptar",
+
+			})
+			.then( (result) => {
+				this.props.onClearError();
+			});
         }
     }
 
     componentWillReceiveProps (nextState) {
         this.setState({
-            isUserLoggedIn: nextState.isUserLoggedIn
+            isUserLoggedIn: nextState.isUserLoggedIn,
+            error: nextState.error
         });
     }
 
@@ -84,13 +98,15 @@ class LogIn extends Component {
 const mapStateToProps = state => {
     return {
         isUserLoggedIn: state.authenticationStore.isUserLoggedIn,
-        loadingAuth: state.authenticationStore.loadingAuth
+        loadingAuth: state.authenticationStore.loadingAuth,
+        error:state.errorStore.error
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUserLogin: (authData, onSuccessCallback) => dispatch(actionCreators.logIn(authData, onSuccessCallback))
+        onUserLogin: (authData, onSuccessCallback) => dispatch(actionCreators.logIn(authData, onSuccessCallback)),
+        onClearError: () => dispatch(actionCreators.clearError())
     }
 }
 
