@@ -1,7 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../instances/axios-authentication';
 
-const API_KEY = 'AIzaSyDYkIUTN0J0neg-zWIE1xCrlH34_Emt6VU'
+const API_KEY = 'AIzaSyB-e5HA6MhGvbT_Ei4sd_xMTOfbYtY5TYo'
 
 const startAuthLoading = () => {
   return {
@@ -13,6 +13,12 @@ const endAuthLoading = () => {
   return {
       type: actionTypes.END_LOADING_AUTH
   }
+}
+const setErrors = () => {
+    return {
+        type: actionTypes.SET_ERRORS
+    }
+
 }
 
 const saveSession = (userName, token, localId) => {
@@ -68,6 +74,7 @@ export const logIn = (authData, onSuccessCallback) => {
               console.log(error);
 
               dispatch(endAuthLoading());
+              dispatch(setErrors());
           })
   }
 };

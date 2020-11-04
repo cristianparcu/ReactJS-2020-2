@@ -8,7 +8,8 @@ const initialState = {
         idToken: '',
         localId: ''
     },
-    loadingAuth: false
+    loadingAuth: false,
+    errors: false
 }
 
 const login = (state, action) => {
@@ -20,6 +21,20 @@ const login = (state, action) => {
           localId: action.payload.localId
         }
     });
+}
+
+const setErrors = (state, action) =>{
+  return updateObject(state,{
+      errors: true,
+      userLoggedIn:{
+        userName: '',
+        idToken: '',
+        localId: ''
+
+      }
+  });
+
+
 }
 
 const signUp = (state, action) => {
@@ -59,6 +74,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.LOG_OUT: return logOut(state, action);
         case actionTypes.START_LOADING_AUTH: return startLoading(state, action);
         case actionTypes.END_LOADING_AUTH: return endLoading(state, action);
+        case actionTypes.SET_ERRORS: return setErrors(state, action);
         default: return state;
     }
 }
