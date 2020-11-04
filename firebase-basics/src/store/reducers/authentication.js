@@ -9,7 +9,7 @@ const initialState = {
         localId: ''
     },
     loadingAuth: false,
-    errors:''
+    error:''
 }
 
 const login = (state, action) => {
@@ -20,7 +20,7 @@ const login = (state, action) => {
           idToken: action.payload.idToken,
           localId: action.payload.localId
         },
-        errors:''
+        error:''
     });
 }
 
@@ -31,7 +31,8 @@ const signUp = (state, action) => {
           userName: action.payload.userName,
           idToken: action.payload.idToken,
           localId: action.payload.localId
-        }
+        },
+        error:''
     });
 }
 
@@ -50,7 +51,8 @@ const setErrors = (state, action) =>
 {
   return updateObject(state, 
     {
-      errors: action.payload.message
+      errorM: action.payload.message,
+      errorC: action.payload.color
     })
 }
 

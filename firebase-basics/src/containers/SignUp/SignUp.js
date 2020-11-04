@@ -29,14 +29,19 @@ class SignUp extends Component {
         return (
             <div className="sign-up--form">
                 <h1 style = {{textAlign: 'center'}}>Sign up</h1>
+                <p>{this.props.errorM}</p>
                 <div>
                     <p>Username:</p>
-                    <input type="text"
+                    <input
+                    style={{backgroundColor:this.props.errorC}}
+                    type="text"
                         value={this.state.userName}
                         onChange={(event) => {this.updateSignUpInfo(event, 'userName')}}
                     />
                     <p>Password:</p>
-                    <input type="password"
+                    <input 
+                    style={{backgroundColor:this.props.errorC}}
+                    type="password"
                         value={this.state.password}
                         onChange={(event) => {this.updateSignUpInfo(event, 'password')}}
                     /><br/>
@@ -84,7 +89,9 @@ class SignUp extends Component {
 const mapStateToProps = state => {
     return {
         isUserLoggedIn: state.authenticationStore.isUserLoggedIn,
-        loadingAuth: state.authenticationStore.loadingAuth
+        loadingAuth: state.authenticationStore.loadingAuth,
+        errorM: state.authenticationStore.errorM,
+        errorC: state.authenticationStore.errorC
     }
 }
 
