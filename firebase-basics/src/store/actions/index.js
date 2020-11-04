@@ -8,3 +8,7 @@ export {
     savePost,
     fetchPosts
 } from './posts';
+export {
+    
+    clearError
+} from './error'

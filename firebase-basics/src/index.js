@@ -8,10 +8,12 @@ import App from './App';
 
 import authenticationReducer from './store/reducers/authentication';
 import postsReducer from './store/reducers/posts';
+import errorReducer from './store/reducers/error'
 
 const rootReducer = combineReducers ({
     authenticationStore: authenticationReducer,
-    postsStore: postsReducer
+    postsStore: postsReducer,
+    errorStore:errorReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
