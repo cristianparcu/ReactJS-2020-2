@@ -5,6 +5,10 @@ import classes from "./inicio.css";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import { ReactComponent as House } from "./login.svg";
+import { connect } from 'react-redux';
+
+
+
 class Inicio extends Component {
   constructor() {
     super();

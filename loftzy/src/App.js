@@ -6,7 +6,6 @@ import ResidentesAdmin from "./views/ResidentesAdmin/ResidentesAdmin.js";
 import InicioResidente from "./views/inicioResidente/InicioResidente";
 import RegPagoAdmin from "./views/RegPagoAdmin/RegPagoAdmin";
 import NotFound from "./views/NotFound/NotFound";
-// import PostComplete from "./views/Foro/PostComplete";
 import Foro from "./views/Foro/Foro.js";
 import Celador from "./views/Celador/Celador";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
