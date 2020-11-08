@@ -44,6 +44,20 @@ const startAuthLoading = () => {
 
             
              dispatch(saveSession(name, token, localId,rol));
+             
+             let userSession = {
+                token,
+                userEmail,
+                localId,
+                rol
+            };
+            
+            userSession = JSON.stringify(userSession);
+  
+            console.log(response);
+            
+            localStorage.setItem('userSession', userSession);
+
           }
           )
           .catch(error => {
@@ -51,16 +65,6 @@ const startAuthLoading = () => {
             })
             
         
-                let userSession = {
-                    token,
-                    userEmail,
-                    localId
-                };
-                userSession = JSON.stringify(userSession);
-  
-                console.log(response);
-                
-                localStorage.setItem('userSession', userSession);
                
                 dispatch(endAuthLoading());
   
@@ -75,8 +79,21 @@ const startAuthLoading = () => {
             })
     }
   };    
+  export const persistAuthentication = () => {
+    return dispatch => {
+        let userSession = localStorage.getItem('userSession');
   
+        if(!userSession) {
+            dispatch(logOut());
+        } else {
+            userSession = JSON.parse(userSession);
+  
+            dispatch(saveSession(userSession.userEmail, userSession.token, userSession.localId,userSession.rol));
+        }
+    }
+  }
 export const logOut = () => {
+    localStorage.clear();
     return {
         type: actionTypes.LOG_OUT
     };

@@ -11,7 +11,6 @@ import * as actionCreators from '../../store/actions/authentication';
 
 
 class Inicio extends Component {
-
    state = {
       isUserLoggedIn: this.props.isUserLoggedIn,
       email: "",
@@ -19,7 +18,14 @@ class Inicio extends Component {
       Redirect: false,
       error: this.props.error
     };
-  
+
+    
+    
+    componentDidUpdate () {
+      if (this.state.isUserLoggedIn) {
+          this.redirectRol();
+      }
+  }
   componentWillReceiveProps (nextState) {
     this.setState({
         isUserLoggedIn: nextState.isUserLoggedIn
@@ -37,20 +43,20 @@ class Inicio extends Component {
   };
 
   redirectRol=()=>{
-    if (this.props.rol=="admin") {
+    if (this.props.rol==="admin") {
       this.setState({
         Redirect: "/admin",
       });
     } else {
       if (
-       this.props.rol=="residente"
+       this.props.rol==="residente"
       ) {
         this.setState({
           Redirect: "/residenteIng",
         });
       } else {
         if (
-         this.props.rol=="celador"
+         this.props.rol==="celador"
         ) {
           this.setState({
             Redirect: "/Celador",
@@ -111,7 +117,7 @@ const mapStateToProps = state => {
       isUserLoggedIn: state.authenticationStore.isUserLoggedIn,
       loadingAuth: state.authenticationStore.loadingAuth,
       error: state.authenticationStore.error,
-      rol: state.authenticationStore.rol
+      rol: state.authenticationStore.userLoggedIn.rol
   }
 }
 
