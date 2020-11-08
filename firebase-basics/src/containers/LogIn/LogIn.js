@@ -20,12 +20,7 @@ class LogIn extends Component {
         }
     }
 
-    componentWillReceiveProps (nextState) {
-        this.setState({
-            isUserLoggedIn: nextState.isUserLoggedIn
-        });
-    }
-
+ 
     render () {
         return (
             <div className="login--form">
