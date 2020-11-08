@@ -43,6 +43,14 @@ class AdminMenu extends Component {
               logo="https://mlxbjtxnprgh.i.optimole.com/VMf8KJ8-15xLw27c/w:auto/h:auto/q:auto/https://www.epicfirstsupport.com/wp-content/uploads/2019/09/guard-1.png"
             ></ButtonAdmin>
           </Link>
+          <Link to="/NuevoPost">
+          <ButtonAdmin
+          className={classes["button"]}
+          title="Foro"
+          logo="https://image.flaticon.com/icons/png/512/14/14409.png"
+          >
+          </ButtonAdmin>
+          </Link>
         </div>
       </div>
       )
