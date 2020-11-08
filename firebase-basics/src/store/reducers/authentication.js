@@ -50,6 +50,7 @@ const logOut = (state, action) => {
           idToken: '',
           localId: ''
         }
+    
     });
 }
 

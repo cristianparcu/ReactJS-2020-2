@@ -4,6 +4,8 @@ import ButtonAdmin from "../../componentes/MenuButton/ButtonMenu";
 import AppBar from "../../componentes/NavBar/NavBar";
 import classes from "./AdminMenu.css";
 
+import {connect} from "react-redux"
+import * as actionCreators from '../../store/actions/authentication';
 
 import { Link } from "react-router-dom";
 
@@ -11,11 +13,13 @@ const newList = [
   { name: "Residentes", url: "/AdminResidentes" },
   { name: "menu", url: "/admin" },
 ];
+const rol ="admin";
 
 class AdminMenu extends Component {
-  render() {
-    return (
-      <div>
+ 
+  menu() {
+    return(
+    <div>
         <AppBar list={newList} />
         <div className={classes["buttons"]}>
           <Link to="/AdminResidentes">
@@ -49,8 +53,19 @@ class AdminMenu extends Component {
           </Link>
         </div>
       </div>
+      )
+  }
+  render() {
+    return (
+     this.menu()
     );
   }
-}
 
-export default AdminMenu;
+  
+}
+const mapStateToProps = state => {
+  return {
+      rol: state.authenticationStore.userLoggedIn.rol
+  }
+}
+export default connect(mapStateToProps, null)(AdminMenu);

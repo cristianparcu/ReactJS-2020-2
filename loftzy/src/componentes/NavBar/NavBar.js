@@ -11,8 +11,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "../NavBarDrawer/NavBarDrawer";
 import classes from "./NavBar.css";
 import { Link } from "react-router-dom";
-
-export default function NavBar(props) {
+import {connect} from "react-redux";
+import * as actionCreators from "../../store/actions/authentication" 
+function NavBar(props) {
   const icon = <MenuIcon style={{ color: "#ffffff" }} />;
   return (
     <div>
@@ -25,13 +26,22 @@ export default function NavBar(props) {
             Loftzy
           </Typography>
 
-          <Button>
-            <Link to="/" className={classes.link}>
-              Salir
-            </Link>
+          <Button onClick={props.onLogOut}>
+           <Link className={classes.link} to="/">
+           Salir
+           </Link>
+              
+           
           </Button>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogOut: () => dispatch( actionCreators.logOut() )
+  };
+};
+
+export default connect(null, mapDispatchToProps)(NavBar)
