@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const newList = [
   { name: "Residentes", url: "/AdminResidentes" },
-  { name: "menu", url: "/admin" },
+  { name: "menu", url: "/AdminMenu" },
 ];
 
 

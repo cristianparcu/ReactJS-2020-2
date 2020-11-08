@@ -59,7 +59,7 @@ export class App extends Component {
           <Route path="/AdminResidentes">
             <ResidentesAdmin />
           </Route>
-          <Route path="/admin">
+          <Route path="/AdminMenu">
           {this.auth("admin",<AdminMenu />)}
           </Route>
           <Route path="/RegPago">
