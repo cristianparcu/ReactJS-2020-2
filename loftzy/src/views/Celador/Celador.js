@@ -18,7 +18,7 @@ import InputWithLabel from "../../componentes/InputWithLabel/InputWithLabel";
 import AppBar from "../../componentes/NavBar/NavBar";
 import classes from "./Celador.css";
 import emailjs from "emailjs-com";
-
+import axiosDatabase from "../../Instances/axios-realtime";
 export default class Celador extends Component {
   constructor() {
     super();
@@ -29,25 +29,41 @@ export default class Celador extends Component {
       rows: [],
       headers: ["NOMBRE", "ID", "TEMP", "DIA", "ACCIONES"],
     };
-    this.createData = this.createData.bind(this);
-    this.DeleteData = this.DeleteData.bind(this);
-    this.notify = this.notify.bind(this);
   }
-  createData() {
+
+  componentDidMount(){
+    axiosDatabase.get(".json")
+    .then((res)=>{
+      if(res.data.Ingresos){
+        this.setState({
+          rows:res.data.Ingresos
+        })
+      }
+     
+      
+    })
+    .catch(err=>{
+      this.setState({
+        rows:[]
+      })
+    })
+  }
+  createData= ()=> {
     let name = this.state.name;
     let temp = this.state.temp;
     let id = this.state.id;
     var day = new Date().toJSON().slice(0, 10).replace(/-/g, "/");
     let data = { name, id, temp, day };
+    
+    axiosDatabase.put("Ingresos/"+this.state.rows.length+".json", {"name":name,"id":id,"temp":temp,"day":day}).then(console.log(data))
     let update = [...this.state.rows];
     update.push(data);
-    console.log(update);
     this.setState({
       rows: update,
     });
   }
 
-  DeleteData(index) {
+  DeleteData= (index)=> {
     console.log(index);
     let update = [...this.state.rows];
     swal({
@@ -62,6 +78,9 @@ export default class Celador extends Component {
           icon: "success",
         });
         update.splice(index, 1);
+        axiosDatabase.delete("Ingresos/"+index+".json");
+        axiosDatabase.patch("Ingresos.json", update);
+       
         this.setState({
           rows: update,
         });
@@ -71,7 +90,7 @@ export default class Celador extends Component {
     });
   }
 
-  notify(index) {
+  notify=(index)=> {
     let update = this.state.rows[index];
     console.log(update);
     const templateParams = {
@@ -138,6 +157,8 @@ export default class Celador extends Component {
             <TableBody className={classes.table}>
               {this.state.rows.map((row, index) => (
                 <TableRow key={row.name}>
+                
+
                   <TableCell align="right">{row.name}</TableCell>
                   <TableCell align="right">{row.id}</TableCell>
                   <TableCell align="right">{row.temp}</TableCell>
