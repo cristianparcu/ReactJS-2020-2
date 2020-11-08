@@ -4,7 +4,10 @@ import axios from "axios";
 import { Route, Redirect, BrowserRouter as Router } from "react-router-dom";
 import PostComplete from "./PostComplete";
 
+
+
 class Foro extends Component {
+
   state = {
     posts: [],
     path: "",
@@ -12,9 +15,10 @@ class Foro extends Component {
     post: null,
   };
   componentDidMount() {
-    axios.get("./Foro.json").then((res) => {
-      this.setState({
-        posts: res.data.slice(0, 6),
+    axios.get("https://foroposts.firebaseio.com/.json").then((res) => {
+    console.log(res)  
+    this.setState({
+        posts: res.data,
       });
     });
   }

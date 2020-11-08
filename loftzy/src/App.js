@@ -9,6 +9,22 @@ import NotFound from "./views/NotFound/NotFound";
 import Foro from "./views/Foro/Foro.js";
 import Celador from "./views/Celador/Celador";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import NuevoPost from "./views/NuevoPostF/NuevoPost.js"
+import PostComplete from "./views/Foro/PostComplete";
+import firebase from "firebase"
+
+var firebaseConfig = {
+  apiKey: "AIzaSyAE2q_QFrpdUH7hx6HORQ9v1h2bdAamm6U",
+  authDomain: "foroposts.firebaseapp.com",
+  databaseURL: "https://foroposts.firebaseio.com",
+  projectId: "foroposts",
+  storageBucket: "foroposts.appspot.com",
+  messagingSenderId: "205327894619",
+  appId: "1:205327894619:web:76e2f4c53afbb41f30977e"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
 export class App extends Component {
   render() {
     return (
@@ -33,6 +49,9 @@ export class App extends Component {
           </Route>
           <Route path="/Foro">
             <Foro />
+          </Route>
+          <Route path="/NuevoPost">
+            <NuevoPost/>
           </Route>
           <Route path="/" exact>
             <Inicio />

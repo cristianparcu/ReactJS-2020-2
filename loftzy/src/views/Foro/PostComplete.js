@@ -2,59 +2,91 @@ import React, { Component } from 'react';
 import Button from "@material-ui/core/Button";
 import { Link, withRouter } from "react-router-dom"
 import classes from "../Foro/PostComplete.css"
+import axios from "axios";
 import Comentario from '../../componentes/Comentario/Comentario'
+import firebase from 'firebase'
 
 class PostComplete extends Component {
 
     state = {
+        posts:[],
         comments: [],
         comment: '',
         hour: '',
+        index:this.props.post.id-1,
     }
 
-    handleAddcomment = (comment) => {
+
+    componentDidMount() {
+        
+
+        axios.get("https://foroposts.firebaseio.com/"+this.state.index+".json").then((res) => {
+        console.log(res)  
         this.setState({
-            comments: [...this.state.comments, comment]
+            posts: res.data,
+          });
+        });
 
+        axios.get("https://foroposts.firebaseio.com/"+this.state.index+"/Comments.json").then((res1)=>{
+            console.log(res1)
+            this.setState({
+                comments: res1.data
+            })
         })
-        console.log(this.state)
+        
+      }
+
+    handleAddcomment = () => {
+        var d= new Date();
+        var postsS
+        if(this.state.comments==null){
+             postsS=0;
+        }else{
+             postsS=this.state.comments.length;
+        }
+        
+
+        var postData = {
+            comment: this.state.comment,
+            hour: d.getHours() + ":" + d.getMinutes(),
+        };
+        var newPostKey = firebase.database().ref().child(postsS).key;
+        var updates = {};
+        updates[this.state.index+"/Comments/"+newPostKey] = postData;
+
+        firebase.database().ref().update(updates);     
     }
+
     handleInput = (e) => {
         const { value, name } = e.target;
         this.setState({
             [name]: value
         })
     };
+    
     handleSubmit = (e) => {
         e.preventDefault();
-        this.handletime()
-        this.handleAddcomment(this.state.comment)
-        console.log(this.state)
+        this.handleAddcomment()
+        this.componentDidMount()
         this.setState({
             comment: '',
         });
     }
-    handletime = ()=>
-    {
-        var d = new Date();
-        this.setState({
-            hour: d.getHours()+":"+d.getMinutes()
-        })
-    }
    
     render() {
         
-        var post = this.props.post
-        const comts = this.state.comments.map((comment, i) => {
+        const {comments}= this.state;
+        const comts = comments?( comments.map((comment, i) => {
             return (
-                <Comentario comment={comment} hour={this.state.hour}></Comentario>
+                <Comentario comment={comment.comment} hour={comment.hour}></Comentario>
             )
-        })
+        })):
+        (<p>lol</p>)
 
         return (
             <div className={classes['body']}>
-                <h2 className={classes['title']}>{post.title}</h2>
-                <p>{post.Topic}</p>
+                <h2 className={classes['title']}>{this.state.posts.title}</h2>
+                <p>{this.state.posts.Topic}</p>
                 {comts}
                 <div className={classes['content']}>
                     <input
@@ -63,15 +95,12 @@ class PostComplete extends Component {
                         name="comment"
                         onChange={this.handleInput}
                         placeholder="Comentario"></input>
-                    <Link to='/Foro'>
-                        <Button m={2}
+                        <Button className={classes['button']} m={2}
                             size="large"
                             color="primary"
                             variant="contained"
                             onClick={this.handleSubmit}
                         >Agregar Comentario</Button>
-                    </Link>
-
                     <Link to='/Foro'>
                         <Button m={2}
                             size="large"
