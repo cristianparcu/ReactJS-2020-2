@@ -1,8 +1,38 @@
-.coloresp{
+/* .coloresp{
     background-color: red;
-}
+} */
 .paper{
     /* padding: theme.spacing(2); */
-    margin: 'auto';
-    max-width: 500px;
+    
+        /* margin: auto; */
+        /* margin-left: 16%; */
+        margin-top: 22px;
+        padding: 27px;
+        width: 62%;
+    
 }
+.busca{
+    margin: 12rem 0rem 0rem 0rem;
+    font-weight: bold;
+/* 
+    .inputDiv {
+        display: flex;
+        justify-content: space-between;
+        margin: 5% 0;
+      } */
+      /* .inputLabel {
+        display: flex; */
+        /* margin: 0 3% 3%;
+        width: 100px;
+      }
+      .inputBox {
+        display: flex;
+      } */
+}
+.box {
+    display: flex;
+    flex-flow: column wrap;
+    padding: 0.5rem 14rem 0.5rem 1rem;
+    margin: 1rem 20rem 1rem 0rem;
+
+  }
