@@ -58,7 +58,7 @@ export default class Celador extends Component {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        swal("Poof! se ha borrado el registro", {
+        swal("Listo! se ha borrado el registro con exito", {
           icon: "success",
         });
         update.splice(index, 1);

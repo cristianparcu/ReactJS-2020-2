@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import SearchBar from "../../componentes/InputWithLabel/InputWithLabel";
-import { Grid } from "@material-ui/core";
+import { Card,Grid } from "@material-ui/core";
 import classes from "../ResidentesAdmin/ResidentesAdmin.css";
 import Paper from "@material-ui/core/Paper";
-// import TextArea from "../../componentes/TextArea/TextArea";
 import axios from "../../Instances/axiosInstance";
 import ListItems from "../../componentes/ListItems/ListItems";
 import { BrowserRouter } from "react-router-dom";
@@ -70,24 +69,33 @@ class ResidentesAdmin extends Component {
   // }
 
   render() {
-    console.log("usuarios al dibujar");
-    console.log(this.state.usuarios);
     return (
-      // <Grid container direction='row' spacing={1}>
       <div>
         <AppBar list={newList} />
         <BrowserRouter>
           <Grid container direction="row">
             <Grid className={classes.coloresp} item xs={0} sm={2}></Grid>
             <Paper
-              style={{ padding: 5, margin: "auto", width: "auto" }}
+              className={classes.paper}
+              // style={{ padding: 5, margin: "auto", width: "auto" }}
               elevation={3}
             >
               <Grid item xs={12} sm={8} spacing={1}>
-                <SearchBar
+              <label className={classes.busca}>Ingrese nombre de residente a buscar:</label>
+              <Card className={classes.box}>
+              
+                {/* <SearchBar
                   placeholder="buscar"
-                  label="ingrese residente:"
-                ></SearchBar>
+                  // label=""
+                ></SearchBar> */}
+                
+                <SearchBar
+                    label="Nombre:"
+                    placeholder="buscar"
+                    // onChange={(event) => this.setState({ id: event.target.value })}
+                    />
+                    
+                </Card>
                 {/* <TextArea items={(userindex) => this.usuarioslis(userindex)}></TextArea> */}
                 {/* <TextArea items={this.state.usuarios.map(usuario =>{usuario.nombre} )}></TextArea> */}
                 {/* <TextArea items={() => this.usuarios}></TextArea> */}
