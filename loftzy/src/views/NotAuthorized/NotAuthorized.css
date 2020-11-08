@@ -1,0 +1,13 @@
+.NotAuthorized {
+  max-width: 600px;
+  text-align: center;
+
+  margin: 15% 40%;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+.link {
+  text-decoration: none;
+}

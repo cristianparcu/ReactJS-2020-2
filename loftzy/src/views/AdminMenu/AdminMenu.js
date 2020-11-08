@@ -5,7 +5,7 @@ import AppBar from "../../componentes/NavBar/NavBar";
 import classes from "./AdminMenu.css";
 
 import {connect} from "react-redux"
-import * as actionCreators from '../../store/actions/authentication';
+
 
 import { Link } from "react-router-dom";
 
@@ -13,7 +13,7 @@ const newList = [
   { name: "Residentes", url: "/AdminResidentes" },
   { name: "menu", url: "/admin" },
 ];
-const rol ="admin";
+
 
 class AdminMenu extends Component {
  
