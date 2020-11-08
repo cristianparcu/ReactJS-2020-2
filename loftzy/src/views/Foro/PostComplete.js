@@ -6,6 +6,7 @@ import axios from "axios";
 import Comentario from '../../componentes/Comentario/Comentario'
 import AppBar from "../../componentes/NavBar/NavBar";
 import firebase from 'firebase'
+import { connect } from 'react-redux';
 
 const newList = [
     { name: "Pago Administracion", url: "/RegPago" },
@@ -18,12 +19,12 @@ class PostComplete extends Component {
         comments: [],
         comment: '',
         hour: '',
+        author:'',
         index: this.props.post.id - 1,
     }
 
 
     componentDidMount() {
-
         axios.get("https://foroposts.firebaseio.com/" + this.state.index + ".json").then((res) => {
             console.log(res)
             this.setState({
@@ -37,7 +38,6 @@ class PostComplete extends Component {
                 comments: res1.data
             })
         })
-
     }
 
     handleAddcomment = () => {
@@ -52,6 +52,7 @@ class PostComplete extends Component {
         var postData = {
             comment: this.state.comment,
             hour: d.getHours() + ":" + d.getMinutes(),
+            author:this.props.userName
         };
         var newPostKey = firebase.database().ref().child(postsS).key;
         var updates = {};
@@ -76,12 +77,13 @@ class PostComplete extends Component {
         });
     }
 
+
     render() {
 
         const { comments } = this.state;
         const comts = comments ? (comments.map((comment, i) => {
             return (
-                <Comentario comment={comment.comment} hour={comment.hour}></Comentario>
+                <Comentario name={comment.author} comment={comment.comment} hour={comment.hour}></Comentario>
             )
         })) :
             (<p>lol</p>)
@@ -118,4 +120,10 @@ class PostComplete extends Component {
     }
 }
 
-export default withRouter(PostComplete); 
+const mapStateToProps = state => {
+    return {
+        userName: state.authenticationStore.userLoggedIn.userName
+    }
+  }
+
+export default connect(mapStateToProps, null)(PostComplete); 

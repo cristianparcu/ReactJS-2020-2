@@ -45,7 +45,7 @@ class Inicio extends Component {
   redirectRol=()=>{
     if (this.props.rol==="admin") {
       this.setState({
-        Redirect: "/admin",
+        Redirect: "/AdminMenu",
       });
     } else {
       if (

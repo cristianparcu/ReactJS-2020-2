@@ -2,6 +2,7 @@
 {
     text-align: center;
     padding: 20px;
+    
 }
 .title
 {
@@ -16,12 +17,18 @@
     border: 1px solid #dddddd;
 }
 .tr{
+    
     text-align: left;
     padding: 20px;
     border: 2px solid #dddddd;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
-
+.tds{
+    display: flex;
+    flex-direction: column-reverse;
+}
 .td{
+    
     padding: 10px;
+
 }

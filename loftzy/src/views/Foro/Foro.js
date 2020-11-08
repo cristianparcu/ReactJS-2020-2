@@ -34,7 +34,6 @@ class Foro extends Component {
       post: this.state.posts[index],
     });
   }
-  prueba = () => { };
 
   render() {
     if (this.state.redirect) {
@@ -79,6 +78,7 @@ class Foro extends Component {
                 <p>{post.author}</p>
               </td>
             </tr>
+
           </React.Fragment>
         );
       })
@@ -86,7 +86,8 @@ class Foro extends Component {
         <div>No hay ningun post de discusion</div>
       );
     return (
-      <div><AppBar list={newList} />
+      <div>
+        <AppBar list={newList} />
         <div className={classes["body"]}>
           <h2 className={classes["title"]}>Foro Residencial</h2>
           <table className={classes["table"]}>
