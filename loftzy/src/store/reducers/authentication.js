@@ -5,7 +5,7 @@ const initialState = {
     isUserLoggedIn: false,
     userLoggedIn: {
         userName: '',
-        role: '',
+        rol: '',
         idToken: '',
         localId: ''
     },
@@ -22,7 +22,7 @@ const login = (state, action) => {
         isUserLoggedIn: true,
         userLoggedIn: {
           userName: action.payload.userName,
-          role: action.payload.role,
+          rol: action.payload.userRol,
           idToken: action.payload.idToken,
           localId: action.payload.localId
         },
@@ -35,7 +35,8 @@ const logOut = (state, action) => {
         userLoggedIn: {
           userName: '',
           idToken: '',
-          localId: ''
+          localId: '',
+          rol:''
         }
     });
 }
@@ -46,7 +47,7 @@ const startLoading = (state, action) => {
   const endLoading = (state, action) => {
     return updateObject(state, { loadingAuth: false });
   }
-  
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.LOGIN: return login(state, action);

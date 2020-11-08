@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
-import axios from '../../instances/axios-authentication';
-
+import axios from '../../Instances/axios-authentication';
+import axiosDatabase from '../../Instances/axios-realtime'
 const API_KEY = 'AIzaSyBOwVX7Zqchg1pnCZrwIJ7jPJnSL3CXmQw';
 
 const startAuthLoading = () => {
@@ -14,17 +14,18 @@ const startAuthLoading = () => {
         type: actionTypes.END_LOADING_AUTH
     }
   }
-  const saveSession = (userName, token, localId) => {
+  const saveSession = (userName, token, localId,rol) => {
     return {
         type: actionTypes.LOGIN,
         payload: {
             userName: userName,
             idToken: token,
-            localId: localId
+            localId: localId,
+            userRol: rol
         }
     };
   };
-
+ 
   export const logIn = (authData, onSuccessCallback) => {
     return dispatch => {
         dispatch(startAuthLoading())
@@ -33,19 +34,34 @@ const startAuthLoading = () => {
                 const userEmail = authData.email;
                 const token = response.data.idToken;
                 const localId = response.data.localId;
+        
+                
+          axiosDatabase.get('.json')
+          .then(response =>{
+             const user = response.data.Users[localId]           
+             const rol = user.rol;
+             const name= user.name;
+
+            
+             dispatch(saveSession(name, token, localId,rol));
+          }
+          )
+          .catch(error => {
+               console.log(error);   
+            })
+            
+        
                 let userSession = {
                     token,
                     userEmail,
                     localId
                 };
-  
                 userSession = JSON.stringify(userSession);
   
                 console.log(response);
                 
                 localStorage.setItem('userSession', userSession);
-  
-                dispatch(saveSession(userEmail, token, localId));
+               
                 dispatch(endAuthLoading());
   
                 if (onSuccessCallback) {
@@ -54,9 +70,7 @@ const startAuthLoading = () => {
             })
             .catch(error => {
                 console.log(error);
-                
-                dispatch(Error_Handing(error.response.data.error.message))
-                console.log(error.response.data.error.message);
+            
                 dispatch(endAuthLoading());
             })
     }

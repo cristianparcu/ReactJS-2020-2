@@ -7,35 +7,50 @@ import Card from "@material-ui/core/Card";
 import { ReactComponent as House } from "./login.svg";
 import { connect } from 'react-redux';
 
+import * as actionCreators from '../../store/actions/authentication';
 
 
 class Inicio extends Component {
-  constructor() {
-    super();
-    this.state = {
+
+   state = {
+      isUserLoggedIn: this.props.isUserLoggedIn,
       email: "",
       password: "",
       Redirect: false,
+      error: this.props.error
     };
-  }
+  
+  componentWillReceiveProps (nextState) {
+    this.setState({
+        isUserLoggedIn: nextState.isUserLoggedIn
+    });
+}
   handleClick = () => {
-    if (this.state.email === "admin" && this.state.password === "admin") {
-      console.log("in");
+    const userData = {
+      email: this.state.email,
+      password: this.state.password
+  };
+
+  this.props.onUserLogin(userData, () => {
+    this.redirectRol();
+  });
+  };
+
+  redirectRol=()=>{
+    if (this.props.rol=="admin") {
       this.setState({
         Redirect: "/admin",
       });
     } else {
       if (
-        this.state.email === "residente" &&
-        this.state.password === "password"
+       this.props.rol=="residente"
       ) {
         this.setState({
           Redirect: "/residenteIng",
         });
       } else {
         if (
-          this.state.email === "celador" &&
-          this.state.password === "password"
+         this.props.rol=="celador"
         ) {
           this.setState({
             Redirect: "/Celador",
@@ -43,7 +58,19 @@ class Inicio extends Component {
         }
       }
     }
-  };
+  }
+  updateLoginInfo=(event,type)=>{
+    var updatedLoginInfo = {
+      ...this.state
+    }
+
+    updatedLoginInfo[type] = event.target.value;
+
+    this.setState({
+      email: updatedLoginInfo.email,
+      password: updatedLoginInfo.password
+    });
+  }
 
   render() {
     if (this.state.Redirect) {
@@ -55,13 +82,13 @@ class Inicio extends Component {
           <Card className={classes.box} p={4}>
             <InputWithLabel
               label="Correo"
-              onChange={(event) => this.setState({ email: event.target.value })}
+              onChange={(event) => {this.updateLoginInfo(event,'email')}}
             ></InputWithLabel>
             <InputWithLabel
               label="Contraseña"
               type="password"
               onChange={(event) =>
-                this.setState({ password: event.target.value })
+                {this.updateLoginInfo(event,'password')}
               }
             ></InputWithLabel>
             <Button
@@ -79,5 +106,19 @@ class Inicio extends Component {
     }
   }
 }
+const mapStateToProps = state => {
+  return {
+      isUserLoggedIn: state.authenticationStore.isUserLoggedIn,
+      loadingAuth: state.authenticationStore.loadingAuth,
+      error: state.authenticationStore.error,
+      rol: state.authenticationStore.rol
+  }
+}
 
-export default Inicio;
+const mapDispatchToProps = dispatch => {
+  return {
+      onUserLogin: (authData, onSuccessCallback) => dispatch(actionCreators.logIn(authData, onSuccessCallback))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Inicio);
