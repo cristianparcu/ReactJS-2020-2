@@ -22,28 +22,14 @@ class AdminMenu extends Component {
     <div>
         <AppBar list={newList} />
         <div className={classes["buttons"]}>
-          <Link to="/AdminResidentes">
+          <Link to="/AdminResidentes" style={{ textDecoration: 'none' }}>
             <ButtonAdmin
               className={classes["button"]}
               title="Residentes"
               logo="https://static.thenounproject.com/png/218676-200.png"
             ></ButtonAdmin>
           </Link>
-          <Link to="/RegPago">
-            <ButtonAdmin
-              className={classes["button"]}
-              title="Pago Administracion"
-              logo="https://image.flaticon.com/icons/png/512/126/126241.png"
-            ></ButtonAdmin>
-          </Link>
-          <Link to="/Celador">
-            <ButtonAdmin
-              className={classes["button"]}
-              title="Celadores"
-              logo="https://mlxbjtxnprgh.i.optimole.com/VMf8KJ8-15xLw27c/w:auto/h:auto/q:auto/https://www.epicfirstsupport.com/wp-content/uploads/2019/09/guard-1.png"
-            ></ButtonAdmin>
-          </Link>
-          <Link to="/NuevoPost">
+          <Link to="/NuevoPost" style={{ textDecoration: 'none' }}>
           <ButtonAdmin
           className={classes["button"]}
           title="Foro"

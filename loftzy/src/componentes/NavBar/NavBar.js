@@ -15,6 +15,7 @@ import {connect} from "react-redux";
 import * as actionCreators from "../../store/actions/authentication" 
 function NavBar(props) {
   const icon = <MenuIcon style={{ color: "#ffffff" }} />;
+
   return (
     <div>
       <AppBar position="sticky">
@@ -25,19 +26,18 @@ function NavBar(props) {
           <Typography variant="h6" className={classes.signOut}>
             Loftzy
           </Typography>
-
           <Button onClick={props.onLogOut}>
-           <Link className={classes.link} to="/">
+           <Link className={classes.link} to="/" >
            Salir
            </Link>
-              
-           
           </Button>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
+
+
 const mapDispatchToProps = dispatch => {
   return {
     onLogOut: () => dispatch( actionCreators.logOut() )
