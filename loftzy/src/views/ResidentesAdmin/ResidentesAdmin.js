@@ -121,7 +121,6 @@ class ResidentesAdmin extends Component {
             <Grid className={classes.coloresp} item xs={0} sm={2}></Grid>
             <Paper
               className={classes.paper}
-              // style={{ padding: 5, margin: "auto", width: "auto" }}
               elevation={3}
             >
               <Grid item xs={12} sm={12} spacing={1}>
@@ -130,15 +129,12 @@ class ResidentesAdmin extends Component {
                   <SearchBar
                     label="Nombre:"
                     placeholder="buscar"
-                    // onChange={(event) => this.setState({ id: event.target.value })}
                     />
 
                 </Card>
                 <TableHead className={classes.titl}>
                 {this.state.headers.map((header) => {
                   return <TableCell className={classes.celda}>{header}</TableCell>;
-                  // <TableCell align="right">{header}</TableCell>;
-                  // <ListItems usuarios={header} />;
                 })}
                 </TableHead>
                 <TableBody className={classes.table}>
@@ -213,8 +209,6 @@ class ResidentesAdmin extends Component {
             </Grid>
 
           </Grid>
-
-          {/* </Grid> */}
         </BrowserRouter>
       </div>
     );

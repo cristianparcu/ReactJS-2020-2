@@ -29,7 +29,6 @@ class Foro extends Component {
     })
     setTimeout(() => {
       axios.get("https://foroposts.firebaseio.com/.json").then((res) => {
-        console.log(res)
         this.setState({
           posts: res.data,
           loading: false
@@ -65,7 +64,7 @@ class Foro extends Component {
     const postList = posts.length ? (
       posts.map((post, i) => {
         return (
-          <React.Fragment>
+            <tbody>
             <tr
               className={classes["tr"]}
               key={i}
@@ -84,8 +83,7 @@ class Foro extends Component {
                 <p>{post.author}</p>
               </td>
             </tr>
-
-          </React.Fragment>
+            </tbody>
         );
       })
     ) : (

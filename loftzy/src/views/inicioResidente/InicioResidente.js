@@ -24,7 +24,6 @@ class inicioResidente extends Component {
     axiosDatabase.get("Residentes.json")
     .then((respuesta)=>{
       let user = respuesta.data.filter(user=> user.id===this.props.localId)
-      console.log(user)
         this.setState({
           userName:user[0].nombre,
           userHouseN:user[0].numero,
@@ -46,7 +45,7 @@ class inicioResidente extends Component {
           ></InfoCard>
           <div className={classes.buttons}>
             <Link to="/RegPago" style={{ textDecoration: 'none' }}>
-              <Button  m={2} size="large" variant="contained" po>
+              <Button  m={2} size="large" variant="contained" >
                 Registro pago administración
               </Button>
             </Link>

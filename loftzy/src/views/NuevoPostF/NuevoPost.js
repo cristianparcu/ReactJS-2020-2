@@ -11,7 +11,7 @@ import Spinner from "../../componentes/Spinner/Spinner"
 
 const newList = [
     { name: "Menu", url: "/AdminMenu" },
-    { name: "Residentes", url: "/AdminResidente" },
+    { name: "Residentes", url: "/AdminResidentes" },
 ];
 class NuevoPost extends Component {
 
@@ -37,12 +37,10 @@ class NuevoPost extends Component {
         })
         setTimeout(() => {
             axios.get("https://foroposts.firebaseio.com/.json").then((res) => {
-                console.log(res)
                 this.setState({
                     posts: res.data,
                     loading:false
                 });
-                console.log(this.state.posts.length)
             });
         }, 1000);
 
@@ -88,7 +86,6 @@ class NuevoPost extends Component {
         e.preventDefault();
         this.writeNewPost()
         this.componentDidMount()
-        console.log(this.state)
         this.setState({
             Topic: '',
             title: ''
@@ -96,7 +93,6 @@ class NuevoPost extends Component {
     }
 
     clickHandler(index) {
-        console.log(index);
         this.setState({
             path: "/post/" + index,
             redirect: true,
@@ -117,12 +113,11 @@ class NuevoPost extends Component {
                 redirect: false,
             });
         }
-
         const { posts } = this.state;
         const postList = posts.length ? (
             posts.map((post, i) => {
                 return (
-                    <React.Fragment>
+                    <tbody>
                         <tr
                             className={classes["tr"]}
                             key={i}
@@ -141,7 +136,7 @@ class NuevoPost extends Component {
                                 <p>{post.author}</p>
                             </td>
                         </tr>
-                    </React.Fragment>
+                    </tbody>
                 );
             })
         ) : (
@@ -152,7 +147,6 @@ class NuevoPost extends Component {
             <div>
                 <AppBar list={newList} />
                 <div className={classes.body}>
-
                     <h2 className={classes["title"]}>Foro Residencial</h2>
                     <table className={classes["table"]}>
                         <tr className={classes["tr"]}>
