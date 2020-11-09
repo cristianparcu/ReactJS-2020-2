@@ -6,33 +6,50 @@
     
         /* margin: auto; */
         /* margin-left: 16%; */
+        /* margin-top: 22px;
+        padding: 27px;
+        width: 62%; */
         margin-top: 22px;
         padding: 27px;
-        width: 62%;
+        width: 39%;
     
 }
 .busca{
     margin: 12rem 0rem 0rem 0rem;
     font-weight: bold;
-/* 
-    .inputDiv {
-        display: flex;
-        justify-content: space-between;
-        margin: 5% 0;
-      } */
-      /* .inputLabel {
-        display: flex; */
-        /* margin: 0 3% 3%;
-        width: 100px;
-      }
-      .inputBox {
-        display: flex;
-      } */
+
 }
 .box {
     display: flex;
     flex-flow: column wrap;
     padding: 0.5rem 14rem 0.5rem 1rem;
-    margin: 1rem 20rem 1rem 0rem;
+    margin: 1rem 18rem 1rem 0rem;
 
   }
+  .create {
+    padding: 0.5rem 3rem 0.5rem 1rem;
+    position: absolute;
+    top: 5.5rem;
+    left: 58rem;
+
+
+  }
+  .celda {
+    padding: 0.5rem 3rem 0.5rem 1rem;
+   }
+   .titl{
+    padding: 0.5rem 3rem 0.5rem 1rem;
+   }
+
+   .agrega{
+    margin: 12rem 0rem 0rem 0rem;
+    font-weight: bold;
+   }
+
+   .items{
+    margin: 0.4rem -1rem 0rem 0rem;
+    padding: 0rem 1rem 1rem 0rem;
+   }
+   .boton{
+    margin: 0rem 0rem 0rem 4.5rem;
+   }
