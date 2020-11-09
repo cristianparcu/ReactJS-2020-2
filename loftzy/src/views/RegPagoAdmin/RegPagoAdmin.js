@@ -6,7 +6,6 @@ import AppBar from "../../componentes/NavBar/NavBar";
 
 const newList = [
   { name: "Perfil", url: "/residenteIng" },
-  { name: "Pago Administracion", url: "/RegPago" },
   { name: "Foro", url: "/Foro" },
 ];
 

@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import classes from "../Foro/Foro.css";
 import axios from "axios";
-import { Route, Redirect, BrowserRouter as Router } from "react-router-dom";
-import PostComplete from "./PostComplete";
+import { Redirect } from "react-router-dom";
+import Spinner from "../../componentes/Spinner/Spinner.js"
+import AppBar from "../../componentes/NavBar/NavBar";
 
-
-
+const newList = [
+  { name: "Pago Administracion", url: "/RegPago" },
+  { name: "Perfil", url: "/residenteIng" },
+];
 class Foro extends Component {
 
   state = {
@@ -13,16 +16,29 @@ class Foro extends Component {
     path: "",
     redirect: false,
     post: null,
+    loading: false,
   };
   componentDidMount() {
-    axios.get("https://foroposts.firebaseio.com/.json").then((res) => {
-    console.log(res)  
-    this.setState({
-        posts: res.data,
-      });
-    });
+    this.getPost()
   }
 
+
+  getPost() {
+    this.setState({
+      loading: true,
+    })
+    setTimeout(() => {
+      axios.get("https://foroposts.firebaseio.com/.json").then((res) => {
+        console.log(res)
+        this.setState({
+          posts: res.data,
+          loading: false
+        });
+      });
+    }, 2000);
+  }
+
+  
   clickHandler(index) {
     console.log(index);
     this.setState({
@@ -31,22 +47,14 @@ class Foro extends Component {
       post: this.state.posts[index],
     });
   }
-  prueba = () => {};
 
   render() {
     if (this.state.redirect) {
       return (
-        <Router>
-          <Route path="/Foro">
-            <Foro />
-          </Route>
-          <Route
-            path={this.state.path}
-            exact
-            render={() => <PostComplete post={this.state.post} />}
-          />
-          <Redirect to={this.state.path} />
-        </Router>
+        <Redirect to={{
+          pathname: this.state.path,
+          state: { post: this.state.post }
+        }} />
       );
     } else if (this.state.redirect) {
       this.setState({
@@ -76,26 +84,33 @@ class Foro extends Component {
                 <p>{post.author}</p>
               </td>
             </tr>
+
           </React.Fragment>
         );
       })
     ) : (
-      <div>No hay ningun post de discusion</div>
-    );
+        <div>No hay ningun post de discusion</div>
+      );
     return (
-      <div className={classes["body"]}>
-        <h2 className={classes["title"]}>Foro Residencial</h2>
-        <table className={classes["table"]}>
-          <tr className={classes["tr"]}>
-            <th className={classes["td"]}>Tema</th>
-            <th className={classes["td"]}>Fecha</th>
-            <th className={classes["td"]}>Hora</th>
-            <th className={classes["td"]}>Autor</th>
-          </tr>
-          {postList}
-        </table>
+      <div>
+        <AppBar list={newList} />
+
+        <div className={classes["body"]}>
+          <h2 className={classes["title"]}>Foro Residencial</h2>
+          <table className={classes["table"]}>
+            <tr className={classes["tr"]}>
+              <th className={classes["td"]}>Tema</th>
+              <th className={classes["td"]}>Fecha</th>
+              <th className={classes["td"]}>Hora</th>
+              <th className={classes["td"]}>Autor</th>
+            </tr>
+            {this.state.loading ? <Spinner /> : postList}
+          </table>
+        </div>
       </div>
     );
+
   }
 }
+
 export default Foro;

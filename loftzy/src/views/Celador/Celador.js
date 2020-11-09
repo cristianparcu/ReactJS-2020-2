@@ -19,6 +19,7 @@ import AppBar from "../../componentes/NavBar/NavBar";
 import classes from "./Celador.css";
 import emailjs from "emailjs-com";
 import axiosDatabase from "../../Instances/axios-realtime";
+import Spinner from "../../componentes/Spinner/Spinner"
 export default class Celador extends Component {
   constructor() {
     super();
@@ -26,36 +27,51 @@ export default class Celador extends Component {
       name: "",
       id: "",
       temp: "",
+      casa:"",
       rows: [],
-      headers: ["NOMBRE", "ID", "TEMP", "DIA", "ACCIONES"],
+      headers: ["NOMBRE", "ID","CASA", "TEMP", "DIA", "ACCIONES"],
+      loading:false,
+
     };
   }
 
   componentDidMount(){
-    axiosDatabase.get(".json")
-    .then((res)=>{
-      if(res.data.Ingresos){
+    this.getPost();
+  }
+  getPost(){
+    this.setState({
+      loading:true,
+    })
+    setTimeout(() => {
+      axiosDatabase.get(".json")
+      .then((res)=>{
+        if(res.data.Ingresos){
+          this.setState({
+            rows:res.data.Ingresos,
+          })
+        }
         this.setState({
-          rows:res.data.Ingresos
+          loading:false
         })
-      }
-     
-      
-    })
-    .catch(err=>{
-      this.setState({
-        rows:[]
+       
+        
       })
-    })
+      .catch(err=>{
+        this.setState({
+          rows:[]
+        })
+      })
+    }, 2000);
   }
   createData= ()=> {
     let name = this.state.name;
     let temp = this.state.temp;
     let id = this.state.id;
+    let casa = this.state.casa;
     var day = new Date().toJSON().slice(0, 10).replace(/-/g, "/");
-    let data = { name, id, temp, day };
+    let data = { name, id, temp, day,casa };
     
-    axiosDatabase.put("Ingresos/"+this.state.rows.length+".json", {"name":name,"id":id,"temp":temp,"day":day}).then(console.log(data))
+    axiosDatabase.put("Ingresos/"+this.state.rows.length+".json", {"name":name,"id":id,"temp":temp,"day":day,"casa":casa}).then(console.log(data))
     let update = [...this.state.rows];
     update.push(data);
     this.setState({
@@ -79,13 +95,13 @@ export default class Celador extends Component {
         });
         update.splice(index, 1);
         axiosDatabase.delete("Ingresos/"+index+".json");
-        axiosDatabase.patch("Ingresos.json", update);
+        axiosDatabase.put("Ingresos.json", update);
        
         this.setState({
           rows: update,
         });
       } else {
-        swal("Es estuvo cerca!");
+        swal("Eso estuvo cerca!");
       }
     });
   }
@@ -95,7 +111,7 @@ export default class Celador extends Component {
     console.log(update);
     const templateParams = {
       name: update.name,
-      casa: update.temp,
+      casa: update.casa,
       day: update.day,
     };
     emailjs
@@ -104,7 +120,7 @@ export default class Celador extends Component {
         "template_d8vbgnf",
         {
           name: templateParams.name,
-          casa: templateParams.temp,
+          casa: templateParams.casa,
           day: templateParams.day,
           reply_to: "",
         },
@@ -119,34 +135,9 @@ export default class Celador extends Component {
         }
       );
   }
-
-  render() {
-    return (
-      <div>
-        <AppBar list={[]} />
-        <Card className={classes.box}>
-          <InputWithLabel
-            label="Nombre"
-            onChange={(event) => this.setState({ name: event.target.value })}
-          />
-          <InputWithLabel
-            label="id"
-            onChange={(event) => this.setState({ id: event.target.value })}
-          />
-          <InputWithLabel
-            label="temp"
-            type="number"
-            onChange={(event) => this.setState({ temp: event.target.value })}
-          />
-          <Button onClick={this.createData}>Agregar</Button>
-        </Card>
-
-        <TableContainer
-          component={Paper}
-          style={{ width: "900px" }}
-          className={classes.table}
-        >
-          <Table size="small" aria-label="a dense table">
+  renderTable=()=>{
+    return(
+    <Table size="small" aria-label="a dense table">
             <TableHead>
               <TableRow>
                 {this.state.headers.map((header) => {
@@ -159,8 +150,9 @@ export default class Celador extends Component {
                 <TableRow key={row.name}>
                 
 
-                  <TableCell align="right">{row.name}</TableCell>
+                <TableCell align="right">{row.name}</TableCell>
                   <TableCell align="right">{row.id}</TableCell>
+                  <TableCell align="right">{row.casa}</TableCell>
                   <TableCell align="right">{row.temp}</TableCell>
                   <TableCell align="right">{row.day}</TableCell>
                   <TableCell align="right">
@@ -175,8 +167,46 @@ export default class Celador extends Component {
               ))}
             </TableBody>
           </Table>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        <AppBar list={[]} />
+        <Card className={classes.box}>
+          <InputWithLabel
+            label="Nombre"
+            onChange={(event) => this.setState({ name: event.target.value })}
+          />
+          <InputWithLabel
+            label="Id"
+            onChange={(event) => this.setState({ id: event.target.value })}
+          />
+           <InputWithLabel
+            label="Casa"
+            
+            onChange={(event) => this.setState({ casa: event.target.value })}
+          />
+          <InputWithLabel
+            label="Temperatura"
+            type="number"
+            onChange={(event) => this.setState({ temp: event.target.value })}
+          />
+          <Button onClick={this.createData}>Agregar</Button>
+        </Card>
+
+        <TableContainer
+          component={Paper}
+          style={{ width: "900px" }}
+          className={classes.table}
+        >
+         {this.state.loading?<Spinner/>:this.renderTable()}
+
         </TableContainer>
       </div>
     );
+    }
+  
   }
-}
+
