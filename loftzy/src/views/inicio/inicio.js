@@ -106,7 +106,7 @@ class Inicio extends Component {
       return <Redirect to={this.state.Redirect} />;
     } else {
       return (
-        <div className={classes.inicioContainer}>
+        <div className={classes.inicioContainer}>   
         {this.props.error}
           <House className={classes.bg} />
           <Card className={classes.box} p={4}>
