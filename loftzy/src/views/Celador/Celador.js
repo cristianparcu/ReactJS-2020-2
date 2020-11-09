@@ -19,6 +19,7 @@ import AppBar from "../../componentes/NavBar/NavBar";
 import classes from "./Celador.css";
 import emailjs from "emailjs-com";
 import axiosDatabase from "../../Instances/axios-realtime";
+import Spinner from "../../componentes/Spinner/Spinner"
 export default class Celador extends Component {
   constructor() {
     super();
@@ -29,25 +30,36 @@ export default class Celador extends Component {
       casa:"",
       rows: [],
       headers: ["NOMBRE", "ID","CASA", "TEMP", "DIA", "ACCIONES"],
+      loading:false,
+
     };
   }
 
   componentDidMount(){
-    axiosDatabase.get(".json")
-    .then((res)=>{
-      if(res.data.Ingresos){
-        this.setState({
-          rows:res.data.Ingresos
-        })
-      }
-     
-      
+    this.getPost();
+  }
+  getPost(){
+    this.setState({
+      loading:true,
     })
-    .catch(err=>{
-      this.setState({
-        rows:[]
+    setTimeout(() => {
+      axiosDatabase.get(".json")
+      .then((res)=>{
+        if(res.data.Ingresos){
+          this.setState({
+            rows:res.data.Ingresos,
+            loading:false
+          })
+        }
+       
+        
       })
-    })
+      .catch(err=>{
+        this.setState({
+          rows:[]
+        })
+      })
+    }, 2000);
   }
   createData= ()=> {
     let name = this.state.name;
@@ -121,6 +133,40 @@ export default class Celador extends Component {
         }
       );
   }
+  renderTable=()=>{
+    return(
+    <Table size="small" aria-label="a dense table">
+            <TableHead>
+              <TableRow>
+                {this.state.headers.map((header) => {
+                  return <TableCell align="right">{header}</TableCell>;
+                })}
+              </TableRow>
+            </TableHead>
+            <TableBody className={classes.table}>
+              {this.state.rows.map((row, index) => (
+                <TableRow key={row.name}>
+                
+
+                <TableCell align="right">{row.name}</TableCell>
+                  <TableCell align="right">{row.id}</TableCell>
+                  <TableCell align="right">{row.casa}</TableCell>
+                  <TableCell align="right">{row.temp}</TableCell>
+                  <TableCell align="right">{row.day}</TableCell>
+                  <TableCell align="right">
+                    <IconButton onClick={() => this.DeleteData(index)}>
+                      <DeleteIcon />
+                    </IconButton>
+                    <IconButton onClick={() => this.notify(index)}>
+                      <NotificationsIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+    );
+  }
 
   render() {
     return (
@@ -153,38 +199,12 @@ export default class Celador extends Component {
           style={{ width: "900px" }}
           className={classes.table}
         >
-          <Table size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                {this.state.headers.map((header) => {
-                  return <TableCell align="right">{header}</TableCell>;
-                })}
-              </TableRow>
-            </TableHead>
-            <TableBody className={classes.table}>
-              {this.state.rows.map((row, index) => (
-                <TableRow key={row.name}>
-                
+         {this.state.loading?<Spinner/>:this.renderTable()}
 
-                <TableCell align="right">{row.name}</TableCell>
-                  <TableCell align="right">{row.id}</TableCell>
-                  <TableCell align="right">{row.casa}</TableCell>
-                  <TableCell align="right">{row.temp}</TableCell>
-                  <TableCell align="right">{row.day}</TableCell>
-                  <TableCell align="right">
-                    <IconButton onClick={() => this.DeleteData(index)}>
-                      <DeleteIcon />
-                    </IconButton>
-                    <IconButton onClick={() => this.notify(index)}>
-                      <NotificationsIcon />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
         </TableContainer>
       </div>
     );
+    }
+  
   }
-}
+
