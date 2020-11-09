@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Button from "@material-ui/core/Button";
-import { Link, withRouter } from "react-router-dom"
+import { Link } from "react-router-dom"
 import classes from "../Foro/PostComplete.css"
 import axios from "axios";
 import Comentario from '../../componentes/Comentario/Comentario'
@@ -92,7 +92,6 @@ class PostComplete extends Component {
         });
     }
 
-
     render() {
 
         const { comments } = this.state;
@@ -123,12 +122,12 @@ class PostComplete extends Component {
                             variant="contained"
                             onClick={this.handleSubmit}
                         >Agregar Comentario</Button>
-                        <Link to='/Foro'>
+                        <Link to='/Foro' style={{ textDecoration: 'none', outline: 0 }}>
                             <Button className={classes['button']} m={2} 
                                 size="large"
                                 variant="contained"
                             >Regresar</Button>
-                        </Link>
+                            </Link>
                         </div>
                     </div>
                 </div>

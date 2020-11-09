@@ -6,8 +6,8 @@ import Spinner from "../../componentes/Spinner/Spinner.js"
 import AppBar from "../../componentes/NavBar/NavBar";
 
 const newList = [
-  { name: "Pago Administracion", url: "/RegPago" },
   { name: "Perfil", url: "/residenteIng" },
+  { name: "Pago Administracion", url: "/RegPago" },
 ];
 class Foro extends Component {
 

@@ -49,11 +49,19 @@ class NuevoPost extends Component {
     }
 
     handleInput = (e) => {
+
         const { value, name } = e.target;
         this.setState({
             [name]: value
         })
     };
+    
+    addZero(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+      }
 
     writeNewPost = () => {
 
@@ -66,7 +74,7 @@ class NuevoPost extends Component {
             id: postsS + 1,
             Topic: this.state.Topic,
             title: this.state.title,
-            hour: d.getHours() + ":" + d.getMinutes(),
+            hour: this.addZero(d.getHours()) + ":" + this.addZero(d.getMinutes()),
             date: d.getDay() + "/" + d.getMonth() + "/" + d.getFullYear()
         };
         var newPostKey = firebase.database().ref().child(postsS).key;
@@ -162,12 +170,12 @@ class NuevoPost extends Component {
                             name="title"
                             onChange={this.handleInput}
                             placeholder="Titulo"></input>
-                        <input
+                        <textarea
                             className={classes.addComment}
                             type="text"
                             name="Topic"
                             onChange={this.handleInput}
-                            placeholder="Tema"></input>
+                            placeholder="Tema"></textarea>
 
                         <Button m={2}
                             className={classes.button}
