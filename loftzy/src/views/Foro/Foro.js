@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import classes from "../Foro/Foro.css";
 import axios from "axios";
 import { Route, Redirect, BrowserRouter as Router } from "react-router-dom";
-import PostComplete from "./PostComplete";
+import Spinner from "../../componentes/Spinner/Spinner.js"
 import AppBar from "../../componentes/NavBar/NavBar";
 
 const newList = [
@@ -16,14 +16,26 @@ class Foro extends Component {
     path: "",
     redirect: false,
     post: null,
+    loading:false,
   };
   componentDidMount() {
-    axios.get("https://foroposts.firebaseio.com/.json").then((res) => {
+    this.getPost()
+  }
+
+  getPost(){
+    this.setState({
+      loading:true,
+    })
+    setTimeout(() => {
+      axios.get("https://foroposts.firebaseio.com/.json").then((res) => {
       console.log(res)
       this.setState({
         posts: res.data,
+        loading:false
       });
     });
+    }, 2000);
+
   }
 
   clickHandler(index) {
@@ -81,6 +93,7 @@ class Foro extends Component {
     return (
       <div>
         <AppBar list={newList} />
+        <Spinner/>
         <div className={classes["body"]}>
           <h2 className={classes["title"]}>Foro Residencial</h2>
           <table className={classes["table"]}>
@@ -90,11 +103,13 @@ class Foro extends Component {
               <th className={classes["td"]}>Hora</th>
               <th className={classes["td"]}>Autor</th>
             </tr>
-            {postList}
+            {this.state.loading?<Spinner/>:postList}
           </table>
         </div>
       </div>
     );
+
   }
-}
+  }
+
 export default Foro;
