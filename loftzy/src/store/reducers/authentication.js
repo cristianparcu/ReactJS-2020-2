@@ -12,7 +12,7 @@ const initialState = {
     loadingAuth: false,
     error:''
 }
-const Error_Handing = (state, action) =>{
+const errorHandling = (state, action) =>{
     return updateObject(state,{
         error: action.payload.message
     })
@@ -54,7 +54,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.LOG_OUT: return logOut(state, action);
         case actionTypes.START_LOADING_AUTH: return startLoading(state, action);
         case actionTypes.END_LOADING_AUTH: return endLoading(state, action);
-        case actionTypes.ERROR_HANDLING: return Error_Handing(state,action);
+        case actionTypes.ERROR: return errorHandling(state,action);
         default: return state;
     }
 }
