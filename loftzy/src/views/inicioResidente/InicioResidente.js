@@ -21,13 +21,14 @@ class inicioResidente extends Component {
   }
 
   componentDidMount(){
-    axiosDatabase.get("Users/"+this.props.localId+".json")
-    .then((rest)=>{
-      console.log(rest)
+    axiosDatabase.get("Residentes.json")
+    .then((respuesta)=>{
+      let user = respuesta.data.filter(user=> user.id===this.props.localId)
+      console.log(user)
         this.setState({
-          userName:rest.data.name,
-          userHouseN:rest.data.casa,
-          userPhone:rest.data.telefono
+          userName:user[0].nombre,
+          userHouseN:user[0].numero,
+          userPhone:user[0].celular
         })
       })
   }

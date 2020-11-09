@@ -21,7 +21,8 @@ const errorHandling = (state, action) =>{
 const signUp = (state,action)=>{
 
     return updateObject(state,{
-        createdUser:action.payload.createdId
+        createdUser:action.payload.createdId,
+        error: ''
     })
 }
 const login = (state, action) => {

@@ -27,13 +27,14 @@ class ResidentesAdmin extends Component {
     super();
     this.state = {
       usuarios: [],
-      headers: ["Nombre", "Tipo Inmueble", "Número Inmueble", "Si Propietario?", "Acciones"],
+      headers: ["Nombre", "Tipo Inmueble","Celular", "Número Inmueble", "Si Propietario?", "Acciones"],
         nombre: "",
         tipo_inmueble: "",
         numero: "",
         sipropietario: "",
         correo:"",
-        password:""
+        password:"",
+        celular:""
 
     };
   }
@@ -57,14 +58,15 @@ class ResidentesAdmin extends Component {
     let tipo_inmueble = this.state.tipo_inmueble;
     let numero = this.state.numero;
     let sipropietario = this.state.sipropietario;
+    let celular= this.state.celular
     const userData = {
       email: this.state.correo,
       password: this.state.password,
   };
 
     this.props.onSignUp(userData, ()=>{
-      let data = { nombre, tipo_inmueble, numero, sipropietario };
-    axiosDatabase.put("Residentes/"+this.state.usuarios.length+".json", {"id":this.props.createdUser,"nombre":nombre,"tipo_inmueble":tipo_inmueble,"numero":numero,"sipropietario":sipropietario})
+      let data = { nombre, tipo_inmueble, numero, sipropietario,celular };
+    axiosDatabase.put("Residentes/"+this.state.usuarios.length+".json", {"id":this.props.createdUser,"nombre":nombre,"tipo_inmueble":tipo_inmueble,"numero":numero,"sipropietario":sipropietario,"celular":celular})
     axiosDatabase.put("Users/"+this.props.createdUser+".json",{"name":nombre,"rol":"residente"})
     let update = [...this.state.usuarios];
     update.push(data);
@@ -146,6 +148,8 @@ class ResidentesAdmin extends Component {
 
                   <TableCell align="center">{user.nombre}</TableCell>
                   <TableCell align="center">{user.tipo_inmueble}</TableCell>
+                  <TableCell align="center">{user.celular}</TableCell>
+
                   <TableCell align="center">{user.numero}</TableCell>
                   <TableCell align="center">{user.sipropietario}</TableCell>
                   <TableCell align="center">
@@ -175,6 +179,11 @@ class ResidentesAdmin extends Component {
                   type="password"
                   placeholder="ingrese nombre"
                   onChange={(event) => this.setState({ password: event.target.value })}
+                />
+                <SearchBar
+                  label="Celular:"
+                  placeholder="ingrese Celular"
+                  onChange={(event) => this.setState({ celular: event.target.value })}
                 />
                 <SearchBar
                   label="Nombre:"
