@@ -1,6 +1,6 @@
 
 .paper{
-            margin-top: 22px;
+        margin-top: 22px;
         padding: 27px;
         width: 39%;
     
@@ -19,11 +19,7 @@
   }
   .create {
     padding: 0.5rem 3rem 0.5rem 1rem;
-    position: absolute;
-    top: 5.5rem;
-    left: 58rem;
-
-
+    margin: 1.5rem -6rem 0rem 1rem;
   }
   .celda {
     padding: 0.5rem 3rem 0.5rem 1rem;
