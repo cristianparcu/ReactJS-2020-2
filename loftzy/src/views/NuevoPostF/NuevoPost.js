@@ -5,8 +5,9 @@ import firebase from "firebase";
 import axios from "axios";
 import { connect } from 'react-redux';
 import AppBar from "../../componentes/NavBar/NavBar";
-import { Route, Redirect, BrowserRouter as Router } from "react-router-dom";
-import PostComplete from "../Foro/PostComplete";
+import { Redirect } from "react-router-dom";
+import Spinner from "../../componentes/Spinner/Spinner"
+
 
 const newList = [
     { name: "Menu", url: "/AdminMenu" },
@@ -21,17 +22,29 @@ class NuevoPost extends Component {
         author: "",
         date: '',
         hour: '',
-        id: 8,
+        id: 0,
+        redirect: false,
+        loading: false,
     }
 
     componentDidMount() {
-        axios.get("https://foroposts.firebaseio.com/.json").then((res) => {
-            console.log(res)
-            this.setState({
-                posts: res.data,
+        this.getPost()
+
+    }
+    getPost() {
+        this.setState({
+            loading: true,
+        })
+        setTimeout(() => {
+            axios.get("https://foroposts.firebaseio.com/.json").then((res) => {
+                console.log(res)
+                this.setState({
+                    posts: res.data,
+                    loading:false
+                });
+                console.log(this.state.posts.length)
             });
-            console.log(this.state.posts.length)
-        });
+        }, 1000);
 
     }
 
@@ -74,7 +87,29 @@ class NuevoPost extends Component {
         });
     }
 
+    clickHandler(index) {
+        console.log(index);
+        this.setState({
+            path: "/post/" + index,
+            redirect: true,
+            post: this.state.posts[index],
+        });
+    }
+
     render() {
+        if (this.state.redirect) {
+            return (
+                <Redirect to={{
+                    pathname: this.state.path,
+                    state: { post: this.state.post }
+                }} />
+            );
+        } else if (this.state.redirect) {
+            this.setState({
+                redirect: false,
+            });
+        }
+
         const { posts } = this.state;
         const postList = posts.length ? (
             posts.map((post, i) => {
@@ -82,6 +117,8 @@ class NuevoPost extends Component {
                     <React.Fragment>
                         <tr
                             className={classes["tr"]}
+                            key={i}
+                            onClick={this.clickHandler.bind(this, i)}
                         >
                             <td className={classes["td"]}>
                                 <h4>{post.title}</h4>
@@ -116,7 +153,7 @@ class NuevoPost extends Component {
                             <th className={classes["td"]}>Hora</th>
                             <th className={classes["td"]}>Autor</th>
                         </tr>
-                        {postList}
+                        {this.state.loading ? <Spinner /> : postList}
                     </table>
                     <div className={classes.inputs}>
                         <input
@@ -133,7 +170,7 @@ class NuevoPost extends Component {
                             placeholder="Tema"></input>
 
                         <Button m={2}
-                        className={classes.button}
+                            className={classes.button}
                             size="large"
                             variant="contained"
                             onClick={this.handleSubmit}
