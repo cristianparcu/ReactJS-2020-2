@@ -10,11 +10,18 @@ const initialState = {
         localId: ''
     },
     loadingAuth: false,
-    error:''
+    error:'',
+    createdUser:''
 }
 const errorHandling = (state, action) =>{
     return updateObject(state,{
         error: action.payload.message
+    })
+}
+const signUp = (state,action)=>{
+
+    return updateObject(state,{
+        createdUser:action.payload.createdId
     })
 }
 const login = (state, action) => {
@@ -54,6 +61,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.LOG_OUT: return logOut(state, action);
         case actionTypes.START_LOADING_AUTH: return startLoading(state, action);
         case actionTypes.END_LOADING_AUTH: return endLoading(state, action);
+        case actionTypes.SIGNUP: return signUp(state,action);
         case actionTypes.ERROR: return errorHandling(state,action);
         default: return state;
     }

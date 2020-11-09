@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../Instances/axios-authentication';
-import axiosDatabase from '../../Instances/axios-realtime'
+import axiosDatabase from '../../Instances/axios-realtime';
+
 const API_KEY = 'AIzaSyBOwVX7Zqchg1pnCZrwIJ7jPJnSL3CXmQw';
 
 const startAuthLoading = () => {
@@ -12,6 +13,14 @@ const startAuthLoading = () => {
   const endAuthLoading = () => {
     return {
         type: actionTypes.END_LOADING_AUTH
+    }
+  }
+  const saveCreatedUser = (localId)=>{
+    return{
+        type: actionTypes.SIGNUP,
+        payload:{
+            createdId:localId
+        }
     }
   }
   const handleError = (error) =>{
@@ -94,6 +103,25 @@ const startAuthLoading = () => {
     };
   };
  
+  export const createAccount =(authData, onSuccessCallback)=>{
+      return dispatch =>{
+
+          axios.post('accounts:signUp?key='+API_KEY, authData)
+          .then(response =>{
+            const localId = response.data.localId;
+            dispatch(saveCreatedUser(localId));
+            if(onSuccessCallback){
+                onSuccessCallback()
+            }
+        
+          
+          })
+          .catch(error=>{
+            dispatch(handleError(error.response.data.error.message))
+   
+          })
+      }
+  }
   export const logIn = (authData, onSuccessCallback) => {
     return dispatch => {
         dispatch(startAuthLoading())
