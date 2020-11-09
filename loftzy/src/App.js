@@ -34,42 +34,55 @@ export class App extends Component {
     this.props.onPersistAuthentication();
   }
 
-  auth=(rol,nextComponent)=>{
+  authRol=(rol,nextComponent)=>{
     if(this.props.rol===rol){
       return nextComponent;
     }else{
       return(
-        <NotAuthorized/>
+        <NotAuthorized isUserLoggedin={this.props.isUserLoggedIn}/>
       );
     }
   }
+
+  authLoggedin=(nextComponent)=>{
+    if(this.props.isUserLoggedin){
+      return nextComponent;
+    }else{
+      return (<NotAuthorized />);
+    }
+  }
+
   render() {
     
     return (
       <Router>
         <Switch>
           <Route path="/Celador">
-            {this.auth("celador",<Celador />)}
+            {this.authRol("celador",<Celador />)}
           </Route>
           <Route path="/residenteIng">
-            
-          {this.auth("residente",<InicioResidente />)}
-
+          {this.authRol("residente",<InicioResidente />)}
           </Route>
           <Route path="/AdminResidentes">
-            <ResidentesAdmin />
+            
+            {this.authRol("admin",<ResidentesAdmin />)}
+
           </Route>
           <Route path="/AdminMenu">
-          {this.auth("admin",<AdminMenu />)}
+          {this.authRol("admin",<AdminMenu />)}
           </Route>
           <Route path="/RegPago">
-            <RegPagoAdmin />
+          {this.authLoggedin(<RegPagoAdmin />)}
+
           </Route>
           <Route path="/Foro">
-            <Foro />
+          {this.authLoggedin( <Foro />)}
+
+           
           </Route>
           <Route path="/NuevoPost">
-            <NuevoPost/>
+          {this.authLoggedin(<NuevoPost/>)}
+           
           </Route>
           <Route path="/" exact>
             <Inicio />
@@ -95,7 +108,8 @@ const mapDispatchToProps = dispatch => {
 };
 const mapStateToProps = state => {
   return {
-      rol: state.authenticationStore.userLoggedIn.rol
+      rol: state.authenticationStore.userLoggedIn.rol,
+      isUserLoggedIn: state.authenticationStore.isUserLoggedIn
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);
