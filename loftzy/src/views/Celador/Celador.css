@@ -2,7 +2,8 @@
   min-width: 650;
   display: flex;
   text-align: center;
-  margin: 0 25%;
+  margin: 0 20%;
+  margin-bottom: 3%;
 }
 .box {
   display: flex;

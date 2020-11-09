@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import { ReactComponent as House } from "./login.svg";
 import { connect } from 'react-redux';
+import Spinner from '../../componentes/Spinner/Spinner';
 
 import * as actionCreators from '../../store/actions/authentication';
 
@@ -82,12 +83,31 @@ class Inicio extends Component {
     });
   }
 
+  renderSubmitButton = () => {
+    let content = <Button
+    m={2}
+    size="large"
+    color="primary"
+    variant="contained"
+    onClick={this.handleClick}
+  >
+    Iniciar
+  </Button>;
+
+    if(this.props.loadingAuth) {
+        content = <Spinner />
+    }
+
+    return content;
+}
+
   render() {
     if (this.state.Redirect) {
       return <Redirect to={this.state.Redirect} />;
     } else {
       return (
         <div className={classes.inicioContainer}>
+        {this.props.error}
           <House className={classes.bg} />
           <Card className={classes.box} p={4}>
             <InputWithLabel
@@ -101,15 +121,7 @@ class Inicio extends Component {
                 {this.updateLoginInfo(event,'password')}
               }
             ></InputWithLabel>
-            <Button
-              m={2}
-              size="large"
-              color="primary"
-              variant="contained"
-              onClick={this.handleClick}
-            >
-              Iniciar
-            </Button>
+            {this.renderSubmitButton()}
           </Card>
         </div>
       );

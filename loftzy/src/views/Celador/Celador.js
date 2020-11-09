@@ -26,8 +26,9 @@ export default class Celador extends Component {
       name: "",
       id: "",
       temp: "",
+      casa:"",
       rows: [],
-      headers: ["NOMBRE", "ID", "TEMP", "DIA", "ACCIONES"],
+      headers: ["NOMBRE", "ID","CASA", "TEMP", "DIA", "ACCIONES"],
     };
   }
 
@@ -52,10 +53,11 @@ export default class Celador extends Component {
     let name = this.state.name;
     let temp = this.state.temp;
     let id = this.state.id;
+    let casa = this.state.casa;
     var day = new Date().toJSON().slice(0, 10).replace(/-/g, "/");
-    let data = { name, id, temp, day };
+    let data = { name, id, temp, day,casa };
     
-    axiosDatabase.put("Ingresos/"+this.state.rows.length+".json", {"name":name,"id":id,"temp":temp,"day":day}).then(console.log(data))
+    axiosDatabase.put("Ingresos/"+this.state.rows.length+".json", {"name":name,"id":id,"temp":temp,"day":day,"casa":casa}).then(console.log(data))
     let update = [...this.state.rows];
     update.push(data);
     this.setState({
@@ -95,7 +97,7 @@ export default class Celador extends Component {
     console.log(update);
     const templateParams = {
       name: update.name,
-      casa: update.temp,
+      casa: update.casa,
       day: update.day,
     };
     emailjs
@@ -104,7 +106,7 @@ export default class Celador extends Component {
         "template_d8vbgnf",
         {
           name: templateParams.name,
-          casa: templateParams.temp,
+          casa: templateParams.casa,
           day: templateParams.day,
           reply_to: "",
         },
@@ -130,11 +132,16 @@ export default class Celador extends Component {
             onChange={(event) => this.setState({ name: event.target.value })}
           />
           <InputWithLabel
-            label="id"
+            label="Id"
             onChange={(event) => this.setState({ id: event.target.value })}
           />
+           <InputWithLabel
+            label="Casa"
+            
+            onChange={(event) => this.setState({ casa: event.target.value })}
+          />
           <InputWithLabel
-            label="temp"
+            label="Temperatura"
             type="number"
             onChange={(event) => this.setState({ temp: event.target.value })}
           />
@@ -159,8 +166,9 @@ export default class Celador extends Component {
                 <TableRow key={row.name}>
                 
 
-                  <TableCell align="right">{row.name}</TableCell>
+                <TableCell align="right">{row.name}</TableCell>
                   <TableCell align="right">{row.id}</TableCell>
+                  <TableCell align="right">{row.casa}</TableCell>
                   <TableCell align="right">{row.temp}</TableCell>
                   <TableCell align="right">{row.day}</TableCell>
                   <TableCell align="right">
