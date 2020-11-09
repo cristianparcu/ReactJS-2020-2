@@ -48,9 +48,11 @@ export default class Celador extends Component {
         if(res.data.Ingresos){
           this.setState({
             rows:res.data.Ingresos,
-            loading:false
           })
         }
+        this.setState({
+          loading:false
+        })
        
         
       })
@@ -93,13 +95,13 @@ export default class Celador extends Component {
         });
         update.splice(index, 1);
         axiosDatabase.delete("Ingresos/"+index+".json");
-        axiosDatabase.patch("Ingresos.json", update);
+        axiosDatabase.put("Ingresos.json", update);
        
         this.setState({
           rows: update,
         });
       } else {
-        swal("Es estuvo cerca!");
+        swal("Eso estuvo cerca!");
       }
     });
   }
