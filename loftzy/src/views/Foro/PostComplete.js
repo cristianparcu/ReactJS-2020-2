@@ -20,11 +20,14 @@ class PostComplete extends Component {
         comment: '',
         hour: '',
         author:'',
-        index: this.props.post.id - 1,
+       index: this.props.location.state.post.id - 1,
     }
 
 
-    componentDidMount() {
+    componentDidMount(props) {
+
+        console.log(this.props.location.state.post)
+
         axios.get("https://foroposts.firebaseio.com/" + this.state.index + ".json").then((res) => {
             console.log(res)
             this.setState({
@@ -102,17 +105,19 @@ class PostComplete extends Component {
                             name="comment"
                             onChange={this.handleInput}
                             placeholder="Comentario"></input>
+                        <div className={classes['buttons']}>
                         <Button className={classes['button']} m={2}
                             size="large"
                             variant="contained"
                             onClick={this.handleSubmit}
                         >Agregar Comentario</Button>
                         <Link to='/Foro'>
-                            <Button m={2}
+                            <Button className={classes['button']} m={2} 
                                 size="large"
                                 variant="contained"
                             >Regresar</Button>
                         </Link>
+                        </div>
                     </div>
                 </div>
             </div>

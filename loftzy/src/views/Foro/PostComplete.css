@@ -19,5 +19,11 @@
     box-sizing: border-box;
 }
 .button{
-    width: 200px;
+    width: 300px;
 }
+.buttons{
+    display: flex;
+    flex-direction: row; 
+    column-gap: 10px;
+}
+

@@ -74,6 +74,11 @@ export class App extends Component {
           <Route path="/" exact>
             <Inicio />
           </Route>
+          <Route
+            path="/post/:id"
+            exact
+            render={(props) => <PostComplete {...props}/>}
+          />
           <Route>
             <NotFound />
           </Route>

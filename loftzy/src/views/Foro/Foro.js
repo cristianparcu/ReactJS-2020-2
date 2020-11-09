@@ -38,17 +38,10 @@ class Foro extends Component {
   render() {
     if (this.state.redirect) {
       return (
-        <Router>
-          <Route path="/Foro">
-            <Foro />
-          </Route>
-          <Route
-            path={this.state.path}
-            exact
-            render={() => <PostComplete post={this.state.post} />}
-          />
-          <Redirect to={this.state.path} />
-        </Router>
+          <Redirect to={{
+            pathname:this.state.path,
+            state:{post: this.state.post}
+          }}/>
       );
     } else if (this.state.redirect) {
       this.setState({
