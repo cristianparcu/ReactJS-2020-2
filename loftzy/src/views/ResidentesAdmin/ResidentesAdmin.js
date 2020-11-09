@@ -116,7 +116,6 @@ class ResidentesAdmin extends Component {
 
         <AppBar list={newList} />
         {this.props.error}
-        <BrowserRouter>
           <Grid container direction="row">
             <Grid className={classes.coloresp} item xs={0} sm={2}></Grid>
             <Paper
@@ -124,14 +123,6 @@ class ResidentesAdmin extends Component {
               elevation={3}
             >
               <Grid item xs={12} sm={12} spacing={1}>
-              <label className={classes.busca}>Ingrese nombre de residente a buscar:</label>
-              <Card className={classes.box}>
-                  <SearchBar
-                    label="Nombre:"
-                    placeholder="buscar"
-                    />
-
-                </Card>
                 <TableHead className={classes.titl}>
                 {this.state.headers.map((header) => {
                   return <TableCell className={classes.celda}>{header}</TableCell>;
@@ -208,8 +199,7 @@ class ResidentesAdmin extends Component {
             </Grid>
 
           </Grid>
-        </BrowserRouter>
-      </div>
+        </div>
     );
   }
 }
