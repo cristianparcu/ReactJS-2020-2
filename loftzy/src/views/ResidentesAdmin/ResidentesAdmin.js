@@ -48,7 +48,7 @@ class ResidentesAdmin extends Component {
     })
   }
 
-  createData= ()=> {
+   createData= ()=> {
     let nombre = this.state.nombre;
     let tipo_inmueble = this.state.tipo_inmueble;
     let numero = this.state.numero;
@@ -57,7 +57,7 @@ class ResidentesAdmin extends Component {
     
     let data = { nombre, tipo_inmueble, numero, sipropietario };
     
-    axiosDatabase.put("Residentes/"+this.state.usuarios.length+".json", {"nombre":nombre,"tipo":tipo_inmueble,"num_inmu":numero,"sipropietario":sipropietario}).then(console.log(data))
+    axiosDatabase.put("Residentes/"+this.state.usuarios.length+".json", {"nombre":nombre,"tipo_inmueble":tipo_inmueble,"numero":numero,"sipropietario":sipropietario}).then(console.log(data))
     let update = [...this.state.usuarios];
     update.push(data);
     this.setState({
