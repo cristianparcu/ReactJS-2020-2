@@ -16,7 +16,7 @@ import * as actionCreators from '../../store/actions/authentication';
 
 const newList = [
   { name: "Menu", url: "/AdminMenu" },
-  { name: "Pagos", url: "RegPago" },
+  { name: "Foro", url: "/NuevoPost" },
 ];
 
 class ResidentesAdmin extends Component {
