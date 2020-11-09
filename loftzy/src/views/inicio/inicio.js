@@ -19,7 +19,11 @@ class Inicio extends Component {
       error: this.props.error
     };
 
-    
+    componentDidMount () {
+      if (this.state.isUserLoggedIn) {
+          this.redirectRol();
+      }
+  }
     
     componentDidUpdate () {
       if (this.state.isUserLoggedIn) {
