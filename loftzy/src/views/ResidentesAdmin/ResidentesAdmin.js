@@ -156,7 +156,6 @@ class ResidentesAdmin extends Component {
                 </TableRow>
               ))}
             </TableBody>
-                {/* <ListItems usuarios={this.state.usuarios} /> */}
               </Grid>
             </Paper>
 
