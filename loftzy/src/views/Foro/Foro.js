@@ -93,7 +93,7 @@ class Foro extends Component {
     return (
       <div>
         <AppBar list={newList} />
-        <Spinner/>
+        
         <div className={classes["body"]}>
           <h2 className={classes["title"]}>Foro Residencial</h2>
           <table className={classes["table"]}>

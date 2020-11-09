@@ -6,6 +6,7 @@ import axios from "axios";
 import Comentario from '../../componentes/Comentario/Comentario'
 import AppBar from "../../componentes/NavBar/NavBar";
 import firebase from 'firebase'
+import Spinner from '../../componentes/Spinner/Spinner'
 import { connect } from 'react-redux';
 
 const newList = [
@@ -21,14 +22,22 @@ class PostComplete extends Component {
         hour: '',
         author:'',
        index: this.props.location.state.post.id - 1,
+       loading:false,
     }
 
 
-    componentDidMount(props) {
+    componentDidMount() {
 
         console.log(this.props.location.state.post)
+        this.getComments()
+    }
 
-        axios.get("https://foroposts.firebaseio.com/" + this.state.index + ".json").then((res) => {
+    getComments(){
+        this.setState({
+            loading:true
+        })
+        setTimeout(() => {
+            axios.get("https://foroposts.firebaseio.com/" + this.state.index + ".json").then((res) => {
             console.log(res)
             this.setState({
                 posts: res.data,
@@ -38,9 +47,12 @@ class PostComplete extends Component {
         axios.get("https://foroposts.firebaseio.com/" + this.state.index + "/Comments.json").then((res1) => {
             console.log(res1)
             this.setState({
-                comments: res1.data
+                comments: res1.data,
+                loading:false
             })
         })
+        }, 1000);
+
     }
 
     handleAddcomment = () => {
@@ -97,7 +109,7 @@ class PostComplete extends Component {
                 <div className={classes['body']}>
                     <h2 className={classes['title']}>{this.state.posts.title}</h2>
                     <p>{this.state.posts.Topic}</p>
-                    {comts}
+                    {this.state.loading?<Spinner/>:comts}
                     <div className={classes['content']}>
                         <input
                             className={classes.comment}
