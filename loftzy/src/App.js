@@ -45,7 +45,7 @@ export class App extends Component {
   }
 
   authLoggedin=(nextComponent)=>{
-    if(this.props.isUserLoggedin){
+    if(this.props.isUserLoggedIn){
       return nextComponent;
     }else{
       return (<NotAuthorized />);
